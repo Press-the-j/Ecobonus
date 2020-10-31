@@ -60,7 +60,10 @@
           <small class="head-small-text"></small>
         </div>
         <form id="formComp" class="" novalidate action="" method="post" autocomplete="off">
-          <fieldset data-count-page="1">
+
+
+
+          <fieldset data-count-page="1" class="my_current_step">
             <p class="m-bottom-60">
               È il momento di migliorare la        sicurezza antisismica di casa? Stai pensando di aumentare l’efficienza energetica dei tuoi impianti? Potresti avere i requisiti per accedere al Superbonus 110%. 
               <br>
@@ -73,9 +76,9 @@
               <br>
               OK! Verifichiamo se ho i requisiti per accedere al Superbonus 110%</p>
             <div class="form-group switch-wrapper">
-              <label class="switch" for="privacy">
-                <input type="checkbox" id="privacy" name="checkPrivacy" class="switch-check checkbox-control">
-                <span class="slider"></span>
+              <label  class="switch" for="privacy">
+                <input  type="checkbox" id="privacy" name="checkPrivacy" class="switch-check checkbox-control">
+                <span  class="slider"></span>
               </label>
               <span>Accetta la nostra <a class="link" href="">Privacy policy</a></span>
             </div>
@@ -87,9 +90,12 @@
               <span>Rimani aggiornato sulle nostre offerte <a class="link" href="">Marketing</a></span>
             </div>
             <div class="bottoni m-top-60">
-              <input type="button" name="continua" class="next btn-next btn-home" value="continua"  />
+              <input type="button" name="continua" data-access="allowed" class="next btn-next btn-home" value="continua"  />
             </div>
           </fieldset>
+
+
+
           <fieldset data-count-page="2" class="scegliTipo">
             <section class="scelta">
               <div class=" choose-type-user m-bottom-30 ">
@@ -155,6 +161,10 @@
             </div>
           </fieldset>
           <!--Registrazione persona fisica-->
+
+
+
+
           <fieldset data-count-page="3" class="person">
             <div class="form-group">
               <label class="control-label" for="name">Nome</label>
@@ -237,6 +247,10 @@
               </div>
             </div>
           </fieldset>
+
+
+
+
           <fieldset data-count-page="4" class="business">
             <div class="form-group">
               <label class="control-label"for="company-name">Ragione sociale</label>

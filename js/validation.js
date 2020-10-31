@@ -1,7 +1,3 @@
-
-
-
-
 $.validator.addMethod('regName' , function(value, element){
 
   return value == '' || /^[a-zA-Z'-. ]+$/.test(value)
