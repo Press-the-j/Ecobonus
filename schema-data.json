@@ -1,0 +1,68 @@
+{
+    "marketing-check": false,
+    "nome": "",
+    "cognome": "",
+    "data-nascita": "",
+    "sesso": "none",
+    "email": "",
+    "cellulare": "",
+    "bonus110": [
+      {
+        "indirizzo": "",
+        "numero": "",
+        "città": "",
+        "provincia": "",
+        "cap": "",
+        "tipologia": {
+          "name": "Tipologia immobile"
+        },
+        "superficie": {
+          "name": "Dimensione superficie"
+        },
+        "statoImmobile": {
+          "name": "Stato immobile"
+        },
+        "climatizzazione": {
+          "tipoGenerazione": {
+            "name": ""
+          },
+          "tipoGeneratore": {
+            "name": ""
+          },
+          "radiatore": {
+            "name": ""
+          }
+        },
+        "involucroOpaco": {
+          "paretiEsterne": {
+            "name": ""
+          },
+          "cappotto ": ""
+        },
+        "involucroTrasp": {
+          "telaio": {
+            "name": ""
+          },
+          "vetro": {
+            "name": ""
+          }
+        },
+        "efficienza_energetica": {
+          "name": "Efficienza energetica"
+        },
+        "questionario": {
+          "d1": "check1",
+          "d2": "check5",
+          "d3": "Si",
+          "d4": "check2, check3",
+          "d5bis": "Si",
+          "d6": "Si"
+        },
+        "categoriaCatastale": {
+          "categoria": "a",
+          "sottoCategoria": "a/2"
+        },
+        "esito": "ko"
+      }
+    ]
+  }
