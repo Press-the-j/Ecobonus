@@ -1,7 +1,13 @@
 $(document).ready(function(){
 
-  /* validation initialization */
+  const URLSELECT = "http://ectm-env.eba-wmhap9wv.eu-south-1.elasticbeanstalk.com/";
+  const SELECTS = ['tipologia', 'stato-immobile','tipo-generazione','tipo-generatore','radiatore','pareti-esterne','telaio', 'vetro']
+
+  /* validation init */
   $.getScript( "js/validation.js", function( data ) {});
+
+  /* set options in empty selects */
+  populateSelect(URLSELECT, SELECTS)
 
   /* check permission to nexStep */
   $('input:not(.next)').on('click', function() {
@@ -84,7 +90,6 @@ function checkAccess() {
     $('.next').attr('data-access', 'denied')
   }
 
-
 }
 
 
@@ -94,10 +99,24 @@ function checkAccess() {
 
   
 function nextStep(this_fieldset) {
+
+  if(this_fieldset.attr('data-typeuser')) {
+    console.log($(this))
+    switch ($(this)) {
+      case 'business':
+        $('fieldset').remove('.person')
+        break;
+    
+      case 'person':
+        $('fieldset').remove('.business')
+        break;
+    }
+  }
+
   let next_fieldset = this_fieldset.next();
   
   //1: save user answers
-  saveAnswers(this_fieldset)
+  /* saveAnswers(this_fieldset) */
 
   //2: set next step
   setStep(next_fieldset)
@@ -108,9 +127,13 @@ function nextStep(this_fieldset) {
 
 
 
+
+ 
 /* saveAnswers(this_fieldset) {
 
 } */
+
+
 
 
 
@@ -184,3 +207,46 @@ function setStep(step) {
       break;
   }
 }
+
+
+
+
+
+
+function populateSelect(url, endpoints ){
+  endpoints.forEach((endpoint) => {
+
+    $.ajax({
+
+      type: "GET",
+
+      url: url + endpoint,
+
+      success: function (data) {
+
+
+        /* this loop is due because of the API syntax inconsistency*/
+        for (let element in data._embedded) {
+
+          let selectKey = element;
+          let optionsArray = data._embedded[selectKey];
+
+          optionsArray.forEach(option => {
+            let thisOption = $("<option></option>");
+            thisOption.text(option.name).attr('value', option.name)
+            $(`[data-select=${endpoint}]`).append(thisOption)
+          });
+
+          break
+
+        };
+
+      },
+
+      error: function(err){
+        console.log(err);
+      }
+    });
+  })
+}
+
