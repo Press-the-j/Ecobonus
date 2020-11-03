@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
   const URLSELECT = "http://ectm-env.eba-wmhap9wv.eu-south-1.elasticbeanstalk.com/";
-  const SELECTS = ['tipologia', 'stato-immobile','tipo-generazione','tipo-generatore','radiatore','pareti-esterne','telaio', 'vetro']
+  const SELECTS = ['tipologia', 'stato-immobile', 'tipo-generazione', 'tipo-generatore', 'radiatore', 'pareti-esterne','telaio', 'vetro']
 
   /* validation init */
   $.getScript( "js/validation.js", function( data ) {});
@@ -9,22 +9,48 @@ $(document).ready(function(){
   /* set options in empty selects */
   populateSelect(URLSELECT, SELECTS)
 
+  // open a modal
+  $('.open-modal').on('click', function(){ 
+    let this_click = $(this);
+    showModal(this_click)
+  })
+
+  // get values from modal
+  $('.modal-dialog .save-pop-up').on('click', function() {
+    let this_click = $(this);
+    getModalData(this_click)
+  })
+
+  // close a modal
+  $('.close-modal').on('click', function(){
+    $('.close').click();
+  })
+
+
+  // switchSelection() on click
+  $('#type-real-estate').on('click', function() {
+    let this_click = $(this);
+    switchSelection(this_click)
+  })
+
   /* check permission to nexStep */
   $('input:not(.next)').on('click', function() {
     checkAccess()
   })
+
   
   /* 
   save data in local
   and set next page view
   */
   $(document).on('click', '.next[data-access="allowed"]', function(){
-    let this_fieldset = $(this).closest('fieldset');
+    let this_click = $(this);
+    let this_fieldset = this_click.closest('fieldset');
+    
 
-    nextStep(this_fieldset);
+    nextStep(this_fieldset, this_click);
     this_fieldset.hide().removeClass('my_current_step');
     this_fieldset.next().show().addClass('my_current_step')
-    
 
   })
   
@@ -41,9 +67,9 @@ function checkAccess() {
   aggiungi attributo data-access="allowed" al pulsante .next 
   */
 
-  let inputArray = $('fieldset[class="my_current_step"] .input-control').get();
-  let checkboxArray = $('fieldset[class="my_current_step"] .checkbox-control').get();
-  let selectArray = $('fieldset[class="my_current_step"] .select-control').get();
+  let inputArray = $('.my_current_step .input-control').get();
+  let checkboxArray = $('.my_current_step .checkbox-control').get();
+  let selectArray = $('.my_current_step .select-control').get();
 
   let access = true;
 
@@ -98,25 +124,16 @@ function checkAccess() {
 
 
   
-function nextStep(this_fieldset) {
+function nextStep(this_fieldset, this_click) {
 
-  if(this_fieldset.attr('data-typeuser')) {
-    console.log($(this))
-    switch ($(this)) {
-      case 'business':
-        $('fieldset').remove('.person')
-        break;
-    
-      case 'person':
-        $('fieldset').remove('.business')
-        break;
-    }
-  }
+  // select an user-type in fieldset 2
+  selectUserType(this_click);
+  
 
   let next_fieldset = this_fieldset.next();
   
   //1: save user answers
-  /* saveAnswers(this_fieldset) */
+  saveAnswers(this_fieldset)
 
   //2: set next step
   setStep(next_fieldset)
@@ -128,10 +145,145 @@ function nextStep(this_fieldset) {
 
 
 
- 
-/* saveAnswers(this_fieldset) {
+// select an user-type in fieldset 2 and save this reference in localStorage
+function selectUserType(this_click) {
+  let userType;
 
-} */
+  if(this_click.attr('data-typeuser')) {
+    switch (this_click.attr('data-typeuser')) {
+      case 'business':
+        $('fieldset').remove('.person')
+        localStorage.setItem('user-type', 'business')
+        break 
+
+    
+      case 'person':
+        $('fieldset').remove('.business')
+        localStorage.setItem('user-type', 'person')
+        break
+    }
+  }
+}
+
+
+
+
+
+
+ 
+function saveAnswers(this_fieldset) {
+  let this_fieldset_position = this_fieldset.data('count-page')
+  console.log(this_fieldset_position)
+  // loop e prendi i dati
+  let inputArray = $('.my_current_step .save-data').get();
+  let selectArray = $('.my_current_step select .save-data').get();
+  let entriesArray = {'inputArray': inputArray, 'selectArray': selectArray}
+
+  console.log(inputArray)
+  console.log(selectArray)
+
+  switch(this_fieldset_position) {
+
+    case(1): 
+      // setto il nome da ottenere
+      let marketingName = "marketing-check";
+      // avvio la funzione di loop
+      let nameValue = getValueByName(entriesArray, marketingName);
+      // passo il valore al local storage
+      localStorage.setItem('marketingCheck', nameValue)
+      console.log(localStorage.getItem('marketingCheck'))
+      break
+    
+    case(3):
+
+
+      break
+  }
+
+
+
+} 
+
+function getValueByName(entriesArray, name) {
+  let value;
+
+  for (const elementArray in entriesArray) {
+    entriesArray[elementArray].forEach(element => {
+
+      let elementId = element.getAttribute('name')
+      switch (element.getAttribute('type')) {
+        case 'text':
+          if (elementId == name) {
+            let nameValue = element.val()
+            console.log(nameValue)
+            value = nameValue
+          }
+          break;
+
+        case 'checkbox':
+
+          if (elementId == name) {
+            let nameValue = element.checked ? true : false;
+            value = nameValue
+          }
+
+          break;
+      }
+      
+
+    });
+  }
+
+  return value
+}
+
+
+
+function showModal(this_click) {
+
+  let modalName = this_click.data('modal');
+  $(`#${modalName}`).modal('show');
+  $(`#${modalName}`).addClass('opened')
+
+}
+
+function getModalData(this_click) {
+  let this_fieldset_position = this_click.closest('fieldset').data('count-page');
+  let inputArray = $('.my_current_step .modal-content .save-data').get();
+  let selectArray = $('.my_current_step .modal-content select .save-data').get();
+  let entriesArray = {'inputArray': inputArray, 'selectArray': selectArray}
+
+  switch (this_fieldset_position) {
+    case(3):
+      let inputName = 'name_popup'
+      let inputLastname = 'surname_popup'
+      let nameValue = getValueByName(entriesArray, inputName)
+      let lastnameValue = getValueByName(entriesArray, inputLastname)
+
+      $('input[name="nome"]').val(nameValue);
+      $('input[name="cognome"]').val(lastnameValue);
+      break;
+  
+    default:
+      break;
+  }
+}
+
+function switchSelection(this_click) {
+  this_click.on('change',function() {
+    if ($(this).val() === 'Stabile condominiale') {
+      $('.condominium').show();
+      $('.condominium-hide').hide()
+      $('.toggle-reverse').removeClass('select-control save-data-array')
+      $('.toggle-control').addClass('input-control save-data-array');
+    } else {
+      $('.condominium').hide();
+      $('.condominium-hide').show()
+      $('.toggle-reverse').addClass('select-control save-data-array')
+      $('.toggle-control').removeClass('input-control save-data-array');
+    }
+  })
+}
 
 
 
@@ -148,7 +300,9 @@ function setStep(step) {
 
 
     case 2:
-
+    // verificare che tutti i fieldset siano settati
+    // indipendentemente dall'user-type scelto in precedenza
+    // se si giunge da previouStep()
       break;
 
 
@@ -250,3 +404,33 @@ function populateSelect(url, endpoints ){
   })
 }
 
+
+
+
+
+ //? validazione select
+//  $(".choose-category").on("change", function () {
+//   // prende il valore della select
+//   let selectedCategory = $(this).val();
+  
+//   // abilitiamo o disabilitiamo la subcategory (seconda select)
+//   if (selectedCategory !== "none") {
+//       $(".category-real-estate")
+//           .siblings(".bottoni")
+//           .find(".next")
+//           .prop("disabled", false);
+//   } else {
+//       $(".category-real-estate")
+//           .siblings(".bottoni")
+//           .find(".next")
+//           .prop("disabled", true);
+//   }
+
+//   // attributo standard per eliminare la seconda select
+//   $(".sub-category").removeClass("active");
+//   $(".sub-category select").removeClass("selected-category save-data-array group-save modal-single-check");
+  
+//   // mostra la select solo quando avviene il change su una scelta consona
+//   $(".category-" + selectedCategory).addClass("active");
+//   $(".category-" + selectedCategory + " select").addClass("selected-category save-data-array group-save modal-single-check");
+// })
