@@ -40,7 +40,7 @@ window.validator = $('#formComp').validate({
     'checkPrivacy':{
       required:true,
     },
-    'nome':{
+    'nome-completo':{
       required:true,
       regName:true
     },
@@ -60,11 +60,11 @@ window.validator = $('#formComp').validate({
       number:true,
       minlength:6
     },
-    'name_popup': {
+    'nome': {
       required:true,
       regName:true
     },
-    'surname_popup': {
+    'cognome': {
       required:true,
       regName:true
     },
@@ -136,10 +136,10 @@ window.validator = $('#formComp').validate({
       number:true,
       maxlength:11
     },
-    'address_real_estate':{
-      required:true,
-      regAddress:true
-    },
+    // 'address_real_estate':{
+    //   required:true,
+    //   regAddress:true
+    // },
     'tipologia':{
       required:true,
       emptySel:'none'
@@ -148,7 +148,8 @@ window.validator = $('#formComp').validate({
       required:true,
     },
     'piani-condominio':{
-      required:true,
+      required:true
+      ,
       min:1,
       max:99
     },

@@ -172,8 +172,8 @@
                 <input data-toggle="modal" data-modal="nameModal" data-whatever="@mdo" type="text"
                   class="form-control input-control open-modal" id="name" name="nome-completo"   data-receive-from="complete-name">
               </div>
-            <input type="hidden" class="save-data save-name" name="nome" data-receive-from="name-popup" >
-            <input type="hidden" class="save-data" name="cognome"data-receive-from="surname-popup">
+            <!-- <input type="hidden" class="save-data save-name" name="nome" data-receive-from="name-popup" >
+            <input type="hidden" class="save-data" name="cognome"data-receive-from="surname-popup"> -->
             </div>
             <div class="form-group">
               <label class="control-label" for="date">Compleanno</label>
@@ -183,7 +183,7 @@
             </div>
             <div class="form-group">
               <label class="control-label"  for="genre">Sesso</label>
-              <select class="form-control select-control save-data" name="sesso" id="genre" data-acquire="true">
+              <select class="form-control select-control save-data" name="sesso" id="genre" data-acquire="true" data-acquire="true">
                 <option value="none" style="display:none;">Genere</option>
                 <option value="">Maschio</option>
                 <option value="">Femmina</option>
@@ -210,7 +210,7 @@
             </div>
             <div class="bottoni">
               <input type="button" name="previous" class="previous reset btn-previous btn" value="Previous" />
-              <input type="button" name="next" class="next btn btn-next" value="Next" />
+              <input type="button" name="next" data-access="denied" class="next btn btn-next" value="Next" />
             </div>
 
             <div class="modal fade" id="nameModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
@@ -469,7 +469,7 @@
             <p><strong>Raccontaci di più sul tuo immobile</strong><br>
               Più dettagli ci darai e più precisa sarà la valutazione
             </p>
-            <div class="form-group">
+            <!-- <div class="form-group">
               <label class="control-label" for="address_estate">Dove si trova?</label>
               <div class="row-input">
                 <input type="search" autocomplete class="form-control input-control open-modal" name="address_real_estate" data-toggle="modal" data-modal="address_real_estate_modal" data-whatever="@mdo" id="address_estate">
@@ -479,10 +479,10 @@
                 <input type="hidden" name="provincia" class="save-data-array common-save" data-receive-from="province_estate" >
                 <input type="hidden" name="cap" class="save-data-array common-save" data-receive-from="postal_code_estate" >
               </div>
-            </div>
+            </div> -->
             <div class="form-group">
               <label class="control-label" for="type-real-estate">Tipologia</label>
-              <select data-select="tipologia"name="tipologia" id="type-real-estate" class="form-control select-control save-data-array">
+              <select data-select="tipologia"name="tipologia" id="type-real-estate" class="form-control select-control save-data-array" data-acquire="true">
                 <option style="display:none" value="none">Tipologia immobile</option>
               </select>
             </div>
@@ -507,7 +507,7 @@
 
             <div class="form-group condominium-hide">
               <label class="control-label" for="square-meters">Superficie</label>
-              <select name="superficie" id="square-meters" class="form-control select-control toggle-reverse save-data-array" >
+              <select name="superficie" id="square-meters" class="form-control select-control toggle-reverse save-data-array" data-acquire="true">
                 <option style="display:none" value="none">Dimensione superficie</option>
                 <option>fino a 50mq</option>
                 <option>50-90mq</option>
@@ -518,7 +518,7 @@
             </div>
             <div class="form-group">
               <label class="control-label" for="state-real-estate">Stato Immobile</label>
-              <select data-select="stato-immobile"name="statoImmobile" id="state-real-estate" class="form-control select-control save-data-array">
+              <select data-select="stato-immobile"name="statoImmobile" id="state-real-estate" class="form-control select-control save-data-array" data-acquire="true">
                 <option style="display:none" value="none">Stato immobile</option>
                 
               </select>
@@ -527,43 +527,43 @@
             <div class="form-group">
               <label class="control-label" for="winter-air-conditioning">Climatizzazione Invernale</label>
               <div class="row-input">
-                <input class="form-control input-control open-modal save-data-array from-select group-save" type="text" id="winter-air-conditioning" name="tipoGenerazione"
+                <input class="form-control input-control open-modal save-data-array from-select group-save" type="text" id="winter-air-conditioning" name="air-conditioner"
                 data-group="climatizzazione" data-toggle="modal" data-modal="winter-air-conditioning-popup"
                 data-receive-from="generation-heating-input">
               </div>
-              <input type="hidden"  name="tipoGeneratore"
+              <!-- <input type="hidden"  name="tipoGeneratore"
               data-group="climatizzazione"
               data-receive-from="generator-type-input" class="save-data-array from-select group-save">
               <input type="hidden" class="save-data-array from-select group-save"
               data-group="climatizzazione"
-              name="radiatore"  data-receive-from="terminal-type-input">
+              name="radiatore"  data-receive-from="terminal-type-input"> -->
             </div>
 
             <div class="form-group">
               <label class="control-label" for="opaque-casing">Involucro opaco</label>
               <div class="row-input">
-                <input type="text" class="form-control input-control open-modal save-data-array from-select group-save " name="paretiEsterne" id="opaque-casing" 
+                <input type="text" class="form-control input-control open-modal save-data-array from-select group-save " name="external-walls" id="opaque-casing" 
                 data-group="involucroOpaco"
                   data-toggle="modal" data-modal="opaque-casing-popup" data-whatever="@mdo"
                   data-receive-from="external-walls-input">
               </div>
-              <input type="hidden" class="save-data-array modal-single-check group-save"  name="cappotto "data-receive-from="coat_input" data-group="involucroOpaco">
+              <!-- <input type="hidden" class="save-data-array modal-single-check group-save"  name="cappotto "data-receive-from="coat_input" data-group="involucroOpaco"> -->
               
             </div>
             <div class="form-group">
               <label class="control-label" for="transparent-casing">Involucro trasparente</label>
               <div class="row-input">
-                <input type="text" class="form-control input-control open-modal save-data-array from-select group-save" name="telaio" id="transparent-casing"
+                <input type="text" class="form-control input-control open-modal save-data-array from-select group-save" name="frame-type" id="transparent-casing"
                 data-group="involucroTrasp"
                   data-toggle="modal" data-modal="transparent-casing-popup" data-whatever="@mdo"
                   data-receive-from="frame-type-input">
               </div>
-              <input type="hidden" class="save-data-array from-select group-save" name="vetro" 
-              data-group="involucroTrasp"data-receive-from="glass-type-input" >
+              <!-- <input type="hidden" class="save-data-array from-select group-save" name="vetro" 
+              data-group="involucroTrasp"data-receive-from="glass-type-input" > -->
             </div>
             <div class="form-group">
               <label class="control-label" for="efficienza_energetica">Efficienza Energetica</label>
-              <select name="efficienza_energetica" id="energy-efficiency" class="form-control select-control save-data-array">
+              <select name="efficienza_energetica" id="energy-efficiency" class="form-control select-control save-data-array" data-acquire="true">
                 <option style="display:none" value="none">Efficienza energetica</option>
                 <option>A,A+,A1-A4</option>
                 <option>B,C,D</option>
@@ -575,7 +575,7 @@
               <input type="button" name="next" class="next btn btn-next" value="Next" />
             </div>
             <!-- popup indirizzo immobile -->
-            <div class="modal fade" id="address_real_estate_modal" tabindex="-1" role="dialog"
+            <!-- <div class="modal fade" id="address_real_estate_modal" tabindex="-1" role="dialog"
               aria-labelledby="exampleModalLabel">
               <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -636,7 +636,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> -->
             <!-- pop up climatizzazione invernale -->
             <div class="modal fade" id="winter-air-conditioning-popup" tabindex="-1" role="dialog"
               aria-labelledby="exampleModalLabel">
@@ -653,7 +653,7 @@
                         <a tabindex="0" role="button" data-trigger="focus" data-toggle="popover" title="Tipologia generazione riscaldamento" class="label-info-cursor" data-content="Abbiamo bisogno di sapere se l’impianto di riscaldamento è autonomo o centralizzato. Nell’impianto autonomo, il generatore termico serve solamente quell’immobile. Nell’impianto centralizzato c’è un unico generatore termico per più immobili"><img src="./img/Punto-Interrogativo.svg" alt="info"></a>
                       </div>
                       
-                      <select data-select="tipo-generazione" class="form-control select-control send-val" name="generation_heating" id="generation-heating">
+                      <select data-select="tipo-generazione" class="form-control select-control send-val" name="tipoGenerazione" id="generation-heating" data-acquire="true">
                         <option style="display:none" value="none">Tipologia generazione riscaldamento</option>
                         
                       </select>
@@ -665,7 +665,7 @@
                         <label for="generator-type" class="control-label">Tipologia generatore</label>
                         <a tabindex="0" role="button" data-trigger="focus" data-toggle="popover" title="Tipologia generatore" class="label-info-cursor" data-content="Abbiamo bisogno di conoscere il tipo di generatore termico del tuo impianto di riscaldamento, cioè il tipo di apparecchio che genera il calore nel tuo impianto. Solitamente si tratta di una caldaia o di una pompa di calore, ma se sei indeciso ti consigliamo di consultare i documenti che ti ha lasciato l’installatore"><img src="./img/Punto-Interrogativo.svg" alt="info"></a>
                       </div>
-                      <select data-select="tipo-generatore"class="form-control select-control send-val" name="generator_type" id="generator-type">
+                      <select data-select="tipo-generatore"class="form-control select-control send-val" name="tipoGeneratore" id="generator-type" data-acquire="true">
                         <option style="display:none" value="none">Tipologia generatore</option>
                         
                       </select>
@@ -676,7 +676,7 @@
                         <label for="terminal-type" class="control-label">Tipologia terminale emissione</label>
                         <a tabindex="0" role="button" data-trigger="focus" data-toggle="popover" title="Tipologia terminale emissione" class="label-info-cursor" data-content="Abbiamo bisogno di sapere che tipo di terminali sono collegati al tuo impianto di riscaldamento. I terminali sono gli apparecchi che distribuiscono il calore negli ambienti dell’immobile. Per esempio, i terminali più comuni sono i termosifoni"><img src="./img/Punto-Interrogativo.svg" alt="info"></a>
                       </div>
-                      <select data-select="radiatore" class="form-control select-control send-val" name="terminal_type" id="terminal-type">
+                      <select data-select="radiatore" class="form-control select-control send-val" name="radiatore" id="terminal-type" data-acquire="true">
                         <option style="display:none" value="none">Tipologia terminale emissione</option>
                         
                       </select>
@@ -706,7 +706,7 @@
                         <label for="external-walls" class="control-label">Pareti verso l'esterno</label>
                         <a tabindex="0" role="button" data-trigger="focus" data-toggle="popover" title="Tipologia generazione riscaldamento" class="label-info-cursor" data-content="Abbiamo bisogno di sapere come sono state costruite le pareti più esterne dell’edificio in cui si trova l’immobile, quale sia la loro tipologia edilizia. Le pareti esterne corrispondono a tutti gli effetti alle facciate di una villa o del palazzo in cui si trova un appartamento"><img src="./img/Punto-Interrogativo.svg" alt="info"></a>
                       </div>
-                      <select data-select="pareti-esterne" class="form-control select-control send-val" name="external_walls" id="external-walls">
+                      <select data-select="pareti-esterne" class="form-control select-control send-val" name="paretiEsterne" id="external-walls" data-acquire="true">
                         <option style="display:none" value="none">Tipo di parete verso l'esterno</option>
                         
                       </select>
@@ -715,7 +715,7 @@
                     <div class="form-group">
                       <div class="label-wrapper">
                         <label for="coat" class="m-right-10 coat-label">Le pareti sono gia state isolate mediante cappotto?</label>
-                        <input type="checkbox" id="coat" class="coat-checkbox m-right-20">
+                        <input type="checkbox" id="coat" class="coat-checkbox m-right-20" data-acquire="true">
                         <a tabindex="0" role="button" data-trigger="focus" data-toggle="popover" title="Tipologia generazione riscaldamento" class="label-info-cursor" data-content="Il capotto termico è formato da elementi edilizi prefabbricati e crea un vero e proprio guscio protettivo e isolante per l’edificio. Il rivestimento del cappotto termico è invisibile all’esterno, ma ha il vantaggio di ridurre la dispersione termica con un conseguente risparmio di energia e risorse"><img src="./img/Punto-Interrogativo.svg" alt="info"></a>
                       </div>
                     </div>
@@ -742,7 +742,7 @@
 
                     <div class="form-group">
                       <label for="frame-type" class="control-label">Tipologia telaio infisso</label>
-                      <select data-select="telaio" class="form-control select-control send-val" name="frame_type" id="frame-type">
+                      <select data-select="telaio" class="form-control select-control send-val" name="telaio" id="frame-type" data-acquire="true">
                         <option style="display:none" value="none">Tipologia telaio</option>
                         
                       </select>
@@ -751,7 +751,7 @@
                     <input type="hidden" class="popup-control" data-error="frame-type"  id="frame-type-input">
                     <div class="form-group">
                       <label for="glass-type" class="control-label">Tipologia vetro infisso</label>
-                      <select data-select="vetro" class="form-control select-control send-val" name="glass_type" id="glass-type">
+                      <select data-select="vetro" class="form-control select-control send-val" name="vetro" id="glass-type" data-acquire="true">
                         <option style="display:none" value="none">Tipologia vetro</option>
                         
                       </select>

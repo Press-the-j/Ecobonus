@@ -100,7 +100,7 @@ $(document).ready(function(){
   })
 
   /* check permission to nexStep */
-  $('input:not(.next)').on('click', function() {
+  $('.next').on('click', function() {
     checkAccess()
   })
 
@@ -143,7 +143,7 @@ function checkAccess() {
 
 
   inputArray.forEach(input => {
-    
+
     let inputId = input.getAttribute('id');
     let validate = validator.element(`#${inputId}`);
 
@@ -154,7 +154,7 @@ function checkAccess() {
   });
 
   checkboxArray.forEach(checkbox => {
-    
+
     let checkboxId = checkbox.getAttribute('id');
     let validate = validator.element(`#${checkboxId}`);
 
@@ -165,10 +165,10 @@ function checkAccess() {
   });
 
   selectArray.forEach(select => {
-    
+
     let selectId = select.getAttribute('id');
     let validate = validator.element(`#${selectId}`);
-
+ 
     if(!validate) {
       access = false
     }
@@ -198,10 +198,10 @@ function nextStep(this_fieldset, this_click) {
   let next_fieldset = this_fieldset.next();
   
   //1: save user answers
-  saveAnswers(this_fieldset)
+  saveAnswers()
 
   //2: set next step
-  setStep(next_fieldset)
+  // setStep(next_fieldset)
 
 }
 
@@ -239,32 +239,19 @@ function saveAnswers() {
   let selectArray = $('.my_current_step select[data-acquire="true"]').get();
   let entriesArray = {'inputArray': inputArray, 'selectArray': selectArray};
   
-  
+  console.log(inputArray)
+  console.log(selectArray)
   for (const elementArray in entriesArray) {
 
     entriesArray[elementArray].forEach(element => {
 
       let nameValue;
       let elementName = element.getAttribute('name');      
-
+      console.log(elementName)
       // lo switch gestisce i casi che i dati provengano da input di tipo diverso:
       // testuali, checkbox, select
       switch (element.getAttribute('type')) {
-        case 'text':
-
-          nameValue = $(element).val();
-          for (const classe in bonusObj) {
-            for (const option in bonusObj[classe]) {
-              if(option == elementName) {
-                // inserire if/else typeof option === 'object'
-                bonusObj[classe][option] = nameValue
-              }
-              
-            }
-
-          }
-          break;
-
+        
         case 'checkbox':
 
           nameValue = element.checked ? true : false;
@@ -277,6 +264,21 @@ function saveAnswers() {
               
             }
               
+          }
+          break;
+
+        default:
+
+          nameValue = $(element).val();
+          for (const classe in bonusObj) {
+            for (const option in bonusObj[classe]) {
+              if(option == elementName) {
+                // inserire if/else typeof option === 'object'
+                bonusObj[classe][option] = nameValue
+              }
+              
+            }
+
           }
           break;
 
@@ -307,27 +309,42 @@ function showModal(this_click) {
 
 function getModalData(this_click) {
   let this_fieldset_position = this_click.closest('fieldset').data('count-page');
-  let inputArray = $('.my_current_step input[data-acquire="true"]').get();
-  let selectArray = $('.my_current_step select[data-acquire="true"]').get();
-  let entriesArray = {'inputArray': inputArray, 'selectArray': selectArray}
 
   switch (this_fieldset_position) {
     case(3):
 
-      let inputName = 'name_popup';
-      let inputLastname = 'surname_popup'; 
-      let nameValue = $.trim(getValueByName(entriesArray))
-      let lastnameValue = $.trim(getValueByName(entriesArray))
-
-      $('input[name="nome"]').val(nameValue)
-      $('input[name="cognome"]').val(lastnameValue)
+      let nameValue = $('input[name="nome"]').val()
+      let lastnameValue = $('input[name="cognome"]').val()
       $('input[name="nome-completo"]').val(nameValue + ' ' + lastnameValue);
+      $('.my_current_step .close').click();
 
+      break;
+    
+    case(5):
+
+      if ($('select[name="tipoGenerazione"]').val() != 'none') {
+        let tipoGenerazioneValue = $('select[name="tipoGenerazione"]').val()
+        $('input[name="air-conditioner"]').val(tipoGenerazioneValue);
+      }
+      if ($('select[name="paretiEsterne"]').val() != 'none') {
+        let paretiEsterneValue = $('select[name="paretiEsterne"]').val()
+        $('input[name="external-walls"]').val(paretiEsterneValue)
+      }
+      if ($('select[name="paretiEsterne"]').val() != 'none') {
+        let paretiEsterneValue = $('select[name="paretiEsterne"]').val()
+        $('input[name="external-walls"]').val(paretiEsterneValue)
+      }
+      if ($('select[name="telaio"]').val() != 'none') {
+        let telaioValue = $('select[name="paretiEsterne"]').val()
+        $('input[name="frame-type"]').val(telaioValue)
+      }
+      $('.my_current_step .close').click();
       break;
 
   }
 
 }
+
 
 
 
