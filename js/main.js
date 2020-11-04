@@ -328,7 +328,7 @@ function getModalData(this_click) {
       let nameValue = $('input[name="nome"]').val()
       let lastnameValue = $('input[name="cognome"]').val()
       $('input[name="nome-completo"]').val(nameValue + ' ' + lastnameValue);
-      $('.my_current_step .close').click();
+      $('.my_current_step .modal.opened.in .close').click();
 
       break;
     
@@ -350,7 +350,7 @@ function getModalData(this_click) {
         let telaioValue = $('select[name="paretiEsterne"]').val()
         $('input[name="frame-type"]').val(telaioValue)
       }
-      $('.my_current_step .close').click();
+      $('.my_current_step .modal.opened.in .close').click();
       break;
 
   }
