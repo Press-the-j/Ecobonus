@@ -84,7 +84,7 @@
             </div>
             <div class="form-group switch-wrapper">
               <label class="switch" for="marketing">
-                <input type="checkbox" id="marketing" name="marketing-check" class="save-data switch-check">
+                <input type="checkbox" id="marketing" name="marketingCheck" class="save-data switch-check" data-acquire="true">
                 <span class="slider"></span>
               </label>
               <span>Rimani aggiornato sulle nostre offerte <a class="link" href="">Marketing</a></span>
@@ -170,7 +170,7 @@
               <label class="control-label" for="name">Nome</label>
               <div class="row-input">
                 <input data-toggle="modal" data-modal="nameModal" data-whatever="@mdo" type="text"
-                  class="form-control input-control open-modal" id="name" name="nome"   data-receive-from="complete-name">
+                  class="form-control input-control open-modal" id="name" name="nome-completo"   data-receive-from="complete-name">
               </div>
             <input type="hidden" class="save-data save-name" name="nome" data-receive-from="name-popup" >
             <input type="hidden" class="save-data" name="cognome"data-receive-from="surname-popup">
@@ -183,7 +183,7 @@
             </div>
             <div class="form-group">
               <label class="control-label"  for="genre">Sesso</label>
-              <select class="form-control select-control save-data"   name="sesso" id="genre">
+              <select class="form-control select-control save-data" name="sesso" id="genre" data-acquire="true">
                 <option value="none" style="display:none;">Genere</option>
                 <option value="">Maschio</option>
                 <option value="">Femmina</option>
@@ -198,13 +198,13 @@
             <div class="form-group">
               <label class="control-label"  for="email">Email</label>
               <div class="row-input">
-                <input type="email" class="form-control input-control save-data" id="email" name="email">
+                <input type="email" class="form-control input-control save-data" id="email" name="email" data-acquire="true">
               </div>
             </div>
             <div class="form-group">
               <label class="control-label" for="tel-number">Telefono</label>
               <div class="row-input">
-                <input type="number" class="form-control input-control save-data"  id="tel-number" name="cellulare">
+                <input type="number" class="form-control input-control save-data"  id="tel-number" name="cellulare" data-acquire="true">
               </div>
               <small class="error"></small>
             </div>
@@ -225,15 +225,15 @@
                     <div class="form-group">
                       <label for="name-popup" class="control-label">Nome</label>
                       <div class="row-input">
-                        <input type="text" class="form-control  popup-control input-popup-control person send-val-name save-name"
-                          id="name-popup" name="name_popup">
+                        <input type="text" class="form-control  popup-control input-popup-control person send-val-name save-name" data-acquire="true"
+                          id="name-popup" name="nome">
                       </div>
                     </div>
                     <div class="form-group">
                       <label for="surname-popup" class="control-label">Cognome</label>
                       <div class="row-input">
-                        <input type="text" class="form-control  popup-control input-popup-control person send-val-name"
-                        name="surname_popup"  id="surname-popup">
+                        <input type="text" class="form-control  popup-control input-popup-control person send-val-name" data-acquire="true"
+                        name="cognome"  id="surname-popup">
                       </div>
                     </div>
                     <input type="hidden" id="complete-name">

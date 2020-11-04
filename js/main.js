@@ -3,6 +3,72 @@ $(document).ready(function(){
   const URLSELECT = "http://ectm-env.eba-wmhap9wv.eu-south-1.elasticbeanstalk.com/";
   const SELECTS = ['tipologia', 'stato-immobile', 'tipo-generazione', 'tipo-generatore', 'radiatore', 'pareti-esterne','telaio', 'vetro']
 
+  // !IMPORTANTE: implementare caricando il template direttamente da un file json
+  var bonusTemplate = {
+    "impresa" : {
+      "ragioneSociale" : "string",
+      "piva" : "string",
+      "indirizzo" : "string",
+      "citta" : "string",
+      "cap" : "string",
+      "provincia" : "string",
+      "stato" : "string",
+      "email" : "string",
+      "cellulare" : "string",
+      "marketingCheck" : false
+     },
+    "privato" : {
+      "nome" : "Max",
+      "cognome" : "Branca",
+      "sesso" : "UOMO",
+      "email" : "aaa@aa.it",
+      "cellulare" : "212121",
+      "marketingCheck" : false
+    },
+    "bonus110" : {
+      "indirizzo" : "indirizzo",
+      "citta" : "citta",
+      "provincia" : "prov",
+      "tipologia" : {
+        "name" : "Villa plurifamiliare"
+      },
+      "superficie" : "123",
+      "statoImmobile" : {
+        "name" : "Nuovo/ In costruzione"
+      },
+      "climatizzazione" : {
+        "tipoGenerazione" : {
+          "name" : "Impianto centralizzato"
+        },
+        "tipoGeneratore" : {
+          "name" : "Caldaie tradizionali"
+        },
+        "radiatore" : {
+          "name" : "Ventilconvettore"
+        }
+      },
+      "involucroOpaco" : {
+        "paretiEsterne" : {
+          "name" : "Parete a cassa vuota con mattoni forati"
+        },
+        "cappotto" : true
+      },
+      "involucroTrasp" : {
+        "telaio" : {
+          "name" : "Legno"
+        },
+        "vetro" : {
+          "name" : "Vetro singolo"
+        }
+      },
+      "efficienzaEnergetica" : "eff",
+      "categoriaCatastale" : "cat",
+      "questionario" : "\"d1\": \"check2\", \"d2\": \"check2\",\"d3\": \"Si\",\"d4\": \"check1, check2\",\"d5\": 4,\"d5bis\": \"Si\",\"d6\": \"No\"",
+      "esito" : "OK"
+    }
+  }
+  localStorage.setItem('bonusObj', JSON.stringify(bonusTemplate))
+
   /* validation init */
   $.getScript( "js/validation.js", function( data ) {});
 
@@ -57,6 +123,7 @@ $(document).ready(function(){
 
   
 });
+
 
 
 
@@ -122,8 +189,6 @@ function checkAccess() {
 
 
 
-
-  
 function nextStep(this_fieldset, this_click) {
 
   // select an user-type in fieldset 2
@@ -139,7 +204,6 @@ function nextStep(this_fieldset, this_click) {
   setStep(next_fieldset)
 
 }
-
 
 
 
@@ -169,73 +233,63 @@ function selectUserType(this_click) {
 
 
 
-
- 
-function saveAnswers(this_fieldset) {
-  let this_fieldset_position = this_fieldset.data('count-page')
-  console.log(this_fieldset_position)
-  // loop e prendi i dati
-  let inputArray = $('.my_current_step .save-data').get();
-  let selectArray = $('.my_current_step select .save-data').get();
-  let entriesArray = {'inputArray': inputArray, 'selectArray': selectArray}
-
-  console.log(inputArray)
-  console.log(selectArray)
-
-  switch(this_fieldset_position) {
-
-    case(1): 
-      // setto il nome da ottenere
-      let marketingName = "marketing-check";
-      // avvio la funzione di loop
-      let nameValue = getValueByName(entriesArray, marketingName);
-      // passo il valore al local storage
-      localStorage.setItem('marketingCheck', nameValue)
-      console.log(localStorage.getItem('marketingCheck'))
-      break
-    
-    case(3):
-
-
-      break
-  }
-
-
-
-} 
-
-function getValueByName(entriesArray, name) {
-  let value;
-
+function saveAnswers() {
+  let bonusObj = JSON.parse(localStorage.getItem('bonusObj'));
+  let inputArray = $('.my_current_step input[data-acquire="true"]').get();
+  let selectArray = $('.my_current_step select[data-acquire="true"]').get();
+  let entriesArray = {'inputArray': inputArray, 'selectArray': selectArray};
+  
+  
   for (const elementArray in entriesArray) {
+
     entriesArray[elementArray].forEach(element => {
 
-      let elementId = element.getAttribute('name')
+      let nameValue;
+      let elementName = element.getAttribute('name');      
+
+      // lo switch gestisce i casi che i dati provengano da input di tipo diverso:
+      // testuali, checkbox, select
       switch (element.getAttribute('type')) {
         case 'text':
-          if (elementId == name) {
-            let nameValue = element.val()
-            console.log(nameValue)
-            value = nameValue
+
+          nameValue = $(element).val();
+          for (const classe in bonusObj) {
+            for (const option in bonusObj[classe]) {
+              if(option == elementName) {
+                // inserire if/else typeof option === 'object'
+                bonusObj[classe][option] = nameValue
+              }
+              
+            }
+
           }
           break;
 
         case 'checkbox':
 
-          if (elementId == name) {
-            let nameValue = element.checked ? true : false;
-            value = nameValue
+          nameValue = element.checked ? true : false;
+          for (const classe in bonusObj) {
+            for (const option in bonusObj[classe]) {
+              if(option == elementName) {
+                // inserire if/else typeof option === 'object'
+                bonusObj[classe][option] = nameValue
+              }
+              
+            }
+              
           }
-
           break;
+
       }
       
-
     });
+    
   }
-
-  return value
+  localStorage.setItem('bonusObj', JSON.stringify(bonusObj))
+  console.log(JSON.parse(localStorage.getItem('bonusObj')))
 }
+
+
 
 
 
@@ -247,27 +301,37 @@ function showModal(this_click) {
 
 }
 
+
+
+
+
 function getModalData(this_click) {
   let this_fieldset_position = this_click.closest('fieldset').data('count-page');
-  let inputArray = $('.my_current_step .modal-content .save-data').get();
-  let selectArray = $('.my_current_step .modal-content select .save-data').get();
+  let inputArray = $('.my_current_step input[data-acquire="true"]').get();
+  let selectArray = $('.my_current_step select[data-acquire="true"]').get();
   let entriesArray = {'inputArray': inputArray, 'selectArray': selectArray}
 
   switch (this_fieldset_position) {
     case(3):
-      let inputName = 'name_popup'
-      let inputLastname = 'surname_popup'
-      let nameValue = getValueByName(entriesArray, inputName)
-      let lastnameValue = getValueByName(entriesArray, inputLastname)
 
-      $('input[name="nome"]').val(nameValue);
-      $('input[name="cognome"]').val(lastnameValue);
+      let inputName = 'name_popup';
+      let inputLastname = 'surname_popup'; 
+      let nameValue = $.trim(getValueByName(entriesArray))
+      let lastnameValue = $.trim(getValueByName(entriesArray))
+
+      $('input[name="nome"]').val(nameValue)
+      $('input[name="cognome"]').val(lastnameValue)
+      $('input[name="nome-completo"]').val(nameValue + ' ' + lastnameValue);
+
       break;
-  
-    default:
-      break;
+
   }
+
 }
+
+
+
+
 
 function switchSelection(this_click) {
   this_click.on('change',function() {
@@ -284,7 +348,6 @@ function switchSelection(this_click) {
     }
   })
 }
-
 
 
 
@@ -361,7 +424,6 @@ function setStep(step) {
       break;
   }
 }
-
 
 
 

@@ -1,0 +1,66 @@
+  {
+    "impresa" : {
+      "ragioneSociale" : "string",
+      "piva" : "string",
+      "indirizzo" : "string",
+      "citta" : "string",
+      "cap" : "string",
+      "provincia" : "string",
+      "stato" : "string",
+      "email" : "string",
+      "cellulare" : "string",
+      "marketingCheck" : false
+     },
+    "privato" : {
+      "nome" : "Max",
+      "cognome" : "Branca",
+      "sesso" : "UOMO",
+      "email" : "aaa@aa.it",
+      "cellulare" : "212121",
+      "marketingCheck" : false
+    },
+    "bonus110" : {
+      "indirizzo" : "indirizzo",
+      "citta" : "citta",
+      "provincia" : "prov",
+      "tipologia" : {
+        "name" : "Villa plurifamiliare"
+      },
+      "superficie" : "123",
+      "statoImmobile" : {
+        "name" : "Nuovo/ In costruzione"
+      },
+      "climatizzazione" : {
+        "tipoGenerazione" : {
+          "name" : "Impianto centralizzato"
+        },
+        "tipoGeneratore" : {
+          "name" : "Caldaie tradizionali"
+        },
+        "radiatore" : {
+          "name" : "Ventilconvettore"
+        }
+      },
+      "involucroOpaco" : {
+        "paretiEsterne" : {
+          "name" : "Parete a cassa vuota con mattoni forati"
+        },
+        "cappotto" : true
+      },
+      "involucroTrasp" : {
+        "telaio" : {
+          "name" : "Legno"
+        },
+        "vetro" : {
+          "name" : "Vetro singolo"
+        }
+      },
+      "efficienzaEnergetica" : "eff",
+      "categoriaCatastale" : "cat",
+      "questionario" : "\"d1\": \"check2\", \"d2\": \"check2\",\"d3\": \"Si\",\"d4\": \"check1, check2\",\"d5\": 4,\"d5bis\": \"Si\",\"d6\": \"No\"",
+      "esito" : "OK"
+    }
+  }
+
+
+  
