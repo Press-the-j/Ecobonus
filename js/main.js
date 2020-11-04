@@ -119,6 +119,13 @@ $(document).ready(function(){
     this_fieldset.next().show().addClass('my_current_step')
 
   })
+
+  $(document).on('click', 'input[name="previous"]', function(){
+    let this_click = $(this);
+    let this_fieldset = this_click.closest('fieldset');
+    this_fieldset.hide().removeClass('my_current_step');
+    this_fieldset.prev().show().addClass('my_current_step')
+  })
   
 
   
@@ -211,6 +218,7 @@ function nextStep(this_fieldset, this_click) {
 
 // select an user-type in fieldset 2 and save this reference in localStorage
 function selectUserType(this_click) {
+  let bonusObj = JSON.parse(localStorage.getItem('bonusObj'));
   let userType;
 
   if(this_click.attr('data-typeuser')) {
@@ -218,12 +226,16 @@ function selectUserType(this_click) {
       case 'business':
         $('fieldset').remove('.person')
         localStorage.setItem('user-type', 'business')
+        delete bonusObj.privato
+        localStorage.setItem('bonusObj', JSON.stringify(bonusObj))
         break 
 
     
       case 'person':
         $('fieldset').remove('.business')
         localStorage.setItem('user-type', 'person')
+        delete bonusObj.impresa
+        localStorage.setItem('bonusObj', JSON.stringify(bonusObj))
         break
     }
   }
