@@ -12,53 +12,53 @@
       "marketingCheck" : false
      },
     "privato" : {
-      "nome" : "Max",
-      "cognome" : "Branca",
-      "sesso" : "UOMO",
-      "email" : "aaa@aa.it",
-      "cellulare" : "212121",
+      "nome" : "string",
+      "cognome" : "string",
+      "sesso" : "string",
+      "email" : "string",
+      "cellulare" : "string",
       "marketingCheck" : false
     },
     "bonus110" : {
-      "indirizzo" : "indirizzo",
-      "citta" : "citta",
-      "provincia" : "prov",
+      "indirizzo" : "string",
+      "citta" : "string",
+      "provincia" : "string",
       "tipologia" : {
-        "name" : "Villa plurifamiliare"
+        "name" : "string"
       },
       "superficie" : "123",
       "statoImmobile" : {
-        "name" : "Nuovo/ In costruzione"
+        "name" : "string"
       },
       "climatizzazione" : {
         "tipoGenerazione" : {
-          "name" : "Impianto centralizzato"
+          "name" : "string"
         },
         "tipoGeneratore" : {
-          "name" : "Caldaie tradizionali"
+          "name" : "string"
         },
         "radiatore" : {
-          "name" : "Ventilconvettore"
+          "name" : "string"
         }
       },
       "involucroOpaco" : {
         "paretiEsterne" : {
-          "name" : "Parete a cassa vuota con mattoni forati"
+          "name" : "string"
         },
-        "cappotto" : true
+        "cappotto" : false
       },
       "involucroTrasp" : {
         "telaio" : {
-          "name" : "Legno"
+          "name" : "string"
         },
         "vetro" : {
-          "name" : "Vetro singolo"
+          "name" : "string"
         }
       },
-      "efficienzaEnergetica" : "eff",
-      "categoriaCatastale" : "cat",
-      "questionario" : "\"d1\": \"check2\", \"d2\": \"check2\",\"d3\": \"Si\",\"d4\": \"check1, check2\",\"d5\": 4,\"d5bis\": \"Si\",\"d6\": \"No\"",
-      "esito" : "OK"
+      "efficienzaEnergetica" : "string",
+      "categoriaCatastale" : "string",
+      "questionario" : "string",
+      "esito" : "string"
     }
   }
 

@@ -29,11 +29,16 @@ $(document).ready(function(){
     $('.close').click();
   })
 
-
   // switchSelection() on click
   $('#type-real-estate').on('click', function() {
     let this_click = $(this);
     switchSelection(this_click)
+  })
+
+  // manage minimum number of selections
+  $('div[data-required="true"] input').on("click", function () {
+    let this_click = $(this)
+    manageMinimumSelections(this_click)
   })
 
   /* check permission to nexStep */
@@ -65,15 +70,17 @@ $(document).ready(function(){
     this_fieldset.prev().show().addClass('my_current_step')
   })
   
-  // 
+  // get the report
   $(document).on('click', 'input[data-elaborate="allowed"]', function(){
     getReport();
   })
+
+
 });
 
 
-
-
+//  let required =  $('#check-d1-1').closest('div[data-required="true"]')
+//  required.siblings(".bottoni").find(".next").prop("disabled", false);
 
 function checkAccess() {
   /* 
@@ -269,7 +276,7 @@ function showModal(this_click) {
 
 
 
-
+// !IMPORTANTE aggiungere i modali 's'
 function getModalData(this_click) {
   let this_fieldset_position = this_click.closest('fieldset').data('count-page');
 
@@ -311,7 +318,7 @@ function getModalData(this_click) {
 
 
 
-
+// !IMPORTANTE aggiungere lo switch della penultima pagina
 function switchSelection(this_click) {
   this_click.on('change',function() {
     if ($(this).val() === 'Stabile condominiale') {
@@ -373,6 +380,28 @@ function populateSelect(url, endpoints ){
 
 
 
+function manageMinimumSelections(this_click) {
+  let divParent = this_click.closest('div[data-required="true"]');      // assign data-required="true" to div parent
+  divParent.find("input[data-selection='one']").prop("checked", false); // assign data-selection="one" for "onlyone" selections 
+  this_click.prop("checked", true);
+  divParent.siblings(".bottoni").find(".next").prop("disabled", false);
+}
+
+
+
+
+
+function saveButtonValues() {
+
+  // quando vengono premuti bottoni con data-report il valore viene riportato nell'iput hissen della current_page
+
+
+}
+
+
+
+
+
 function getReport() {
   // posso ottenere 5 risultati: 
   // esito OK
@@ -381,9 +410,12 @@ function getReport() {
   // esito RIQ
   // esito NOSISM
 
+  // crea stringa "questionario" e la aggiunge al bonusObject
+
+  // popola le variabili
   // leggo oggetto e salvo variabili di interesse
 
-  // sismeicKo = 
+  // sismeicRisk = 
   // checkboxNegative KO a prescindere
   // estraneitàImp se No esito negativo
   // interventisismici
@@ -407,4 +439,6 @@ function getReport() {
 
   }
 } 
+
+
 
