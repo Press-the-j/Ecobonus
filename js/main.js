@@ -375,17 +375,36 @@ function populateSelect(url, endpoints ){
 
 function getReport() {
   // posso ottenere 5 risultati: 
-  // esito positivo
-  // esito negativo
-  // esito train
-  // esito 2
-  // esito 3
+  // esito OK
+  // esito KO
+  // esito TRAIN
+  // esito RIQ
+  // esito NOSISM
 
-  // loop oggetto e salvo variabili di interesse
+  // leggo oggetto e salvo variabili di interesse
 
-  // sisVulnerability
-  // checkboxNegative
+  // sismeicKo = 
+  // checkboxNegative KO a prescindere
+  // estraneitàImp se No esito negativo
+  // interventisismici
 
-  // esito restituito tramite switch, 5 casi
-}
+  // esito restituito tramite if/else, 5 casi
+  if(x || y){          //negativo
+    // se una checkbox negativa
+    // OPPURE
+    // estraneitaImprenditoria negativa
+  }
+  else if(x && y && z) {    //esito 2
+
+  }
+  else if(x && y && z) {    //esito 1
+
+  }
+  else if(x && y && z) {    //train
+
+  }
+  else {                    //positivo
+
+  }
+} 
 
