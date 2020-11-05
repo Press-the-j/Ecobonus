@@ -3,71 +3,8 @@ $(document).ready(function(){
   const URLSELECT = "http://ectm-env.eba-wmhap9wv.eu-south-1.elasticbeanstalk.com/";
   const SELECTS = ['tipologia', 'stato-immobile', 'tipo-generazione', 'tipo-generatore', 'radiatore', 'pareti-esterne','telaio', 'vetro']
 
-  // !IMPORTANTE: implementare caricando il template direttamente da un file json
-  var bonusTemplate = {
-    "impresa" : {
-      "ragioneSociale" : "string",
-      "piva" : "string",
-      "indirizzo" : "string",
-      "citta" : "string",
-      "cap" : "string",
-      "provincia" : "string",
-      "stato" : "string",
-      "email" : "string",
-      "cellulare" : "string",
-      "marketingCheck" : false
-     },
-    "privato" : {
-      "nome" : "Max",
-      "cognome" : "Branca",
-      "sesso" : "UOMO",
-      "email" : "aaa@aa.it",
-      "cellulare" : "212121",
-      "marketingCheck" : false
-    },
-    "bonus110" : {
-      "indirizzo" : "indirizzo",
-      "citta" : "citta",
-      "provincia" : "prov",
-      "tipologia" : {
-        "name" : "Villa plurifamiliare"
-      },
-      "superficie" : "123",
-      "statoImmobile" : {
-        "name" : "Nuovo/ In costruzione"
-      },
-      "climatizzazione" : {
-        "tipoGenerazione" : {
-          "name" : "Impianto centralizzato"
-        },
-        "tipoGeneratore" : {
-          "name" : "Caldaie tradizionali"
-        },
-        "radiatore" : {
-          "name" : "Ventilconvettore"
-        }
-      },
-      "involucroOpaco" : {
-        "paretiEsterne" : {
-          "name" : "Parete a cassa vuota con mattoni forati"
-        },
-        "cappotto" : true
-      },
-      "involucroTrasp" : {
-        "telaio" : {
-          "name" : "Legno"
-        },
-        "vetro" : {
-          "name" : "Vetro singolo"
-        }
-      },
-      "efficienzaEnergetica" : "eff",
-      "categoriaCatastale" : "cat",
-      "questionario" : "\"d1\": \"check2\", \"d2\": \"check2\",\"d3\": \"Si\",\"d4\": \"check1, check2\",\"d5\": 4,\"d5bis\": \"Si\",\"d6\": \"No\"",
-      "esito" : "OK"
-    }
-  }
-  localStorage.setItem('bonusObj', JSON.stringify(bonusTemplate))
+  // get bonustemplate and store it into the localstorage
+  localStorage.setItem('bonusObj', JSON.stringify(BONUSTEMPLATE))
 
   /* validation init */
   $.getScript( "js/validation.js", function( data ) {});
@@ -216,7 +153,9 @@ function nextStep(this_fieldset, this_click) {
 
 
 
-// select an user-type in fieldset 2 and save this reference in localStorage
+// select an user-type in fieldset 2: 
+// save this reference in localStorage;
+// delete unmatched reference in bonusObj
 function selectUserType(this_click) {
   let bonusObj = JSON.parse(localStorage.getItem('bonusObj'));
   let userType;
@@ -251,50 +190,59 @@ function saveAnswers() {
   let selectArray = $('.my_current_step select[data-acquire="true"]').get();
   let entriesArray = {'inputArray': inputArray, 'selectArray': selectArray};
   
-  console.log(inputArray)
-  console.log(selectArray)
   for (const elementArray in entriesArray) {
 
     entriesArray[elementArray].forEach(element => {
-
       let nameValue;
       let elementName = element.getAttribute('name');      
-      console.log(elementName)
-      // lo switch gestisce i casi che i dati provengano da input di tipo diverso:
+
+      // lo switch gestisce i casi in cui i dati provengano da input di tipo diverso:
       // testuali, checkbox, select
-      switch (element.getAttribute('type')) {
-        
+      switch (element.getAttribute('type')) { 
         case 'checkbox':
 
           nameValue = element.checked ? true : false;
-          for (const classe in bonusObj) {
-            for (const option in bonusObj[classe]) {
-              if(option == elementName) {
-                // inserire if/else typeof option === 'object'
-                bonusObj[classe][option] = nameValue
-              }
-              
-            }
-              
-          }
           break;
 
         default:
 
           nameValue = $(element).val();
+          break;
+      }
+
+      // console.log('nameValue: ' + nameValue)
           for (const classe in bonusObj) {
+            // console.log('classe: ' + classe + ' - valore: ' + bonusObj[classe])
             for (const option in bonusObj[classe]) {
-              if(option == elementName) {
-                // inserire if/else typeof option === 'object'
-                bonusObj[classe][option] = nameValue
+              // console.log('option: ' + option + ' - valore: ' + bonusObj[classe][option])
+              if(typeof(bonusObj[classe][option]) == 'object') {
+                if(option == elementName){
+                  if(bonusObj[classe][option]['name'] != 'undefined') {
+                    // console.log('bonusObj[classe][option]["name"]: ' + bonusObj[classe][option]['name'])
+                    bonusObj[classe][option]['name'] = nameValue
+                  }else if (bonusObj[classe][option]['cappotto'] != 'undefined') {
+                    // console.log('bonusObj[classe][option]["cappotto"]: ' + bonusObj[classe][option]['cappotto'])
+                  }
+                  
+                }else {
+                  for (const sub in bonusObj[classe][option]) {
+                    // console.log('sub: ' + sub + ' - valore: ' + bonusObj[classe][option][sub])
+                    if (sub == elementName) {
+                      // console.log('bonusObj[classe][option][sub]["name"]: ' + bonusObj[classe][option][sub]['name'])
+                      bonusObj[classe][option][sub]['name'] = nameValue                      
+                    }
+                  }
+                }
+              } else if(typeof(bonusObj[classe][option]) != 'object') {
+                // console.log('option: ' + option + ' - valore: ' + bonusObj[classe][option])
+                if(option == elementName){
+                  bonusObj[classe][option] = nameValue
+                }
               }
               
             }
 
           }
-          break;
-
-      }
       
     });
     

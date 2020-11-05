@@ -30,6 +30,7 @@
     crossorigin="anonymous"></script>
   <!-- custom js -->
   <script src="js/validation.js"></script>
+  <script src="data/schema-data.js"></script>
   <script src="js/main.js" charset="utf-8"></script>
   <!-- Google Maps Api Key -->
   <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6ElNLOL1BWAp5GUCvkrOEM9vEbPxxceI&libraries=places&v=weekly"></script>
@@ -172,8 +173,7 @@
                 <input data-toggle="modal" data-modal="nameModal" data-whatever="@mdo" type="text"
                   class="form-control input-control open-modal" id="name" name="nome-completo"   data-receive-from="complete-name">
               </div>
-            <!-- <input type="hidden" class="save-data save-name" name="nome" data-receive-from="name-popup" >
-            <input type="hidden" class="save-data" name="cognome"data-receive-from="surname-popup"> -->
+
             </div>
             <div class="form-group">
               <label class="control-label" for="date">Compleanno</label>
@@ -465,7 +465,7 @@
               </div>
             </div>
           </fieldset>
-          <fieldset data-count-page="5" class="">
+          <fieldset data-count-page="5" class="my_current_step">
             <p><strong>Raccontaci di più sul tuo immobile</strong><br>
               Più dettagli ci darai e più precisa sarà la valutazione
             </p>
@@ -563,11 +563,11 @@
             </div>
             <div class="form-group">
               <label class="control-label" for="efficienza_energetica">Efficienza Energetica</label>
-              <select name="efficienza_energetica" id="energy-efficiency" class="form-control select-control save-data-array" data-acquire="true">
+              <select name="efficienzaEnergetica" id="energy-efficiency" class="form-control select-control save-data-array" data-acquire="true">
                 <option style="display:none" value="none">Efficienza energetica</option>
-                <option>A,A+,A1-A4</option>
-                <option>B,C,D</option>
-                <option>E,F,G</option>
+                <option value="A,A+,A1-A4">A,A+,A1-A4</option>
+                <option value="B,C,D">B,C,D</option>
+                <option value="E,F,G">E,F,G</option>
               </select>
             </div>
             <div class="bottoni">
@@ -658,8 +658,6 @@
                         
                       </select>
                     </div>
-                    <input type="hidden" class="" data-error="generation-heating"
-                      id="generation-heating-input">
                     <div class="form-group">
                       <div class="label-wrapper">
                         <label for="generator-type" class="control-label">Tipologia generatore</label>

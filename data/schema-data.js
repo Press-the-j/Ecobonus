@@ -1,4 +1,4 @@
-  {
+  const BONUSTEMPLATE = {
     "impresa" : {
       "ragioneSociale" : "string",
       "piva" : "string",
