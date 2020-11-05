@@ -57,6 +57,7 @@ $(document).ready(function(){
 
   })
 
+  // set previous page view
   $(document).on('click', 'input[name="previous"]', function(){
     let this_click = $(this);
     let this_fieldset = this_click.closest('fieldset');
@@ -64,8 +65,10 @@ $(document).ready(function(){
     this_fieldset.prev().show().addClass('my_current_step')
   })
   
-
-  
+  // 
+  $(document).on('click', 'input[data-elaborate="allowed"]', function(){
+    getReport();
+  })
 });
 
 
@@ -309,7 +312,6 @@ function getModalData(this_click) {
 
 
 
-
 function switchSelection(this_click) {
   this_click.on('change',function() {
     if ($(this).val() === 'Stabile condominiale') {
@@ -324,82 +326,6 @@ function switchSelection(this_click) {
       $('.toggle-control').removeClass('input-control save-data-array');
     }
   })
-}
-
-
-
-
-
-function setStep(step) {
-  let step_counter = step[0].getAttribute('data-count-page');
-
-  switch (step_counter) {
-    case 1:
-      
-      break;
-
-
-    case 2:
-    // verificare che tutti i fieldset siano settati
-    // indipendentemente dall'user-type scelto in precedenza
-    // se si giunge da previouStep()
-      break;
-
-
-    case 3:
-  
-      break;
-
-
-    case 4:
-    
-      break;
-
-
-    case 5:
-  
-      break;
-
-
-    case 6:
-    
-      break;
-
-
-    case 7:
-    
-      break;
-
-
-    case 8:
-  
-      break;
-
-
-    case 9:
-    
-      break;
-
-      
-    case 10:
-  
-      break;
-
-
-    case 11:
-
-      break;
-
-
-    case 12:
-    
-      break;
-
-      
-    case 13:
-  
-      break;
-  }
 }
 
 
@@ -447,29 +373,19 @@ function populateSelect(url, endpoints ){
 
 
 
- //? validazione select
-//  $(".choose-category").on("change", function () {
-//   // prende il valore della select
-//   let selectedCategory = $(this).val();
-  
-//   // abilitiamo o disabilitiamo la subcategory (seconda select)
-//   if (selectedCategory !== "none") {
-//       $(".category-real-estate")
-//           .siblings(".bottoni")
-//           .find(".next")
-//           .prop("disabled", false);
-//   } else {
-//       $(".category-real-estate")
-//           .siblings(".bottoni")
-//           .find(".next")
-//           .prop("disabled", true);
-//   }
+function getReport() {
+  // posso ottenere 5 risultati: 
+  // esito positivo
+  // esito negativo
+  // esito train
+  // esito 2
+  // esito 3
 
-//   // attributo standard per eliminare la seconda select
-//   $(".sub-category").removeClass("active");
-//   $(".sub-category select").removeClass("selected-category save-data-array group-save modal-single-check");
-  
-//   // mostra la select solo quando avviene il change su una scelta consona
-//   $(".category-" + selectedCategory).addClass("active");
-//   $(".category-" + selectedCategory + " select").addClass("selected-category save-data-array group-save modal-single-check");
-// })
+  // loop oggetto e salvo variabili di interesse
+
+  // sisVulnerability
+  // checkboxNegative
+
+  // esito restituito tramite switch, 5 casi
+}
+
