@@ -56,7 +56,7 @@ $(document).ready(function(){
     let this_fieldset = this_click.closest('fieldset');
     
 
-    nextStep(this_fieldset, this_click);
+    nextStep(this_click);
     this_fieldset.hide().removeClass('my_current_step');
     this_fieldset.next().show().addClass('my_current_step')
 
@@ -75,12 +75,11 @@ $(document).ready(function(){
     getReport();
   })
 
-
 });
 
 
-//  let required =  $('#check-d1-1').closest('div[data-required="true"]')
-//  required.siblings(".bottoni").find(".next").prop("disabled", false);
+
+
 
 function checkAccess() {
   /* 
@@ -143,19 +142,16 @@ function checkAccess() {
 
 
 
-function nextStep(this_fieldset, this_click) {
+function nextStep(this_click) {
 
   // select an user-type in fieldset 2
   selectUserType(this_click);
   
+  // funzione per compilare gli hidden input utili al questionario
+  compileHiddenInput(this_click)
 
-  let next_fieldset = this_fieldset.next();
-  
   //1: save user answers
   saveAnswers()
-
-  //2: set next step
-  // setStep(next_fieldset)
 
 }
 
@@ -187,6 +183,33 @@ function selectUserType(this_click) {
         localStorage.setItem('bonusObj', JSON.stringify(bonusObj))
         break
     }
+  }
+}
+
+
+
+
+
+function compileHiddenInput(this_click) {
+  if(this_click.attr('name') == 'questionario') {
+    $(this_click).attr('data-acquire', 'true')
+  } else {
+    let divParent = this_click.parent();
+    let inputGroup = divParent.siblings('div[data-required="true"]');
+    let checkedInputArray = $(inputGroup).find('input:checked').get();
+    let inputValue = '';
+    let valueConcat = '';
+    let checkedValueArray = [];
+
+    checkedInputArray.forEach(checked => {
+      inputValue = checked.getAttribute('name')
+      checkedValueArray.push(inputValue)
+
+    });
+
+    valueConcat = checkedValueArray.join(', ');
+    divParent.find('[type="hidden"]').val(valueConcat)
+    
   }
 }
 
@@ -246,7 +269,18 @@ function saveAnswers() {
               } else if(typeof(bonusObj[classe][option]) != 'object') {
                 // console.log('option: ' + option + ' - valore: ' + bonusObj[classe][option])
                 if(option == elementName){
-                  bonusObj[classe][option] = nameValue
+                  console.log(elementName)
+                  if (elementName == 'questionario') {
+                    console.log('sono entrato')
+                    let question = '"' + $(element).data('question') + '"'; //element.data('question')
+                    let answer = question + ': "' + nameValue + '"'; //uguale al valore dell'input
+                    let string = bonusObj[classe][option];
+                    console.log(
+                      answer)
+                    compileString(question, answer, string)
+                  } else {
+                    bonusObj[classe][option] = nameValue
+                  }
                 }
               }
               
@@ -256,9 +290,28 @@ function saveAnswers() {
       
     });
     
+    localStorage.setItem('bonusObj', JSON.stringify(bonusObj))
+    console.log(JSON.parse(localStorage.getItem('bonusObj')))
   }
-  localStorage.setItem('bonusObj', JSON.stringify(bonusObj))
-  console.log(JSON.parse(localStorage.getItem('bonusObj')))
+  
+}
+
+
+
+
+
+function compileString(question, answer, string) {
+  // string = '"d1": "check2", "d2": "check2", "d3": "Si", "d4": "check1, check2, palla", "d5": 4, "d5bis": "Si", "d6": "No"'
+  // question = '"d7"';
+  // answer = '"d7": "andrea, un, altra, parola"'
+  // console.log(question + answer + string)
+  let ruleEx = '(' + question + ':\\s"\\w+(,\\s\\w+)*")';
+  console.log(ruleEx)
+  let rexegg = new RegExp(ruleEx)
+
+  let replacedString = string.replace(rexegg, answer)
+  localStorage.setItem('bonusObj', replacedString)
+  console.log(replacedString)
 }
 
 
@@ -391,17 +444,6 @@ function manageMinimumSelections(this_click) {
 
 
 
-function saveButtonValues() {
-
-  // quando vengono premuti bottoni con data-report il valore viene riportato nell'iput hissen della current_page
-
-
-}
-
-
-
-
-
 function getReport() {
   // posso ottenere 5 risultati: 
   // esito OK
@@ -440,5 +482,4 @@ function getReport() {
   }
 } 
 
-
-
+// !IMPORTANT correggere bug userType: al previous() non viene rigenerato l'oggetto mancante

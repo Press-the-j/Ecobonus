@@ -453,7 +453,7 @@
             </div>
           </fieldset>
 
-          <fieldset data-count-page="5" class="my_current_step">
+          <fieldset data-count-page="5">
             <p><strong>Raccontaci di più sul tuo immobile</strong><br>
               Più dettagli ci darai e più precisa sarà la valutazione
             </p>
@@ -843,7 +843,7 @@
             <div class="bottoni">
               
               <input type="button" name="d3" data-group="questionario" class="btn next  btn-previous save-data-array group-save" data-response-answer="ko" value="No">
-              <input type="button" name="d3" data-group="questionario" class="btn next btn-next  save-data-array group-save" data-response-answer="ok" value="Si">
+              <input type="button" name="d3" data-group="questionario" class="btn next btn-next  save-data-array group-save" data-response-answer="ok" value="Sì">
             </div>
           </fieldset>
 
@@ -853,7 +853,7 @@
               dei seguenti interventi trainanti?(sono possibili più risposte)</p>
             <div class="form-group intervention-trainant" data-required="true">
               <div class="checkbox check-wrap">
-                <input type="checkbox" data-manage-blank="interventi-sismici" value="blank" id="check-d4-1" data-group="questionario" class="sismic-intervention-check save-data-array  group-save blank-check" name="d4">
+                <input type="checkbox" data-manage-blank="interventi-sismici" value="blank" id="check-d4-1" data-group="questionario" class="sismic-intervention-check save-data-array  group-save blank-check" name="check1">
                 <label for="check-d4-1"></label>
                 <span>INTERVENTI ANTISISMICI di cui
                   ai commi da 1-bis a 1-septies dell'articolo 16 del decreto-legge n. 63 del 2013, anche comprensivo di
@@ -861,27 +861,29 @@
                   380/2001</span>
               </div>
               <div class="checkbox check-wrap">
-                <input type="checkbox" data-manage-blank="riq-energetica"  class="save-data-array  group-save blank-check" name="d4" id="check-d4-2" value="blank" data-group="questionario">
+                <input type="checkbox" data-manage-blank="riq-energetica"  class="save-data-array  group-save blank-check" name="check2" id="check-d4-2" value="blank" data-group="questionario">
                 <label for="check-d4-2"></label>
                 <span>RIQUALIFICAZIONE ENERGETICA: sostituzione degli IMPIANTI DI
                   CLIMATIZZAZIONE INVERNALE ESISTENTI con impianti per il riscaldamento, il raffrescamento o la
                   fornitura di acqua</span>
               </div>
               <div class="checkbox check-wrap">
-                <input type="checkbox" data-manage-blank="trainati"  name="d4" class="save-data-array  group-save blank-check" id="check-d4-3" value="blank" data-group="questionario">
+                <input type="checkbox" data-manage-blank="trainati"  name="check3" class="save-data-array  group-save blank-check" id="check-d4-3" value="blank" data-group="questionario">
                 <label for="check-d4-3"></label>
                 <span>INTERVENTI c.d TRAINATI</span>
               </div>
               <div class="checkbox check-wrap">
-                <input type="checkbox" class="none-check save-data-array  group-save blank-check"  name="d4" id="check-d4-4" value="ko" data-group="questionario">
+                <input type="checkbox" class="none-check save-data-array  group-save blank-check"  name="check4" id="check-d4-4" value="ko" data-group="questionario">
                 <label for="check-d4-4"></label>
                 <span>nessuna delle precedenti</span>
                 
               </div>
+              
             </div>
             <div class="bottoni">
               <input type="button" name="previous" class="previous btn btn-previous" value="Previous" />
               <input type="button" name="next" class="next btn btn-next" value="Continua" disabled />
+              <input type="hidden" name="questionario" data-question="d4" value="" data-acquire="true"/>
             </div>
           </fieldset>
 
@@ -980,7 +982,7 @@
               pertanto sugli stessi non possono essere realizzati interventi trainanti?</p>
             <div class="bottoni">
               <input type="button" class="btn next btn-previous save-data-array group-save" data-response-answer="ok" id="d5_bis_no" value="No" name="d5bis" data-group="questionario"/>
-              <input type="button" class="next btn btn-next save-data-array group-save" data-response-answer="ok" value="Si" name="d5bis" data-group="questionario"/>
+              <input type="button" class="next btn btn-next save-data-array group-save" data-response-answer="ok" value="Sì" name="d5bis" data-group="questionario"/>
             </div>
           </fieldset>
 

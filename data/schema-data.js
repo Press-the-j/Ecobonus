@@ -57,7 +57,7 @@
       },
       "efficienzaEnergetica" : "string",
       "categoriaCatastale" : "string",
-      "questionario" : "string",
+      "questionario" : '"d1": "value", "d2": "value", "d3": "value", "d4": "value", "d5": "value", "d6": "value", "d7": "value"',
       "esito" : "string"
     }
   }
