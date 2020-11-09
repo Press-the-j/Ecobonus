@@ -47,10 +47,9 @@ $(document).ready(function(){
   })
 
   
-  /* 
-  save data in local
-  and set next page view
-  */
+ 
+  //save data in local
+  //and set next page view
   $(document).on('click', '.next[data-access="allowed"]', function(){
     let this_click = $(this);
     let this_fieldset = this_click.closest('fieldset');
@@ -243,50 +242,39 @@ function saveAnswers() {
           break;
       }
 
-      // console.log('nameValue: ' + nameValue)
-          for (const classe in bonusObj) {
-            // console.log('classe: ' + classe + ' - valore: ' + bonusObj[classe])
-            for (const option in bonusObj[classe]) {
-              // console.log('option: ' + option + ' - valore: ' + bonusObj[classe][option])
-              if(typeof(bonusObj[classe][option]) == 'object') {
-                if(option == elementName){
-                  if(bonusObj[classe][option]['name'] != 'undefined') {
-                    // console.log('bonusObj[classe][option]["name"]: ' + bonusObj[classe][option]['name'])
-                    bonusObj[classe][option]['name'] = nameValue
-                  }else if (bonusObj[classe][option]['cappotto'] != 'undefined') {
-                    // console.log('bonusObj[classe][option]["cappotto"]: ' + bonusObj[classe][option]['cappotto'])
-                  }
-                  
-                }else {
-                  for (const sub in bonusObj[classe][option]) {
-                    // console.log('sub: ' + sub + ' - valore: ' + bonusObj[classe][option][sub])
-                    if (sub == elementName) {
-                      // console.log('bonusObj[classe][option][sub]["name"]: ' + bonusObj[classe][option][sub]['name'])
-                      bonusObj[classe][option][sub]['name'] = nameValue                      
-                    }
-                  }
-                }
-              } else if(typeof(bonusObj[classe][option]) != 'object') {
-                // console.log('option: ' + option + ' - valore: ' + bonusObj[classe][option])
-                if(option == elementName){
-                  console.log(elementName)
-                  if (elementName == 'questionario') {
-                    console.log('sono entrato')
-                    let question = '"' + $(element).data('question') + '"'; //element.data('question')
-                    let answer = question + ': "' + nameValue + '"'; //uguale al valore dell'input
-                    let string = bonusObj[classe][option];
-                    console.log(
-                      answer)
-                    compileString(question, answer, string)
-                  } else {
-                    bonusObj[classe][option] = nameValue
-                  }
-                }
+      for (const classe in bonusObj) {
+        for (const option in bonusObj[classe]) {
+          if(typeof(bonusObj[classe][option]) == 'object') {
+            if(option == elementName){
+              if(bonusObj[classe][option]['name'] != 'undefined') {
+                bonusObj[classe][option]['name'] = nameValue
+              }else if (bonusObj[classe][option]['cappotto'] != 'undefined') {
+                bonusObj[classe][option]['cappotto'] = nameValue
               }
               
+            }else {
+              for (const sub in bonusObj[classe][option]) {
+                if (sub == elementName) {
+                  bonusObj[classe][option][sub]['name'] = nameValue                      
+                }
+              }
             }
-
+          } else if(typeof(bonusObj[classe][option]) != 'object') {
+            if(option == elementName){
+              if (elementName == 'questionario') {
+                let question = '"' + $(element).data('question') + '"'; //element.data('question')
+                let answer = question + ': "' + nameValue + '"'; //uguale al valore dell'input
+                let string = bonusObj[classe][option];
+                bonusObj[classe][option] = compileString(question, answer, string)
+              } else {
+                bonusObj[classe][option] = nameValue
+              }
+            }
           }
+          
+        }
+
+      }
       
     });
     
@@ -301,17 +289,11 @@ function saveAnswers() {
 
 
 function compileString(question, answer, string) {
-  // string = '"d1": "check2", "d2": "check2", "d3": "Si", "d4": "check1, check2, palla", "d5": 4, "d5bis": "Si", "d6": "No"'
-  // question = '"d7"';
-  // answer = '"d7": "andrea, un, altra, parola"'
-  // console.log(question + answer + string)
   let ruleEx = '(' + question + ':\\s"\\w+(,\\s\\w+)*")';
-  console.log(ruleEx)
   let rexegg = new RegExp(ruleEx)
 
   let replacedString = string.replace(rexegg, answer)
-  localStorage.setItem('bonusObj', replacedString)
-  console.log(replacedString)
+  return replacedString
 }
 
 
@@ -457,10 +439,14 @@ function getReport() {
   // popola le variabili
   // leggo oggetto e salvo variabili di interesse
 
-  // sismeicRisk = 
+  // rischioSismico
   // checkboxNegative KO a prescindere
   // estraneitàImp se No esito negativo
-  // interventisismici
+  // intAntisismici
+  // intRiqualificazione
+  // intTrainati
+  // intEfficientamento
+  // catCatastale
 
   // esito restituito tramite if/else, 5 casi
   if(x || y){          //negativo
