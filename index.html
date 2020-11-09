@@ -480,14 +480,14 @@
             <div class="form-group condominium">
               <label class="control-label" for="condominium-floors">numero di piani</label>
               <div class="row-input">
-                <input type="number" class="form-control toggle-control " name="piani-condominio" id="condominium-floors">
+                <input type="number" class="form-control toggle-control " name="pianiCondominio" id="condominium-floors" data-acquire="true">
               </div>
               <small class="error"></small>
             </div>
             <div class="form-group condominium">
               <label class="control-label" for="residential-units">numero di unità immobiliari</label>
               <div class="row-input">
-               <input type="number" class="form-control toggle-control " name="unità-condominio" id="residential-units">
+               <input type="number" class="form-control toggle-control " name="unitaCondominio" id="residential-units" data-acquire="true">
               </div>
             <small class="error"></small>
             </div>
@@ -544,9 +544,9 @@
               <label class="control-label" for="efficienza_energetica">Efficienza Energetica</label>
               <select name="efficienzaEnergetica" id="energy-efficiency" class="form-control select-control save-data-array" data-acquire="true">
                 <option style="display:none" value="none">Efficienza energetica</option>
-                <option value="A,A+,A1-A4">A,A+,A1-A4</option>
-                <option value="B,C,D">B,C,D</option>
-                <option value="E,F,G">E,F,G</option>
+                <option value="A, A+, A1-A4">A, A+, A1-A4</option>
+                <option value="B, C, D">B, C, D</option>
+                <option value="E, F, G">E, F, G</option>
               </select>
             </div>
             <div class="bottoni">
@@ -691,7 +691,7 @@
                     <div class="form-group">
                       <div class="label-wrapper">
                         <label for="coat" class="m-right-10 coat-label">Le pareti sono gia state isolate mediante cappotto?</label>
-                        <input type="checkbox" id="coat" class="coat-checkbox m-right-20" data-acquire="true">
+                        <input type="checkbox" id="coat" class="coat-checkbox m-right-20" name="cappotto" data-acquire="true">
                         <a tabindex="0" role="button" data-trigger="focus" data-toggle="popover" title="Tipologia generazione riscaldamento" class="label-info-cursor" data-content="Il capotto termico è formato da elementi edilizi prefabbricati e crea un vero e proprio guscio protettivo e isolante per l’edificio. Il rivestimento del cappotto termico è invisibile all’esterno, ma ha il vantaggio di ridurre la dispersione termica con un conseguente risparmio di energia e risorse"><img src="./img/Punto-Interrogativo.svg" alt="info"></a>
                       </div>
                     </div>
@@ -746,36 +746,37 @@
             <p>Domenico, con quale titolo possiedi o detieni l'immobile?</p>
             <div class="form-group owner-title" data-required="true">
               <div class="checkbox check-wrap">
-                <input data-selection="one" type="checkbox" value="ok" class="group-save save-checkbox save-data-array" data-group="questionario" name="d1" id="check-d1-1">
+                <input data-selection="one" type="checkbox" value="ok" class="group-save save-checkbox save-data-array" data-group="questionario" name="check1" id="check-d1-1">
                 <label for="check-d1-1"></label>
                 <span>Proprietario o nudo proprietario dell’immobile</span>
               </div>
               <div class="checkbox check-wrap">
-                <input data-selection="one" type="checkbox" value="ok" class="group-save save-checkbox save-data-array" data-group="questionario" name="d1" id="check-d1-2">
+                <input data-selection="one" type="checkbox" value="ok" class="group-save save-checkbox save-data-array" data-group="questionario" name="check2" id="check-d1-2">
                 <label for="check-d1-2" ></label>
                 <span>Inquilino, locatario, comodatario dell’immobile e ha già
                   ricevuto autorizzazione dal Proprietario ad effettuare i
                   relativi interventi</span>
               </div>
               <div class="checkbox check-wrap">
-                <input data-selection="one" check="false" type="checkbox"  class="save-checkbox save-data-array group-save" name="d1" data-group="questionario" value="ok" id="check-d1-3">
+                <input data-selection="one" check="false" type="checkbox"  class="save-checkbox save-data-array group-save" name="check3" data-group="questionario" value="ok" id="check-d1-3">
                 <label for="check-d1-3"></label>
                 <span>Convivente di fatto di cui all’articolo 1, commi
                   36 e 37 della legge n. 76 del 2016<span>
               </div>
               <div class="checkbox check-wrap">
-                <input data-selection="one" type="checkbox" value="ok" class="group-save   save-checkbox save-data-array" data-group="questionario" name="d1"id="check-d1-4">
+                <input data-selection="one" type="checkbox" value="ok" class="group-save   save-checkbox save-data-array" data-group="questionario" name="check4" id="check-d1-4">
                 <label for="check-d1-4"></label>
                 <span>Coniuge separato assegnatario dell’immobile intestato
                   all’altro coniuge</span>
               </div>
               <div class="checkbox check-wrap">
-                <input data-selection="one" type="checkbox" value="ko" class="group-save save-checkbox save-data-array" data-group="questionario" name="d1" id="check-d1-5">
+                <input data-selection="one" type="checkbox" value="ko" class="group-save save-checkbox save-data-array" data-group="questionario" name="check5" id="check-d1-5">
                 <label for="check-d1-5"></label>
                 <span>Nessuna delle precedente</span>
               </div>
             </div>
             <div class="bottoni">
+              <input type="hidden" name="questionario" data-question="d1" data-acquire="true" value="">
               <input type="button" name="previous" class="previous btn btn-previous" value="Previous" />
               <input type="button" name="next" class="next btn btn-next" value="Next" disabled />
             </div>
@@ -787,48 +788,49 @@
             <p>Rientri all'interno di quale delle seguenti categorie?</p>
             <div class="form-group category-user" data-required="true">
               <div class="checkbox check-wrap">
-                <input data-selection="one" type="checkbox" value="ok" name="d2" data-group="questionario" class="save-checkbox group-save save-data-array" value="" id="check-1">
+                <input data-selection="one" type="checkbox" value="check1" name="check1" data-group="questionario" class="save-checkbox group-save save-data-array" data-question="d2" id="check-1">
                 <label for="check-1"></label>
                 <span>condomini in possesso di una delibera assembleare valida che autorizza all'effettuazione dell'intervento</span>
               </div>
               <div class="checkbox check-wrap">
-                <input data-selection="one" type="checkbox" value="ok" data-group="questionario" class="save-checkbox group-save save-data-array" name="d2" id="check-2">
+                <input data-selection="one" type="checkbox" value="check2" data-group="check2" class="save-checkbox group-save save-data-array" name="questionario" id="check-2" data-question="d2">
                 <label for="check-2"></label>
                 <span>condomini NON in possesso di una delibera assembleare valida che autorizza all'effettuazione dell'intervento</span>
               </div>
               <div class="checkbox check-wrap">
-                <input data-selection="one" type="checkbox" value="ok" name="d2" data-group="questionario" class="save-checkbox group-save save-data-array" value="" id="check-3">
+                <input data-selection="one" type="checkbox" value="check3" name="check3" data-group="questionario" class="save-checkbox group-save save-data-array" id="check-3" data-question="d2">
                 <label for="check-3"></label>
                 <span>Persone fisiche, al di fuori dell'esercizio di attività di impresa, arti e professioni</span>
               </div>
               <div class="checkbox check-wrap">
-                <input data-selection="one" type="checkbox" value="ok" class="save-checkbox group-save save-data-array" data-group="questionario" name="d2"  id="check-4">
+                <input data-selection="one" type="checkbox" value="check4" class="save-checkbox group-save save-data-array" data-group="questionario" name="check4"  id="check-4" data-question="d2">
                 <label for="check-4"></label>
                 <span>Istituti autonomi case popolari(IACP), comunque denominati, nonchè dagli enti aventi le stesse finalità sociali dei predetti Istituti, istituiti nella forma di società che rispondono ai rquisiti della legislazione europea in</span>
               </div>
               <div class="checkbox check-wrap">
-                <input data-selection="one" type="checkbox" value="ok" class="save-checkbox save-data-array group-save" data-group="questionario" name="d2" value="" id="check-5">
+                <input data-selection="one" type="checkbox" value="check5" class="save-checkbox save-data-array group-save" data-group="questionario" name="check5" id="check-5" data-question="d2">
                 <label for="check-5"></label>
                 <span>Cooperative di abitazione a proprietà indivisa. La detrazione spetta per interventi realizzati su immobili dalle stesse posseduti e assegnati in godimenti ai propri
                   soci</span>
               </div>
               <div class="checkbox check-wrap">
-                <input data-selection="one" type="checkbox" value="ok" class="save-checkbox save-data-array group-save" name="d2" data-group="questionario" id="check-6">
+                <input data-selection="one" type="checkbox" value="check6" class="save-checkbox save-data-array group-save" name="check6" data-group="questionario" id="check-6" data-question="d2">
                 <label for="check-6"></label>
                 <span>Enti del terzo Settore(Onlus, organizzazioni di volontariato, associazioni di promozione sociale)</span>
               </div>
               <div class="checkbox check-wrap">
-                <input data-selection="one" type="checkbox" value="ok" name="d2" class="save-checkbox group-save save-data-array" value="" id="check-7" data-group="questionario">
+                <input data-selection="one" type="checkbox" value="check7" name="check7" class="save-checkbox group-save save-data-array" id="check-7" data-group="questionario" data-question="d2">
                 <label for="check-7"></label>
                 <span>Associazioni e società sportive dilettantistiche, limitatamente ai lavori destinati ai soli immobili o parti di immobili adibiti a spogliatoi</span>
               </div>
               <div class="checkbox check-wrap">
-                <input data-selection="one" type="checkbox" value="ko" data-group="questionario" class="save-checkbox save-data-array group-save" name="d2" value="" id="check-8">
+                <input data-selection="one" type="checkbox" value="check8" data-group="questionario" class="save-checkbox save-data-array group-save" name="check8" value="" id="check-8" data-question="d2">
                 <label for="check-8"></label>
                 <span>Nessuna delle precedenti<span>
               </div>
             </div>
             <div class="bottoni">
+              <input type="hidden" name="questionario" data-question="d2" data-acquire="true" value="">
               <input type="button" name="previous" class="previous btn btn-previous" value="Previous" />
               <input type="button" name="next" class="next btn btn-next" value="Next" disabled />
             </div>

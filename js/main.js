@@ -56,6 +56,7 @@ $(document).ready(function(){
     
 
     nextStep(this_click);
+    getReport();
     this_fieldset.hide().removeClass('my_current_step');
     this_fieldset.next().show().addClass('my_current_step')
 
@@ -70,9 +71,9 @@ $(document).ready(function(){
   })
   
   // get the report
-  $(document).on('click', 'input[data-elaborate="allowed"]', function(){
-    getReport();
-  })
+  // $(document).on('click', 'input[data-elaborate="allowed"]', function(){
+    
+  // })
 
 });
 
@@ -242,6 +243,7 @@ function saveAnswers() {
           break;
       }
 
+      console.log(nameValue)
       for (const classe in bonusObj) {
         for (const option in bonusObj[classe]) {
           if(typeof(bonusObj[classe][option]) == 'object') {
@@ -249,7 +251,7 @@ function saveAnswers() {
               if(bonusObj[classe][option]['name'] != 'undefined') {
                 bonusObj[classe][option]['name'] = nameValue
               }else if (bonusObj[classe][option]['cappotto'] != 'undefined') {
-                bonusObj[classe][option]['cappotto'] = nameValue
+
               }
               
             }else {
@@ -291,6 +293,7 @@ function saveAnswers() {
 function compileString(question, answer, string) {
   let ruleEx = '(' + question + ':\\s"\\w+(,\\s\\w+)*")';
   let rexegg = new RegExp(ruleEx)
+  console.log(rexegg)
 
   let replacedString = string.replace(rexegg, answer)
   return replacedString
@@ -335,12 +338,8 @@ function getModalData(this_click) {
         let paretiEsterneValue = $('select[name="paretiEsterne"]').val()
         $('input[name="external-walls"]').val(paretiEsterneValue)
       }
-      if ($('select[name="paretiEsterne"]').val() != 'none') {
-        let paretiEsterneValue = $('select[name="paretiEsterne"]').val()
-        $('input[name="external-walls"]').val(paretiEsterneValue)
-      }
       if ($('select[name="telaio"]').val() != 'none') {
-        let telaioValue = $('select[name="paretiEsterne"]').val()
+        let telaioValue = $('select[name="telaio"]').val()
         $('input[name="frame-type"]').val(telaioValue)
       }
       $('.my_current_step .modal.opened.in .close').click();
@@ -418,7 +417,9 @@ function populateSelect(url, endpoints ){
 function manageMinimumSelections(this_click) {
   let divParent = this_click.closest('div[data-required="true"]');      // assign data-required="true" to div parent
   divParent.find("input[data-selection='one']").prop("checked", false); // assign data-selection="one" for "onlyone" selections 
+  // divParent.find("input[data-selection='one']").attr('data-acquire', 'false') 
   this_click.prop("checked", true);
+  // this_click.attr('data-acquire', 'true');
   divParent.siblings(".bottoni").find(".next").prop("disabled", false);
 }
 
@@ -434,38 +435,122 @@ function getReport() {
   // esito RIQ
   // esito NOSISM
 
-  // crea stringa "questionario" e la aggiunge al bonusObject
-
   // popola le variabili
   // leggo oggetto e salvo variabili di interesse
+  bonusObj = JSON.parse(localStorage.getItem('bonusObj'));
+  let answersStr = bonusObj.bonus110.questionario;
+  let failed = '';
+  let tutela = '';
+  let intAntisismici = '';
+  let intRiqualificazione = '';
+  let intTrainati = '';
+  let rischioSismico = '';
+  let efficientamento = ''
+  let catCatastale = '';
+  
 
-  // rischioSismico
-  // checkboxNegative KO a prescindere
-  // estraneitàImp se No esito negativo
-  // intAntisismici
-  // intRiqualificazione
-  // intTrainati
-  // intEfficientamento
+  for (let index = 1; index <= 8; index++) {
+    const question = "d" + index;
+    let rexegg = '';
+    
+    
+
+    switch (question) {
+      case 'd1':
+        ruleEx = '("'+ question +'":\\s"check5")'
+        rexegg = new RegExp(ruleEx)
+        console.log(rexegg)
+        failed = answersStr.match(rexegg) === null ? 'ok' : 'ko';
+        console.log(failed)
+        break;
+      
+      case 'd2':
+        ruleEx = '("'+ question +'":\\s"check8")'
+        rexegg = new RegExp(ruleEx)
+        console.log(rexegg)
+        failed = answersStr.match(rexegg) === null ? 'ok' : 'ko';
+        console.log(failed)
+        break
+
+      case 'd3':
+        ruleEx = '("+ question +":\\s"ko")'
+        rexegg = new RegExp(ruleEx)
+        console.log(rexegg)
+        failed = answersStr.match(rexegg) === null ? 'ok' : 'ko';
+        console.log(failed)
+        break
+
+      case 'd4':
+        ruleEx = '("'+ question +'":\\s"check4")'
+        rexegg = new RegExp(ruleEx)
+        failed = answersStr.match(rexegg)
+        ruleEx = '("'+ question +'":\\s"check1"?)'
+        rexegg = new RegExp(ruleEx)
+        console.log(rexegg)
+        intAntisismici = answersStr.match(rexegg) ? 'si': 'no';
+        ruleEx = '("'+ question +'":\\s"(\\w+,\\s)*check2"?)'
+        rexegg = new RegExp(ruleEx)
+        console.log(rexegg)
+        intRiqualificazione = answersStr.match(rexegg) ? 'si': 'no';
+        ruleEx = '("'+ question +'":\\s"(\\w+,\\s)*check3")'
+        rexegg = new RegExp(ruleEx)
+        console.log(rexegg)
+        intTrainati = answersStr.match(rexegg) ? 'si': 'no';
+        console.log('interventi antisismici: ' + intAntisismici)
+        console.log('interventi riqualificazione: ' + intRiqualificazione)
+        console.log('interventi trainati: ' + intTrainati)
+        break
+
+      case 'd5':
+        ruleEx = '("'+ question +'":\\s"4")'
+        rexegg = new RegExp(ruleEx)
+        rischioSismico = answersStr.match(rexegg) ? '4': 'altro';
+        console.log(rischioSismico)
+        break
+
+      case 'd6':
+        ruleEx = '("'+ question +'":\\s"no")'
+        rexegg = new RegExp(ruleEx)
+        tutela = answersStr.match(rexegg) ? 'no' : 'si'
+        console.log(tutela)
+        break
+
+      case 'd7':
+        ruleEx = '("'+ question +'":\s"no")'
+        rexegg = new RegExp(ruleEx)
+        efficientamento = answersStr.match(rexegg) ? 'no' : 'si'
+        console.log(efficientamento)
+        break
+
+      case 'd8':
+        ruleEx = '("'+ question +'":\\s"a\\d{1,2}")'
+        rexegg = new RegExp(ruleEx)
+        catCatastale = answersStr.match(rexegg) ? 'no' : 'si'
+        console.log(tutela)
+        break
+    }
+  }
+  // 
   // catCatastale
 
   // esito restituito tramite if/else, 5 casi
-  if(x || y){          //negativo
+  // if(x || y){          //negativo
     // se una checkbox negativa
     // OPPURE
     // estraneitaImprenditoria negativa
-  }
-  else if(x && y && z) {    //esito 2
+  // }
+  // else if(x && y && z) {    //esito 2
 
-  }
-  else if(x && y && z) {    //esito 1
+  // }
+  // else if(x && y && z) {    //esito 1
 
-  }
-  else if(x && y && z) {    //train
+  // }
+  // else if(x && y && z) {    //train
 
-  }
-  else {                    //positivo
+  // }
+  // else {                    //positivo
 
-  }
+  // }
 } 
 
 // !IMPORTANT correggere bug userType: al previous() non viene rigenerato l'oggetto mancante
