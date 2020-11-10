@@ -56,7 +56,6 @@ $(document).ready(function(){
     
 
     nextStep(this_click);
-    getReport();
     this_fieldset.hide().removeClass('my_current_step');
     this_fieldset.next().show().addClass('my_current_step')
 
@@ -243,7 +242,6 @@ function saveAnswers() {
           break;
       }
 
-      console.log(nameValue)
       for (const classe in bonusObj) {
         for (const option in bonusObj[classe]) {
           if(typeof(bonusObj[classe][option]) == 'object') {
@@ -288,7 +286,6 @@ function saveAnswers() {
 function compileString(question, answer, string) {
   let ruleEx = '(' + question + ':\\s"\\w+(,\\s\\w+)*")';
   let rexegg = new RegExp(ruleEx)
-  console.log(rexegg)
 
   let replacedString = string.replace(rexegg, answer)
   return replacedString
@@ -353,13 +350,13 @@ function switchSelection(this_click) {
     if ($(this).val() === 'Stabile condominiale') {
       $('.condominium').show();
       $('.condominium-hide').hide()
-      $('.toggle-reverse').removeClass('select-control save-data-array')
-      $('.toggle-control').addClass('input-control save-data-array');
+      $('.toggle-reverse').removeClass('select-control')
+      $('.toggle-control').addClass('input-control');
     } else {
       $('.condominium').hide();
       $('.condominium-hide').show()
-      $('.toggle-reverse').addClass('select-control save-data-array')
-      $('.toggle-control').removeClass('input-control save-data-array');
+      $('.toggle-reverse').addClass('select-control')
+      $('.toggle-control').removeClass('input-control');
     }
   })
 }
@@ -412,9 +409,7 @@ function populateSelect(url, endpoints ){
 function manageMinimumSelections(this_click) {
   let divParent = this_click.closest('div[data-required="true"]');      // assign data-required="true" to div parent
   divParent.find("input[data-selection='one']").prop("checked", false); // assign data-selection="one" for "onlyone" selections 
-  // divParent.find("input[data-selection='one']").attr('data-acquire', 'false') 
   this_click.prop("checked", true);
-  // this_click.attr('data-acquire', 'true');
   divParent.siblings(".bottoni").find(".next").prop("disabled", false);
 }
 
@@ -423,13 +418,6 @@ function manageMinimumSelections(this_click) {
 
 
 function getReport() {
-  // posso ottenere 5 risultati: 
-  // esito OK
-  // esito KO
-  // esito TRAIN
-  // esito RIQ
-  // esito NOSISM
-
   // popola le variabili
   // leggo oggetto e salvo variabili di interesse
   bonusObj = JSON.parse(localStorage.getItem('bonusObj'));
@@ -454,25 +442,19 @@ function getReport() {
       case 'd1':
         ruleEx = '("'+ question +'":\\s"check5")'
         rexegg = new RegExp(ruleEx)
-        console.log(rexegg)
         failed = answersStr.match(rexegg) === null ? 'ok' : 'ko';
-        console.log(failed)
         break;
       
       case 'd2':
         ruleEx = '("'+ question +'":\\s"check8")'
         rexegg = new RegExp(ruleEx)
-        console.log(rexegg)
         failed = answersStr.match(rexegg) === null ? 'ok' : 'ko';
-        console.log(failed)
         break
 
       case 'd3':
         ruleEx = '("+ question +":\\s"ko")'
         rexegg = new RegExp(ruleEx)
-        console.log(rexegg)
         failed = answersStr.match(rexegg) === null ? 'ok' : 'ko';
-        console.log(failed)
         break
 
       case 'd4':
@@ -481,47 +463,37 @@ function getReport() {
         failed = answersStr.match(rexegg)
         ruleEx = '("'+ question +'":\\s"check1"?)'
         rexegg = new RegExp(ruleEx)
-        console.log(rexegg)
         intAntisismici = answersStr.match(rexegg) ? 'si': 'no';
         ruleEx = '("'+ question +'":\\s"(\\w+,\\s)*check2"?)'
         rexegg = new RegExp(ruleEx)
-        console.log(rexegg)
         intRiqualificazione = answersStr.match(rexegg) ? 'si': 'no';
         ruleEx = '("'+ question +'":\\s"(\\w+,\\s)*check3")'
         rexegg = new RegExp(ruleEx)
-        console.log(rexegg)
         intTrainati = answersStr.match(rexegg) ? 'si': 'no';
-        console.log('interventi antisismici: ' + intAntisismici)
-        console.log('interventi riqualificazione: ' + intRiqualificazione)
-        console.log('interventi trainati: ' + intTrainati)
         break
 
       case 'd5':
         ruleEx = '("'+ question +'":\\s"4")'
         rexegg = new RegExp(ruleEx)
         rischioSismico = answersStr.match(rexegg) ? '4': 'altro';
-        console.log(rischioSismico)
         break
 
       case 'd6':
         ruleEx = '("'+ question +'":\\s"no")'
         rexegg = new RegExp(ruleEx)
         tutela = answersStr.match(rexegg) ? 'no' : 'si'
-        console.log(tutela)
         break
 
       case 'd7':
         ruleEx = '("'+ question +'":\s"no")'
         rexegg = new RegExp(ruleEx)
         efficientamento = answersStr.match(rexegg) ? 'no' : 'si'
-        console.log(efficientamento)
         break
 
       case 'd8':
         ruleEx = '("'+ question +'":\\s"a\\d{1,2}")'
         rexegg = new RegExp(ruleEx)
         catCatastale = answersStr.match(rexegg) ? 'no' : 'si'
-        console.log(tutela)
         break
     }
   }
