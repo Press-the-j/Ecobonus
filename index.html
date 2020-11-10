@@ -33,7 +33,7 @@
     <script src="data/schema-data.js"></script>
     <script src="js/main.js" charset="utf-8"></script>
     <!-- Google Maps Api Key -->
-    <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6ElNLOL1BWAp5GUCvkrOEM9vEbPxxceI&libraries=places&v=weekly"></script>
+    <!-- <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6ElNLOL1BWAp5GUCvkrOEM9vEbPxxceI&libraries=places&v=weekly"></script> -->
   </head>
 
 <body>
@@ -68,7 +68,7 @@
 
 
 
-          <fieldset data-count-page="1">
+          <fieldset data-count-page="1" class="my_current_step">
 
             <p class="m-bottom-60">
               È il momento di migliorare la sicurezza antisismica di casa? 
@@ -264,7 +264,6 @@
           </fieldset>
 
 
-
           <!--Registrazione persona fisica-->
           <fieldset data-count-page="3" class="person">
 
@@ -422,8 +421,6 @@
               </div>
             </div>
           </fieldset>
-
-
 
 
           <fieldset data-count-page="4" class="business">
@@ -657,7 +654,6 @@
           </fieldset>
 
 
-
           <fieldset data-count-page="5" class="">
             <p>
               <strong>Raccontaci di più sul tuo immobile</strong><br>
@@ -678,6 +674,7 @@
             <div class="form-group">
               <label class="control-label" for="type-real-estate">Tipologia</label>
               <select 
+              data-switch="true"
               data-select="tipologia"
               name="tipologia" 
               id="type-real-estate" 
@@ -1297,7 +1294,7 @@
                   Istituti autonomi case popolari(IACP), comunque denominati, 
                   nonchè dagli enti aventi le stesse finalità sociali dei predetti Istituti, 
                   istituiti nella forma di società che rispondono 
-                  ai rquisiti della legislazione europea in
+                  ai rquisiti della legislazione europea.
                 </span>
               </div>
 
@@ -1418,7 +1415,7 @@
               value="No">
               <input 
               type="button"
-              class="btn next  btn-previous" 
+              class="btn next btn-next" 
               name="questionario" 
               data-question="d3" 
               value="Si">
@@ -1439,7 +1436,7 @@
                 type="checkbox"
                 id="check-d4-1" 
                 class="sismic-intervention-check" 
-                value="check1"
+                name="check1"
                 />
                 <label for="check-d4-1"></label>
                 <span>
@@ -1454,7 +1451,7 @@
                 <input 
                 type="checkbox"
                 id="check-d4-2"
-                value="check2"/>
+                name="check2"/>
                 <label for="check-d4-2"></label>
                 <span>
                   RIQUALIFICAZIONE ENERGETICA: sostituzione degli IMPIANTI DI
@@ -1467,7 +1464,7 @@
                 <input 
                 type="checkbox"
                 id="check-d4-3"
-                value="check3"/>
+                name="check3"/>
                 <label for="check-d4-3"></label>
                 <span>
                   INTERVENTI c.d TRAINATI
@@ -1478,7 +1475,7 @@
                 <input 
                 type="checkbox"
                 id="check-d4-4"
-                value="check4"
+                name="check4"
                 data-selection="one">
                 <label for="check-d4-4"></label>
                 <span>
@@ -1492,6 +1489,7 @@
               type="hidden" 
               name="questionario" 
               data-question="d4"
+              data-acquire="true"
               value=""
               />
 
@@ -1673,6 +1671,7 @@
             </div>
           </fieldset>
 
+
           <fieldset data-count-page="13">
             <div class="title-select">
               <strong>Categoria catastale dell'immobile</strong>
@@ -1694,7 +1693,7 @@
             </div>
 
             <div class="form-group category-real-estate active">
-              <select class="form-control choose-category save-data-array modal-single-check group-save" autocomplete="false" data-group="categoriaCatastale" name="categoria">
+              <select class="form-control choose-category save-data-array modal-single-check group-save" data-switch="true" name="categoria">
                 <option value="none">Scegli una categoria catastale</option>
                 <option value="a">A: alloggi e uffici privati</option>
                 <option value="b">B: scuole, uffici privati e ospedali</option>
@@ -1706,7 +1705,7 @@
             </div>
 
             <div class="form-group sub-category  category-real-estate category-a  ">
-              <select class="form-control " name="sottoCategoria" data-group="categoriaCatastale">
+              <select data-category="a" class="form-control " name="sottoCategoria">
                 <option value="a/1">A/1: abitazioni di tipo signorile</option>
                 <option value="a/2">A/2: abitazioni di tipo civile</option>
                 <option value="a/3">A/3: abitazioni di tipo economico</option>
@@ -1722,7 +1721,7 @@
             </div>
 
             <div class="form-group sub-category category-real-estate category-b " >
-              <select class="form-control" name="sottoCategoria" data-group="categoriaCatastale">
+              <select data-category="b" class="form-control" name="categoriaCatastale">
                 <option value="b/1">B/1: collegi, orfanotrofi, conventi, seminari, ricoveri, ospizi, caserme</option>
                 <option value="b/2">B/2: ospedali ecase di cura senza fine di lucro</option>
                 <option value="b/3">B/3: riformatori e prigioni</option>
@@ -1735,7 +1734,7 @@
             </div>
 
             <div class="form-group sub-category category-real-estate category-c  " >
-              <select class="form-control" name="sottoCategoria" data-group="categoriaCatastale">
+              <select data-category="c" class="form-control" name="categoriaCatastale">
                 <option value="c/1">C/1: locali commerciali</option>
                 <option value="c/2">C/2: locali di deposito e magazzini</option>
                 <option value="c/3">C/3: laboratori per arti e mestieri</option>
@@ -1747,7 +1746,7 @@
             </div>
 
             <div class="form-group sub-category category-real-estate category-d" >
-              <select class="form-control " name="sottoCategoria" data-group="categoriaCatastale">
+              <select data-category="d" class="form-control " name="categoriaCatastale">
                 <option value="d/1">D/1: opifici</option>
                 <option value="d/2">D/2: alberghi con fine di lucro</option>
                 <option value="d/3">D/3: sale per spettacoli e concerti, cinematografi e teatri con fine di lucro</option>
@@ -1759,7 +1758,7 @@
             </div>
 
             <div class="form-group sub-category category-real-estate category-e">
-              <select class="form-control " name="sottoCategoria" data-group="categoriaCatastale">
+              <select data-category="e" class="form-control " name="categoriaCatastale" >
                 <option value="e/1">E/1: stazioni per servizi aerei, marittimi, terrestri e di trasporto</option>
                 <option value="e/2">E/2: ponti comunali e provinciali a pedaggio</option>
                 <option value="e/3">E/3: sale per spettacoli e concerti, cinematografi e teatri con fine di lucro</option>
@@ -1773,7 +1772,7 @@
             </div>
 
             <div class="form-group sub-category category-real-estate category-f" >
-              <select class="form-control" name="sottoCategoria" data-group="categoriaCatastale">
+              <select data-category="f" class="form-control" name="categoriaCatastale">
                 <option value="f/1">F/1: aree urbane</option>
                 <option value="f/2">F/2: punità collabenti</option>
                 <option value="f/3">F/3: unità in corso di costruzione</option>
@@ -1789,10 +1788,6 @@
               <input type="button" name="d7" class="next btn btn-next  d7-valutation sendData" value="Continua"data-myObj="ok" id="d7_si" disabled data-group="questionario" />
             </div>
           </fieldset>
-
-
-
-
 
 
           <fieldset data-count-page="14" class="text-center ">

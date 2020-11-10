@@ -158,7 +158,7 @@ hr {
 }
 
 .head-small-text {
-  display: none;
+  display: block;
   margin-bottom: 75px;
   letter-spacing: 1px !important;
   font-weight: bold;
@@ -589,10 +589,6 @@ select::-ms-expand {
 /* Select per categoria immobile */
 .category-real-estate {
   display: none;
-}
-
-.category-real-estate.active {
-  display: block;
 }
 
 select.form-control {

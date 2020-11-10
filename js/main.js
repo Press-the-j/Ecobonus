@@ -2,6 +2,7 @@ $(document).ready(function(){
 
   const URLSELECT = "http://ectm-env.eba-wmhap9wv.eu-south-1.elasticbeanstalk.com/";
   const SELECTS = ['tipologia', 'stato-immobile', 'tipo-generazione', 'tipo-generatore', 'radiatore', 'pareti-esterne','telaio', 'vetro']
+  const userName = ''
 
   // get bonustemplate and store it into the localstorage
   localStorage.setItem('bonusObj', JSON.stringify(BONUSTEMPLATE))
@@ -30,7 +31,7 @@ $(document).ready(function(){
   })
 
   // switchSelection() on click
-  $('#type-real-estate').on('click', function() {
+  $('[data-switch="true"]').on('click', function() {
     let this_click = $(this);
     switchSelection(this_click)
   })
@@ -46,33 +47,33 @@ $(document).ready(function(){
     checkAccess()
   })
 
-  
- 
   //save data in local
   //and set next page view
   $(document).on('click', '.next[data-access="allowed"]', function(){
+    console.log(userName)
     let this_click = $(this);
-    let this_fieldset = this_click.closest('fieldset');
-    
+    let this_fieldset = this_click.closest('fieldset');    
+    let next_fieldset_count = this_click.parents('fieldset').data('count-page') + 1;
 
-    nextStep(this_click);
+    nextStep(this_click, next_fieldset_count);
     this_fieldset.hide().removeClass('my_current_step');
     this_fieldset.next().show().addClass('my_current_step')
-
   })
 
   // set previous page view
   $(document).on('click', 'input[name="previous"]', function(){
     let this_click = $(this);
     let this_fieldset = this_click.closest('fieldset');
+    let prev_fieldset_count = this_click.parents('fieldset').data('count-page') - 1;
+    setDynamicText(prev_fieldset_count)
     this_fieldset.hide().removeClass('my_current_step');
     this_fieldset.prev().show().addClass('my_current_step')
   })
   
   // get the report
-  // $(document).on('click', 'input[data-elaborate="allowed"]', function(){
-    
-  // })
+  $(document).on('click', 'input[data-elaborate="allowed"]', function(){
+    getReport();
+  })
 
 });
 
@@ -141,7 +142,7 @@ function checkAccess() {
 
 
 
-function nextStep(this_click) {
+function nextStep(this_click, next_fieldset_count) {
 
   // select an user-type in fieldset 2
   selectUserType(this_click);
@@ -152,6 +153,49 @@ function nextStep(this_click) {
   //1: save user answers
   saveAnswers()
 
+  setDynamicText(next_fieldset_count)
+
+}
+
+
+
+
+
+function setDynamicText(fieldset_count){
+
+  let fieldText = $('.dynamic-text');
+  let fieldSmallText = $('.head-small-text');
+  console.log(fieldText)
+  console.log(fieldSmallText)
+  
+  switch (fieldset_count) {
+    case 2 :
+      console.log('entrato nel 2')
+      fieldText.text('Iniziamo!!');
+      fieldSmallText.text('(Per la registrazione impiegheremo circa 5 minuti')
+      break
+
+    case 3 :
+      console.log('entrato nel 3')
+      fieldText.text('Piacere!');
+      fieldSmallText.text('(Proseguiamo, impiegheremo circa 5 minuti)');
+      break
+
+    case 4 : 
+      fieldText.text('Piacere!');
+      break
+
+    case 5 :
+      setUserName()
+      fieldSmallText.text('(Entriamo nel vivo della richiesta. impiegeheremo circa 5 minuti)');
+      // fieldText.text('Ciao '+ nameUser +"!");
+      break
+
+    default:
+      fieldSmallText.text('(Passiamo agli ultimi requisiti, impiegheremo 5 minuti)')
+      // fieldText.text('Ciao '+ nameUser +"!");
+      break  
+  }
 }
 
 
@@ -191,6 +235,7 @@ function selectUserType(this_click) {
 
 function compileHiddenInput(this_click) {
   if(this_click.attr('name') == 'questionario') {
+    $('input[name="questionario"]').attr('data-acquire', false)
     $(this_click).attr('data-acquire', 'true')
   } else {
     let divParent = this_click.parent();
@@ -295,6 +340,15 @@ function compileString(question, answer, string) {
 
 
 
+function setUserName() {
+  let bonusObj = JSON.parse(localStorage.getItem('bonusObj'))
+  userName = bonusObj.privato.nome + ' ' + bonusObj.privato.cognome;
+}
+
+
+
+
+
 function showModal(this_click) {
 
   let modalName = this_click.data('modal');
@@ -344,21 +398,43 @@ function getModalData(this_click) {
 
 
 
-// !IMPORTANTE aggiungere lo switch della penultima pagina
+
 function switchSelection(this_click) {
-  this_click.on('change',function() {
-    if ($(this).val() === 'Stabile condominiale') {
-      $('.condominium').show();
-      $('.condominium-hide').hide()
-      $('.toggle-reverse').removeClass('select-control')
-      $('.toggle-control').addClass('input-control');
-    } else {
-      $('.condominium').hide();
-      $('.condominium-hide').show()
-      $('.toggle-reverse').addClass('select-control')
-      $('.toggle-control').removeClass('input-control');
-    }
-  })
+  let name = this_click.attr('name');
+
+  switch (name) {
+    case 'tipologia':
+      this_click.on('change', function() {
+        if ($(this).val() === 'Stabile condominiale') {
+          $('.condominium').show();
+          $('.condominium-hide').hide()
+          $('.toggle-reverse').removeClass('select-control')
+          $('.toggle-control').addClass('input-control');
+        } else {
+          $('.condominium').hide();
+          $('.condominium-hide').show()
+          $('.toggle-reverse').addClass('select-control')
+          $('.toggle-control').removeClass('input-control');
+        }
+      })
+      break;
+  
+    case 'categoria':
+      this_click.on('change', function() { 
+        let categoria = $(this).val()
+        $('select[data-category]').hide()
+        $('select[data-category]').parent().hide()
+        $('select[data-category]').attr('data-acquire', false)
+        $('select[data-category="' + categoria + '"]').parent().show()
+        $('select[data-category="' + categoria + '"]').show()
+        $('select[data-category="' + categoria + '"]').attr('data-acquire', true)
+      })
+
+      break;
+  }
+
+
+  
 }
 
 
