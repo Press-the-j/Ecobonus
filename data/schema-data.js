@@ -25,44 +25,44 @@ const BONUSTEMPLATE = {
     "provincia" : "string",
     "tipologiaAbitativa" : {
       "tipologia": {
-        "name" : "string",
+        "value" : "string",
       },        
       "pianiCondominio": {
-        "name": "string"
+        "value": "string"
       },
       "unitaCondominio": {
-        "name": "string"
+        "value": "string"
       }
     },
-    "superficie" : "123",
+    "superficie" : "string",
     "statoImmobile" : {
-      "name" : "string"
+      "value" : "string"
     },
     "climatizzazione" : {
       "tipoGenerazione" : {
-        "name" : "string"
+        "value" : "string"
       },
       "tipoGeneratore" : {
-        "name" : "string"
+        "value" : "string"
       },
       "radiatore" : {
-        "name" : "string"
+        "value" : "string"
       }
     },
     "involucroOpaco" : {
       "paretiEsterne" : {
-        "name" : "string"
+        "value" : "string"
       },
       "cappotto" : {
-        'name': "string"
+        'value': false
       }
     },
     "involucroTrasp" : {
       "telaio" : {
-        "name" : "string"
+        "value" : "string"
       },
       "vetro" : {
-        "name" : "string"
+        "value" : "string"
       }
     },
     "efficienzaEnergetica" : "string",

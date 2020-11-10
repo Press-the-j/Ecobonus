@@ -247,17 +247,12 @@ function saveAnswers() {
       for (const classe in bonusObj) {
         for (const option in bonusObj[classe]) {
           if(typeof(bonusObj[classe][option]) == 'object') {
-            if(option == elementName){
-              if(bonusObj[classe][option]['name'] != 'undefined') {
-                bonusObj[classe][option]['name'] = nameValue
-              }else if (bonusObj[classe][option]['cappotto'] != 'undefined') {
-
-              }
-              
-            }else {
+            if(option == elementName ) {                            // && bonusObj[classe][option]['value'] != 'undefined'
+                bonusObj[classe][option]['value'] = nameValue              
+            } else {
               for (const sub in bonusObj[classe][option]) {
                 if (sub == elementName) {
-                  bonusObj[classe][option][sub]['name'] = nameValue                      
+                  bonusObj[classe][option][sub]['value'] = nameValue                      
                 }
               }
             }
