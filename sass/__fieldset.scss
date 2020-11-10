@@ -1,0 +1,144 @@
+fieldset {
+  margin-bottom: 50px;
+}
+
+.scelta {
+    display: flex;
+    justify-content: space-evenly;
+    position: relative;
+    flex-wrap: wrap;
+    padding: 0 10px;
+}
+
+.title-select strong{
+  margin-right: 30px;
+}
+
+//!pagina di valutazione sismica
+.seismic-valutation{
+  display: flex;
+  align-items: end;
+  
+  .seismic-valutation-wrap{
+    display: flex;
+    flex-direction: column;
+    width:50%
+  }
+
+  .btn-next{
+    font-size: 14px;
+  }
+  .input-valutation{
+    border:none;
+    margin-right: 15px;
+    border-radius: 20px;
+    padding: 4px 20px;
+    background: #f5f5f5;
+    box-shadow: inset 3px 3px 3px rgba(0, 0, 0, 0.15),
+      inset -3px -3px 6px #ffffff;
+  }
+
+}
+/* .result{
+  border:none;
+  margin: 15px 0;;
+  border-radius: 20px;
+  padding: 4px 20px;
+  background: #f5f5f5;
+  box-shadow: inset 3px 3px 3px rgba(0, 0, 0, 0.15),
+    inset -3px -3px 6px #ffffff;
+  width: 100%;
+} */
+
+//!da qui parte ultima pagina
+
+.last-page-title {
+    width: 70%;
+    display: block;
+    margin: 0 auto;
+}
+
+.last-page-code {
+    margin: 60px 0;
+}
+
+.last-page-code span {
+    letter-spacing: 5px;
+    font-size: 3rem;
+    border-radius: 30px;
+    background: #f5f5f5;
+    box-shadow: inset 3px 3px 3px rgba(0, 0, 0, 0.15),
+        inset -3px -3px 6px #ffffff;
+    padding: 30px;
+    color: $primary-color;
+    font-weight: bold;
+}
+
+.last-page-code-text {
+    font-size: 2rem;
+}
+
+.last-page-code-text-small {
+    font-size: 1.5rem;
+}
+
+.qr-code {
+    margin: 30px 0px;
+}
+
+.qr-code img {
+    width: 120px;
+}
+
+.last-page-paragraph {
+    width: 80%;
+    margin: 0 auto;
+    margin-bottom: 30px;
+}
+
+.last-page-footer {
+    padding: 60px 0;
+    background-color: #f5f5f5;
+    border-top: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.code {
+    color: #2ad590;
+    margin: 40px 0;
+}
+
+.code div {
+    border-radius: 6px;
+    background: #f1f2f5;
+    box-shadow: inset 20px 20px 60px #fff, inset -20px -20px 60px #ffffff;
+    padding: 20px 40px;
+    font-weight: bold;
+    margin: 0 auto;
+    max-width: 200px;
+    height: auto;
+}
+
+.qr-code img {
+    height: 80px;
+    width: auto;
+    margin: 20px 0;
+}
+
+.qr-code p {
+    margin: 40px 0;
+}
+
+@media (max-width: 680px) {
+     .scelta {
+        flex-direction: column;
+        align-items: center;
+     }
+
+    .seismic-valutation{
+      flex-direction: column;
+
+      .seismic-valutation-wrap{
+        width:100%;
+      }
+    }    
+}

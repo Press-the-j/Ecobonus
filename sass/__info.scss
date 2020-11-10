@@ -1,0 +1,54 @@
+.glyphicon {
+    font-size: 22px;
+    cursor: pointer;
+    margin-left: 6px;
+}
+
+.question {
+    cursor: pointer;
+}
+
+.label-wrapper{
+  display: flex;
+  align-items: center;
+}
+
+#impresa-info,
+#personaFisica-info {
+    a {
+      font-size: 11px;
+    }
+}
+
+.label-info-cursor{
+  border: 1px solid #3C28D6;
+  border-radius: 100%;
+  background-color: transparent;
+  display: flex;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+
+  & img {
+    height: 15px;
+    margin: auto;
+  }
+}
+
+@media (max-width: 680px) {
+
+  #impresa-info,
+  #personaFisica-info {
+    position: relative;
+    right: 0;
+    margin: 0 0 10px 0;
+}
+  .btn-type-user-wrap {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    
+
+  }
+
+}

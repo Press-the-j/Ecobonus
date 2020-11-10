@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+
+
+<html lang="it">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=0">
+  <title>Form Eco Bonus</title>
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+  
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="img/Favicon.png" type="image/png" sizes="48x48">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js"
+    integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ"
+    crossorigin="anonymous"></script>
+  <!-- jquery validator -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.2/dist/jquery.validate.min.js"></script>
+  <!-- jquery-csv -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.71/jquery.csv-0.71.min.js"></script>
+  <!-- Bootstrap Plugins -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+    integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
+    crossorigin="anonymous"></script>
+  <!-- custom js -->
+  <script src="js/validation.js"></script>
+  <script src="js/main.js" charset="utf-8"></script>
+  <!-- Google Maps Api Key -->
+  <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6ElNLOL1BWAp5GUCvkrOEM9vEbPxxceI&libraries=places&v=weekly"></script>
+</head>
+
+<body>
+  <main class="container">
+    <!-- Pagina accettazione -->
+    <div class="row">
+      <div class="wrap-lazyload"></div>
+      <div class=" col-xs-12 col-sm-12 col-md-8 col-md-offset-2">
+        
+        <div class="head">
+          <!-- div id="map-registered-office"></div> -->
+          <img src="img/Logo_Ectm_Trasp.svg" alt="immagine superbonus">
+          <h1 class="dynamic-text">SUPERBONUS 110&#37;</h1>
+          <!-- timer -->
+          <div class="clock">
+            00:<span class="zero"></span><span class="clock_second"></span>
+          </div>
+          <!-- Barra di Progresso -->
+          <div class="progress-wrap">
+            <div class="progress">
+              <div class="progress-bar progress-bar active" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <!-- <span class="glyphicon glyphicon-flag hidden"></span> -->
+            <svg id="flag-icon" width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-flag hidden" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M14.778.085A.5.5 0 0 1 15 .5V8a.5.5 0 0 1-.314.464L14.5 8l.186.464-.003.001-.006.003-.023.009a12.435 12.435 0 0 1-.397.15c-.264.095-.631.223-1.047.35-.816.252-1.879.523-2.71.523-.847 0-1.548-.28-2.158-.525l-.028-.01C7.68 8.71 7.14 8.5 6.5 8.5c-.7 0-1.638.23-2.437.477A19.626 19.626 0 0 0 3 9.342V15.5a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 1 0v.282c.226-.079.496-.17.79-.26C4.606.272 5.67 0 6.5 0c.84 0 1.524.277 2.121.519l.043.018C9.286.788 9.828 1 10.5 1c.7 0 1.638-.23 2.437-.477a19.587 19.587 0 0 0 1.349-.476l.019-.007.004-.002h.001M14 1.221c-.22.078-.48.167-.766.255-.81.252-1.872.523-2.734.523-.886 0-1.592-.286-2.203-.534l-.008-.003C7.662 1.21 7.139 1 6.5 1c-.669 0-1.606.229-2.415.478A21.294 21.294 0 0 0 3 1.845v6.433c.22-.078.48-.167.766-.255C4.576 7.77 5.638 7.5 6.5 7.5c.847 0 1.548.28 2.158.525l.028.01C9.32 8.29 9.86 8.5 10.5 8.5c.668 0 1.606-.229 2.415-.478A21.317 21.317 0 0 0 14 7.655V1.222z"/>
+            </svg>
+          </div>
+          <small class="head-small-text"></small>
+        </div>
+        <form id="formComp" class="" novalidate action="" method="post" autocomplete="off">
+          <fieldset data-count-page="1">
+            <p class="m-bottom-60">
+              È il momento di migliorare la        sicurezza antisismica di casa? Stai pensando di aumentare l’efficienza energetica dei tuoi impianti? Potresti avere i requisiti per accedere al Superbonus 110%. 
+              <br>
+              <br>
+              Il Superbonus 110% è un’agevolazione prevista dal Decreto Rilancio. Con gli incentivi del Superbonus 110%, i beneficiari possono detrarre dall’imposta lorda il 110% delle spese sostenute tra il 1° luglio 2020 e il 31 dicembre 2021 per interventi antisismici o di efficientamento energetico. 
+              <br>
+              <br>
+              Noi possiamo aiutarti a capire se hai tutti i requisiti per accedere alle agevolazioni. Ti faremo alcune domande e alla fine ti rilasceremo una relazione completa. Vuoi fare una verifica e cogliere questa occasione?
+              <br>
+              <br>
+              OK! Verifichiamo se ho i requisiti per accedere al Superbonus 110%</p>
+            <div class="form-group switch-wrapper">
+              <label class="switch" for="privacy">
+                <input type="checkbox" id="privacy" name="checkPrivacy" class="switch-check checkbox-control">
+                <span class="slider"></span>
+              </label>
+              <span>Accetta la nostra <a class="link" href="">Privacy policy</a></span>
+            </div>
+            <div class="form-group switch-wrapper">
+              <label class="switch" for="marketing">
+                <input type="checkbox" id="marketing" name="marketing-check" class="save-data switch-check">
+                <span class="slider"></span>
+              </label>
+              <span>Rimani aggiornato sulle nostre offerte <a class="link" href="">Marketing</a></span>
+            </div>
+            <div class="bottoni m-top-60">
+              <input type="button" name="continua" class="btn next btn-next btn-home" value="continua"  />
+            </div>
+          </fieldset>
+          <fieldset data-count-page="2" class="scegliTipo">
+            <section class="scelta">
+              <div class=" choose-type-user m-bottom-30 ">
+                <div class="image">
+                  <img class="imageType img-responsive" src="img/Icona-Azienda.svg" alt="immagine impresa">
+                </div>
+                <div class="btn-type-user-wrap bottoni">
+                  
+                  <input type="button" value="Rappresento un&#39;impresa &#63;" class="type-user btn-type-user"
+                    data-typeUser="business" />
+                  <span data-toggle="modal" data-modal="business-infos" id="impresa-info" class="open-modal">
+                    <img class="question" src="img/interrogativo.svg" alt="Punto_Interrogativo">
+                    <a href="#">Ti serve un aiuto?</a>
+                  </span>
+                  
+                </div>
+              </div>
+              <div class="choose-type-user m-bottom-30 ">
+                <div class="image">
+                  <img class="imageType img-responsive" src="img/Icona-persona- Fisica.svg" alt="immagine impresa">
+                </div>
+                
+                <div class="btn-type-user-wrap bottoni">
+
+                  <input type="button" value="Sono una persona fisica &#63;" class="type-user btn-type-user"
+                    data-typeUser="person"  />
+                  <span data-toggle="modal" data-modal="person-infos" id="personaFisica-info" class="open-modal">
+                    <img class="question" src="img/interrogativo.svg" alt="Punto_Interrogativo">
+                    <a href="#">Ti serve un aiuto?</a>
+                  </span>
+                  
+                </div>
+              </div>
+            </section>
+            <!-- pop up info impresa-->
+            <div class="modal fade" id="business-infos" tabindex="-1" role="dialog" aria-labelledby="">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Sei un'impresa?</h4>
+                  </div>
+                  <div class="modal-body">
+                    <p>
+                      clicca su questo pulsante se vuoi registrarti a nome di una ditta individuale o di una società, se sei un libero professionista o un amministratore di condominio
+                    </p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-next close-modal">OK</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- pop up info persona fisica -->
+            <div class="modal fade" id="person-infos" tabindex="-1" role="dialog" aria-labelledby="">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Sei una persona fisica?</h4>
+                  </div>
+                  <div class="modal-body">
+                    <p>
+                      clicca su questo pulsante se vuoi registrarti a titolo personale. Se ti registri come persona fisica, lo fai come privato cittadino: non ti stai registrando come libero professionista, né come ditta individuale o società
+                    </p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-next close-modal" >OK</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <!--Registrazione persona fisica-->
+          <fieldset data-count-page="3" class="person">
+            <div class="form-group">
+              <label class="control-label" for="name">Nome</label>
+              <div class="row-input">
+                <input data-toggle="modal" data-modal="nameModal" data-whatever="@mdo" type="text"
+                  class="form-control input-control open-modal" id="name" name="nome"   data-receive-from="complete-name">
+              </div>
+            <input type="hidden" class="save-data save-name" name="nome" data-receive-from="name-popup" >
+            <input type="hidden" class="save-data" name="cognome"data-receive-from="surname-popup">
+            </div>
+            <div class="form-group">
+              <label class="control-label" for="date">Compleanno</label>
+              <div class="row-input">
+                <input type="date" class="form-control input-control save-data" id="date" name="data-nascita">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label"  for="genre">Sesso</label>
+              <select class="form-control select-control save-data"   name="sesso" id="genre">
+                <option value="none" style="display:none;">Genere</option>
+                <option value="">Maschio</option>
+                <option value="">Femmina</option>
+                <option value="">Preferisco non specificarlo</option>
+              </select>
+              <small class="error"></small>
+            </div>
+            <hr>
+            <div class="info-contatto m-bottom-30">
+              <small>Informazioni di contatto</small>
+            </div>
+            <div class="form-group">
+              <label class="control-label"  for="email">Email</label>
+              <div class="row-input">
+                <input type="email" class="form-control input-control save-data" id="email" name="email">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label" for="tel-number">Telefono</label>
+              <div class="row-input">
+                <input type="number" class="form-control input-control save-data"  id="tel-number" name="cellulare">
+              </div>
+              <small class="error"></small>
+            </div>
+            <div class="bottoni">
+              <input type="button" name="previous" class="previous reset btn-previous btn" value="Previous" />
+              <input type="button" name="next" class="next btn btn-next" value="Next" />
+            </div>
+
+            <div class="modal fade" id="nameModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                  </div>
+                  <div class="modal-body">
+
+                    <div class="form-group">
+                      <label for="name-popup" class="control-label">Nome</label>
+                      <div class="row-input">
+                        <input type="text" class="form-control  popup-control input-popup-control person send-val-name save-name"
+                          id="name-popup" name="name_popup">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="surname-popup" class="control-label">Cognome</label>
+                      <div class="row-input">
+                        <input type="text" class="form-control  popup-control input-popup-control person send-val-name"
+                        name="surname_popup"  id="surname-popup">
+                      </div>
+                    </div>
+                    <input type="hidden" id="complete-name">
+
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-previous close-modal">Annulla</button>
+                    <button class="save-pop-up btn btn-next" type="button" class="btn btn-primary">Salva</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset data-count-page="4" class="business">
+            <div class="form-group">
+              <label class="control-label"for="company-name">Ragione sociale</label>
+              <div class="row-input">
+                <input type="text" class="form-control fieldset-input input-control open-modal save-data" id="company-name" name="ragione_sociale"
+                  data-toggle="modal" data-modal="business-name" data-whatever="@mdo"
+                  data-receive-from="company-name-popup">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label" for="pIva">Partita iva</label>
+              <div class="row-input">
+                <input type="number" class="form-control fieldset-input input-control open-modal save-data" id="pIva" name="pIva"
+                  data-toggle="modal" data-modal="business-name" data-whatever="@mdo" data-receive-from="p-iva">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label"  for="address_registered_office">Sede legale</label>
+              <div class="row-input">
+                <input type="text" class="form-control fieldset-input input-control open-modal"  id="address_registered_office" name="sede"
+                  data-toggle="modal" data-modal="registered_office" data-whatever="@mdo">
+                <input type="hidden" name="città" class=" save-data group-save" data-receive-from="locality_registered_office" data-group-result="sede-legale">
+                <input type="hidden" name="cap" class=" save-data  group-save" data-receive-from="postal_code_registered_office" data-group-result="sede-legale">
+                <input type="hidden" class="save-data  group-save" name="indirizzo"data-receive-from="route_registered_office" data-group-result="sede-legale">
+                <input type="hidden" name="numero" class="save-data  group-save" data-receive-from="street_number_registered_office" data-group-result="sede-legale">
+              </div>
+            </div>
+            <hr>
+            <div class="info-contatto">
+              <small>Informazioni di contatto aziendale</small>
+            </div>
+            <div class="form-group">
+              <label class="control-label"  for="referent-name-registration">Nome del referente</label>
+              <div class="row-input">
+                <input data-toggle="modal" data-modal="referent-registration" type="text"
+                  class="form-control fieldset-input input-control open-modal " id="referent-name-registration"
+                   name="name"
+                  data-receive-from="referent-complete-name">
+                  <input type="hidden" class="save-data" data-receive-from="name-referent-registration" name="nome">
+                  <input type="hidden" class="save-data" name="cognome" data-receive-from="surname-referent-registration">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label"  for="referent-mail-registration">Email</label>
+              <div class="row-input">
+                <input data-toggle="modal" data-modal="referent-registration" type="email"
+                  class="form-control fieldset-input input-control open-modal save-data group-save" data-group-result="referente" id="referent-mail-registration" name="email"
+                  data-receive-from="email-referent-registration">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label"  for="referent-tel-registration">Telefono</label>
+              <div class="row-input">
+                <input data-toggle="modal" data-modal="referent-registration" type="tel"
+                  class="form-control fieldset-input input-control open-modal save-data group-save" id="referent-tel-registration" data-group-result="referente" name="cellulare"
+                  data-receive-from="number-referent-registration">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="company_occupation" style="display: none;">occupazione</label>
+              <select name="company_occupation" id="company_occupation" class="form-control select-control save-data">
+                <option value="none" style="display:none" >DI COSA VI OCCUPATE?</option>
+                <option>Impianti idraulici</option>
+                <option>Impianti elettrici</option>
+                <option>Impianti aeraulici</option>
+                <option>Impianti antincendio</option>
+              </select>
+            </div>
+
+            <div class="bottoni">
+              <input type="button" name="previous" class="previous reset btn-previous btn" value="Previous" />
+              <input type="button" name="next" class="next btn btn-next" value="Next" />
+            </div>
+            <!--  popup ragione sociale -->
+            <div class="modal fade" id="business-name" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="form-group">
+                      <label class="control-label" for="company-name-popup">Ragione Sociale</label>
+                      <div class="row-input">
+                        <input type="text" class="form-control popup-control" id="company-name-popup" name="company_name_popup" >
+                      </div>
+                    </div>
+                    <p>
+                      Non ricordi la ragione sociale completa?
+                      <br>
+                      <br>
+                      Inserisci qui il numero di Partita IVA (le informazioni societarie compariranno in automatico)
+                    </p>
+                    <div class="form-group">
+                      <label class="control-label" for="p-iva" >Partita iva</label>
+                      <div class="row-input">
+                        <input type="text" class="form-control popup-control" id="p-iva" name="pIva_popup">
+                      </div>
+                      <small class="error"></small>
+                    </div>
+
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-previous close-modal" >Annulla</button>
+                    <button class="save-pop-up btn btn-next" type="button" class="btn btn-primary">Salva</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- popup sede legale -->
+            <div class="modal fade" id="registered_office" tabindex="-1" role="dialog"
+              aria-labelledby="exampleModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="form-group">
+                      <label class="control-label" for="address-registered-office">Cerca</label>
+                      <div class="row-input">
+                        <input type="search" class="form-control" id="address-registered-office" required
+                          autocorrect="off" spellcheck="false" autocomplete="off">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label" for="locality_registered_office">Città</label>
+                      <div class="row-input">
+                        <input type="text" class="form-control popup-control" name="locality" id="locality_registered_office">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label" for="route_registered_office">Indirizzo</label>
+                      <div class="row-input">
+                        <input type="text" class="form-control popup-control" name="route" id="route_registered_office">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label" for="street_number_registered_office">Numero</label>
+                      <div class="row-input">
+                        <input type="text" class="form-control popup-control" name="street_number" id="street_number_registered_office">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label" for="postal_code_registered_office">CAP</label>
+                      <div class="row-input">
+                        <input type="text" class="form-control popup-control" name="postal_code" id="postal_code_registered_office">
+                      </div>
+                    </div>
+                    <div class="search-address-wrap">
+                      <button class="btn-next btn save-address isModal" data-save="registered_office" id="search-address">Cerca sulla mappa</button>
+                      <input type="hidden" id="address_registered_office_modal">
+                    </div>
+                    <div>
+                      <div id="map-registered-office"></div>
+                    </div>
+                   
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-previous close-modal" >Annulla</button>
+                    <button class="save-pop-up btn btn-next save-address-registered-office" type="button" data-save="registered_office"class="btn btn-primary"
+                      >Salva</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- pop up referente -->
+            <div class="modal fade" id="referent-registration" tabindex="-1" role="dialog" aria-labelledby="">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="form-group">
+                      <label for="name-referent-registration" class="control-label">Nome Referente</label>
+                      <div class="row-input">
+                        <input type="text" class="form-control popup-control send-val-name save-name" id="name-referent-registration" name="referent_name_registration_popup">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="surname-referent-registration" class="control-label">Cognome Referente</label>
+                      <div class="row-input">
+                        <input type="text" class="form-control popup-control send-val-name" id="surname-referent-registration" name="referent_name_registration_popup">
+                      </div>
+                    </div>
+                    <input type="hidden" id="referent-complete-name">
+                    <div class="form-group">
+                      <label for="email-referent-registration" class="control-label">Email</label>
+                      <div class="row-input">
+                        <input type="text" class="form-control popup-control" id="email-referent-registration"
+                        name="referent_mail_registration_popup">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="number-referent-registration" class="control-label">Telefono</label>
+                      <div class="row-input">
+                        <input type="text" class="form-control popup-control" id="number-referent-registration"
+                        name="referent_tel_registration_popup">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-previous close-modal" >Annulla</button>
+                    <button class=" save-pop-up btn btn-next" type="button" class="btn btn-primary"
+                      >Salva</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset data-count-page="5" class="">
+            <p><strong>Raccontaci di più sul tuo immobile</strong><br>
+              Più dettagli ci darai e più precisa sarà la valutazione
+            </p>
+            <div class="form-group">
+              <label class="control-label" for="address_estate">Dove si trova?</label>
+              <div class="row-input">
+                <input type="search" autocomplete class="form-control input-control open-modal" name="address_real_estate" data-toggle="modal" data-modal="address_real_estate_modal" data-whatever="@mdo" id="address_estate">
+                <input type="hidden" class="save-data-array common-save " name="indirizzo"data-receive-from="route_estate" >
+                <input type="hidden" name="numero" class="save-data-array common-save" data-receive-from="street_number_estate">
+                <input type="hidden" name="città" class="save-data-array common-save save-city-valutation" id="city-estate" data-receive-from="locality_estate" >
+                <input type="hidden" name="provincia" class="save-data-array common-save" data-receive-from="province_estate" >
+                <input type="hidden" name="cap" class="save-data-array common-save" data-receive-from="postal_code_estate" >
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label" for="type-real-estate">Tipologia</label>
+              <select data-select="tipologia"name="tipologia" id="type-real-estate" class="form-control select-control save-data-array">
+                <option style="display:none" value="none">Tipologia immobile</option>
+              </select>
+            </div>
+
+            <!-- form che appare solamente se si sceglie condominio -->
+
+            <div class="form-group condominium">
+              <label class="control-label" for="condominium-floors">numero di piani</label>
+              <div class="row-input">
+                <input type="number" class="form-control toggle-control " name="piani-condominio" id="condominium-floors">
+              </div>
+              <small class="error"></small>
+            </div>
+            <div class="form-group condominium">
+              <label class="control-label" for="residential-units">numero di unità immobiliari</label>
+              <div class="row-input">
+               <input type="number" class="form-control toggle-control " name="unità-condominio" id="residential-units">
+              </div>
+            <small class="error"></small>
+            </div>
+            <!--  -->
+
+            <div class="form-group condominium-hide">
+              <label class="control-label" for="square-meters">Superficie</label>
+              <select name="superficie" id="square-meters" class="form-control select-control toggle-reverse save-data-array" >
+                <option style="display:none" value="none">Dimensione superficie</option>
+                <option>fino a 50mq</option>
+                <option>50-90mq</option>
+                <option>90-120mq</option>
+                <option>120-180mq</option>
+                <option>oltre 180mq</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="control-label" for="state-real-estate">Stato Immobile</label>
+              <select data-select="stato-immobile"name="statoImmobile" id="state-real-estate" class="form-control select-control save-data-array">
+                <option style="display:none" value="none">Stato immobile</option>
+                
+              </select>
+              
+            </div>
+            <div class="form-group">
+              <label class="control-label" for="winter-air-conditioning">Climatizzazione Invernale</label>
+              <div class="row-input">
+                <input class="form-control input-control open-modal save-data-array from-select group-save" type="text" id="winter-air-conditioning" name="tipoGenerazione"
+                data-group="climatizzazione" data-toggle="modal" data-modal="winter-air-conditioning-popup"
+                data-receive-from="generation-heating-input">
+              </div>
+              <input type="hidden"  name="tipoGeneratore"
+              data-group="climatizzazione"
+              data-receive-from="generator-type-input" class="save-data-array from-select group-save">
+              <input type="hidden" class="save-data-array from-select group-save"
+              data-group="climatizzazione"
+              name="radiatore"  data-receive-from="terminal-type-input">
+            </div>
+
+            <div class="form-group">
+              <label class="control-label" for="opaque-casing">Involucro opaco</label>
+              <div class="row-input">
+                <input type="text" class="form-control input-control open-modal save-data-array from-select group-save " name="paretiEsterne" id="opaque-casing" 
+                data-group="involucroOpaco"
+                  data-toggle="modal" data-modal="opaque-casing-popup" data-whatever="@mdo"
+                  data-receive-from="external-walls-input">
+              </div>
+              <input type="hidden" class="save-data-array modal-single-check group-save"  name="cappotto "data-receive-from="coat_input" data-group="involucroOpaco">
+              
+            </div>
+            <div class="form-group">
+              <label class="control-label" for="transparent-casing">Involucro trasparente</label>
+              <div class="row-input">
+                <input type="text" class="form-control input-control open-modal save-data-array from-select group-save" name="telaio" id="transparent-casing"
+                data-group="involucroTrasp"
+                  data-toggle="modal" data-modal="transparent-casing-popup" data-whatever="@mdo"
+                  data-receive-from="frame-type-input">
+              </div>
+              <input type="hidden" class="save-data-array from-select group-save" name="vetro" 
+              data-group="involucroTrasp"data-receive-from="glass-type-input" >
+            </div>
+            <div class="form-group">
+              <label class="control-label" for="efficienza_energetica">Efficienza Energetica</label>
+              <select name="efficienza_energetica" id="energy-efficiency" class="form-control select-control save-data-array">
+                <option style="display:none" value="none">Efficienza energetica</option>
+                <option>A,A+,A1-A4</option>
+                <option>B,C,D</option>
+                <option>E,F,G</option>
+              </select>
+            </div>
+            <div class="bottoni">
+              <input type="button" name="previous" class="previous btn-previous btn" value="Previous" />
+              <input type="button" name="next" class="next btn btn-next" value="Next" />
+            </div>
+            <!-- popup indirizzo immobile -->
+            <div class="modal fade" id="address_real_estate_modal" tabindex="-1" role="dialog"
+              aria-labelledby="exampleModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="form-group">
+                      <label class="control-label" for="address-estate">Cerca</label>
+                      <div class="row-input">
+                        <input type="text" class="form-control" id="address-estate-search" required
+                          autocorrect="off" spellcheck="false" autocomplete="new-password">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="locality" class="control-label">Città</label>
+                      <div class="row-input">
+                        <input type="text" class="form-control popup-control" name="locality" id="locality_estate">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="route" class="control-label">Indirizzo</label>
+                      <div class="row-input">
+                        <input type="text" class="form-control popup-control" name="route" id="route_estate">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="street_number" class="control-label">Numero</label>
+                      <div class="row-input">
+                        <input type="text" class="form-control popup-control" name="street_number" id="street_number_estate">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="province" class="control-label">Provincia</label>
+                      <div class="row-input">
+                        <input type="text" class="form-control popup-control" name="province" id="administrative_area_level_2_estate">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="postal_code_estate" class="control-label">CAP</label>
+                      <div class="row-input">
+                        <input type="text" class="form-control popup-control" name="postal_code" id="postal_code_estate">
+                      </div>
+                    </div>
+                    <div class="search-address-wrap">
+                      <button class="btn-next btn save-address isModal" data-save="estate" id="search-address-estate">Cerca sulla mappa</button>
+                      <input type="hidden" id="address_estate_modal">
+                    </div>
+                    <div>
+                      <div id="map-estate"></div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-previous close-modal" >Annulla</button>
+                    <button class="save-pop-up btn btn-next save-address " type="button" data-save="estate" class="btn btn-primary"
+                      >Salva</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- pop up climatizzazione invernale -->
+            <div class="modal fade" id="winter-air-conditioning-popup" tabindex="-1" role="dialog"
+              aria-labelledby="exampleModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="form-group">
+                      <div class="label-wrapper">
+                        <label for="generation-heating" class="control-label">Tipologia generazione riscaldamento</label>
+                        <a tabindex="0" role="button" data-trigger="focus" data-toggle="popover" title="Tipologia generazione riscaldamento" class="label-info-cursor" data-content="Abbiamo bisogno di sapere se l’impianto di riscaldamento è autonomo o centralizzato. Nell’impianto autonomo, il generatore termico serve solamente quell’immobile. Nell’impianto centralizzato c’è un unico generatore termico per più immobili"><img src="./img/Punto-Interrogativo.svg" alt="info"></a>
+                      </div>
+                      
+                      <select data-select="tipo-generazione" class="form-control select-control send-val" name="generation_heating" id="generation-heating">
+                        <option style="display:none" value="none">Tipologia generazione riscaldamento</option>
+                        
+                      </select>
+                    </div>
+                    <input type="hidden" class="" data-error="generation-heating"
+                      id="generation-heating-input">
+                    <div class="form-group">
+                      <div class="label-wrapper">
+                        <label for="generator-type" class="control-label">Tipologia generatore</label>
+                        <a tabindex="0" role="button" data-trigger="focus" data-toggle="popover" title="Tipologia generatore" class="label-info-cursor" data-content="Abbiamo bisogno di conoscere il tipo di generatore termico del tuo impianto di riscaldamento, cioè il tipo di apparecchio che genera il calore nel tuo impianto. Solitamente si tratta di una caldaia o di una pompa di calore, ma se sei indeciso ti consigliamo di consultare i documenti che ti ha lasciato l’installatore"><img src="./img/Punto-Interrogativo.svg" alt="info"></a>
+                      </div>
+                      <select data-select="tipo-generatore"class="form-control select-control send-val" name="generator_type" id="generator-type">
+                        <option style="display:none" value="none">Tipologia generatore</option>
+                        
+                      </select>
+                    </div>
+                    <input data-error="generator-type" class="" type="hidden" id="generator-type-input">
+                    <div class="form-group">
+                      <div class="label-wrapper">
+                        <label for="terminal-type" class="control-label">Tipologia terminale emissione</label>
+                        <a tabindex="0" role="button" data-trigger="focus" data-toggle="popover" title="Tipologia terminale emissione" class="label-info-cursor" data-content="Abbiamo bisogno di sapere che tipo di terminali sono collegati al tuo impianto di riscaldamento. I terminali sono gli apparecchi che distribuiscono il calore negli ambienti dell’immobile. Per esempio, i terminali più comuni sono i termosifoni"><img src="./img/Punto-Interrogativo.svg" alt="info"></a>
+                      </div>
+                      <select data-select="radiatore" class="form-control select-control send-val" name="terminal_type" id="terminal-type">
+                        <option style="display:none" value="none">Tipologia terminale emissione</option>
+                        
+                      </select>
+                    </div>
+                    <input type="hidden" class="" data-error="terminal-type" id="terminal-type-input">
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-previous close-modal" >Annulla</button>
+                    <button class="save-pop-up btn btn-next" type="button" class="btn btn-primary">Salva</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- pop up per involucro opaco -->
+            <div class="modal fade" id="opaque-casing-popup" tabindex="-1" role="dialog"
+              aria-labelledby="exampleModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                  </div>
+                  <div class="modal-body">
+
+                    <div class="form-group">
+                      <div class="label-wrapper">
+                        <label for="external-walls" class="control-label">Pareti verso l'esterno</label>
+                        <a tabindex="0" role="button" data-trigger="focus" data-toggle="popover" title="Tipologia generazione riscaldamento" class="label-info-cursor" data-content="Abbiamo bisogno di sapere come sono state costruite le pareti più esterne dell’edificio in cui si trova l’immobile, quale sia la loro tipologia edilizia. Le pareti esterne corrispondono a tutti gli effetti alle facciate di una villa o del palazzo in cui si trova un appartamento"><img src="./img/Punto-Interrogativo.svg" alt="info"></a>
+                      </div>
+                      <select data-select="pareti-esterne" class="form-control select-control send-val" name="external_walls" id="external-walls">
+                        <option style="display:none" value="none">Tipo di parete verso l'esterno</option>
+                        
+                      </select>
+                    </div>
+                    <input type="hidden" class="popup-control" data-error="external-walls" id="external-walls-input">
+                    <div class="form-group">
+                      <div class="label-wrapper">
+                        <label for="coat" class="m-right-10 coat-label">Le pareti sono gia state isolate mediante cappotto?</label>
+                        <input type="checkbox" id="coat" class="coat-checkbox m-right-20">
+                        <a tabindex="0" role="button" data-trigger="focus" data-toggle="popover" title="Tipologia generazione riscaldamento" class="label-info-cursor" data-content="Il capotto termico è formato da elementi edilizi prefabbricati e crea un vero e proprio guscio protettivo e isolante per l’edificio. Il rivestimento del cappotto termico è invisibile all’esterno, ma ha il vantaggio di ridurre la dispersione termica con un conseguente risparmio di energia e risorse"><img src="./img/Punto-Interrogativo.svg" alt="info"></a>
+                      </div>
+                    </div>
+                    <input type="hidden"
+                      id="coat_input" value="false">
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-previous close-modal" >Annulla</button>
+                    <button class="save-pop-up btn btn-next" type="button" class="btn btn-primary">Salva</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- pop up involucro trasparente -->
+            <div class="modal fade" id="transparent-casing-popup" tabindex="-1" role="dialog"
+              aria-labelledby="exampleModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                  </div>
+                  <div class="modal-body">
+
+                    <div class="form-group">
+                      <label for="frame-type" class="control-label">Tipologia telaio infisso</label>
+                      <select data-select="telaio" class="form-control select-control send-val" name="frame_type" id="frame-type">
+                        <option style="display:none" value="none">Tipologia telaio</option>
+                        
+                      </select>
+                      <small class="error"></small>
+                    </div>
+                    <input type="hidden" class="popup-control" data-error="frame-type"  id="frame-type-input">
+                    <div class="form-group">
+                      <label for="glass-type" class="control-label">Tipologia vetro infisso</label>
+                      <select data-select="vetro" class="form-control select-control send-val" name="glass_type" id="glass-type">
+                        <option style="display:none" value="none">Tipologia vetro</option>
+                        
+                      </select>
+                      <small class="error"></small>
+                    </div>
+                  </div>
+                  <input type="hidden" class="popup-control" data-error="glass-type" id="glass-type-input">
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-previous close-modal" >Annulla</button>
+                    <button class="save-pop-up btn btn-next" type="button" class="btn btn-primary">Salva</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </fieldset>
+          <fieldset data-count-page="6">
+            <h4>Proprietà e detenzione dell’immobile</h4>
+            <p>Domenico, con quale titolo possiedi o detieni l'immobile?</p>
+            <div class="form-group owner-title validate-checkbox">
+              <div class="checkbox check-wrap">
+                <input type="checkbox" value="check1" data-myObj="ok" class="group-save save-checkbox save-data-array" data-group="questionario" name="d1" id="check-d1-1">
+                <label for="check-d1-1"></label>
+                <span>Proprietario o nudo proprietario dell’immobile</span>
+              </div>
+              <div class="checkbox check-wrap">
+                <input type="checkbox" value="check2" data-myObj="ok" class="group-save save-checkbox save-data-array" data-group="questionario" name="d1" id="check-d1-2">
+                <label for="check-d1-2" ></label>
+                <span>Inquilino, locatario, comodatario dell’immobile e ha già
+                  ricevuto autorizzazione dal Proprietario ad effettuare i
+                  relativi interventi</span>
+              </div>
+              <div class="checkbox check-wrap">
+                <input check="false" type="checkbox" data-myObj="ok" class="save-checkbox save-data-array group-save" name="d1" data-group="questionario" value="check3" id="check-d1-3">
+                <label for="check-d1-3"></label>
+                <span>Convivente di fatto di cui all’articolo 1, commi
+                  36 e 37 della legge n. 76 del 2016<span>
+              </div>
+              <div class="checkbox check-wrap">
+                <input type="checkbox" value="check4" data-myObj="ok" class="group-save   save-checkbox save-data-array" data-group="questionario" name="d1"id="check-d1-4">
+                <label for="check-d1-4"></label>
+                <span>Coniuge separato assegnatario dell’immobile intestato
+                  all’altro coniuge</span>
+              </div>
+              <div class="checkbox check-wrap">
+                <input type="checkbox" value="check5" data-myObj="ko" class="group-save save-checkbox save-data-array" data-group="questionario" name="d1" id="check-d1-5">
+                <label for="check-d1-5"></label>
+                <span>Nessuna delle precedente</span>
+              </div>
+            </div>
+            <div class="bottoni">
+              <input type="button" name="previous" class="previous btn btn-previous" value="Previous" />
+              <input type="button" name="next" class="next btn btn-next" value="Next" disabled />
+            </div>
+
+          </fieldset>
+          <fieldset data-count-page="7">
+            <strong>Qualificazione dell'intervento</strong>
+            <p>Rientri all'interno di quale delle seguenti categorie?</p>
+            <div class="form-group category-user validate-checkbox">
+              <div class="checkbox check-wrap">
+                <input type="checkbox" value="check1" data-myObj="ok" name="d2" data-group="questionario" class="save-checkbox group-save save-data-array" value="" id="check-d2-1">
+                <label for="check-d2-1"></label>
+                <span>condomini in possesso di una delibera assembleare valida che autorizza all'effettuazione dell'intervento</span>
+              </div>
+              <div class="checkbox check-d2-wrap">
+                <input type="checkbox" value="check2" data-myObj="ok" data-group="questionario" class="save-checkbox group-save save-data-array" name="d2" id="check-d2-2">
+                <label for="check-d2-2"></label>
+                <span>condomini NON in possesso di una delibera assembleare valida che autorizza all'effettuazione dell'intervento</span>
+              </div>
+              <div class="checkbox check-d2-wrap">
+                <input type="checkbox" value="check3" data-myObj="ok" name="d2" data-group="questionario" class="save-checkbox group-save save-data-array" value="" id="check-d2-3">
+                <label for="check-d2-3"></label>
+                <span>Persone fisiche, al di fuori dell'esercizio di attività di impresa, arti e professioni</span>
+              </div>
+              <div class="checkbox check-d2-wrap">
+                <input type="checkbox" value="check4" data-myObj="ok" class="save-checkbox group-save save-data-array" data-group="questionario" name="d2"  id="check-d2-4">
+                <label for="check-d2-4"></label>
+                <span>Istituti autonomi case popolari(IACP), comunque denominati, nonchè dagli enti aventi le stesse finalità sociali dei predetti Istituti, istituiti nella forma di società che rispondono ai rquisiti della legislazione europea in</span>
+              </div>
+              <div class="checkbox check-d2-wrap">
+                <input type="checkbox" value="check5" data-myObj="ok" class="save-checkbox save-data-array group-save" data-group="questionario" name="d2" value="" id="check-d2-5">
+                <label for="check-d2-5"></label>
+                <span>Cooperative di abitazione a proprietà indivisa. La detrazione spetta per interventi realizzati su immobili dalle stesse posseduti e assegnati in godimenti ai propri
+                  soci</span>
+              </div>
+              <div class="checkbox check-wrap">
+                <input type="checkbox" value="check6" data-myObj="ok" class="save-checkbox save-data-array group-save" name="d2" data-group="questionario" id="check-d2-6">
+                <label for="check-d2-6"></label>
+                <span>Enti del terzo Settore(Onlus, organizzazioni di volontariato, associazioni di promozione sociale)</span>
+              </div>
+              <div class="checkbox check-wrap">
+                <input type="checkbox" value="check7" data-myObj="ok" name="d2" class="save-checkbox group-save save-data-array" value="" id="check-d2-7" data-group="questionario">
+                <label for="check-d2-7"></label>
+                <span>Associazioni e società sportive dilettantistiche, limitatamente ai lavori destinati ai soli immobili o parti di immobili adibiti a spogliatoi</span>
+              </div>
+              <div class="checkbox check-wrap">
+                <input type="checkbox" value="check8" data-myObj="ok" data-group="questionario" class="save-checkbox save-data-array group-save" name="d2"  id="check-d2-8">
+                <label for="check-d2-8"></label>
+                <span>Nessuna delle precedenti<span>
+              </div>
+            </div>
+            <div class="bottoni">
+              <input type="button" name="previous" class="previous btn btn-previous" value="Previous" />
+              <input type="button" name="next" class="next btn btn-next" value="Next" disabled />
+            </div>
+          </fieldset>
+          <fieldset  data-count-page="8">
+            <div class="title-select">
+              <strong>Estraneità all'attività imprenditoriale</strong><a tabindex="0" role="button" data-trigger="focus" data-toggle="popover" title="Requisiti del beneficiario" class="label-info-cursor" data-content="una/un imprenditrice/imprenditore o una libera/libero professionista esercitano attività economiche organizzate che hanno come scopo la produzione e/o lo scambio di beni o servizi"><img src="./img/Punto-Interrogativo.svg" alt="info"></a>
+              <p>Il beneficiario dell'intervento è una persona fisica che agisce in veste di privato e quindi estraneo ad
+                attività imprenditoriale e/o professionale?</p>
+            </div>
+            <div class="bottoni">
+              
+              <input type="button" name="d3" data-group="questionario" class="btn next  btn-previous save-data-array group-save" data-response-answer="No" data-myObj="ko" value="No">
+              <input type="button" name="d3" data-myObj="ok" data-group="questionario" class="btn next btn-next  save-data-array group-save" data-response-answer="Si" value="Si">
+            </div>
+          </fieldset>
+          <fieldset class="intervantion-qualification" data-count-page="9">
+            <strong>Qualificazione dell'intervento</strong>
+            <p>Nel periodo tra il 1 luglio 2020 e il 31 dicembre 2021 hai sostenuto/sosterrai una spesa relativa ad uno
+              dei seguenti interventi trainanti?(sono possibili più risposte)</p>
+            <div class="form-group intervention-trainant">
+              <div class="checkbox check-wrap">
+                <input type="checkbox" data-manage-blank="interventi-sismici" value="check1" data-myObj="blank" id="check-d4-1" data-group="questionario" class="sismic-intervention-check save-data-array  group-save blank-check" name="d4">
+                <label for="check-d4-1"></label>
+                <span>INTERVENTI ANTISISMICI di cui
+                  ai commi da 1-bis a 1-septies dell'articolo 16 del decreto-legge n. 63 del 2013, anche comprensivo di
+                  interventi di DEMOLIZIONE E RICOSTRUZIONE di cui all'articolo 3. Co. 1 lett. d) del DPR
+                  380/2001</span>
+              </div>
+              <div class="checkbox check-wrap">
+                <input type="checkbox" data-manage-blank="riq-energetica"  class="save-data-array  group-save blank-check" name="d4" id="check-d4-2" value="check2" data-myObj="blank" data-group="questionario">
+                <label for="check-d4-2"></label>
+                <span>RIQUALIFICAZIONE ENERGETICA: sostituzione degli IMPIANTI DI
+                  CLIMATIZZAZIONE INVERNALE ESISTENTI con impianti per il riscaldamento, il raffrescamento o la
+                  fornitura di acqua</span>
+              </div>
+              <div class="checkbox check-wrap">
+                <input type="checkbox" data-manage-blank="trainati"  name="d4" class="save-data-array  group-save blank-check" id="check-d4-3" value="check3" data-myObj="blank" data-group="questionario">
+                <label for="check-d4-3"></label>
+                <span>INTERVENTI c.d TRAINATI</span>
+              </div>
+              <div class="checkbox check-wrap">
+                <input type="checkbox" class="none-check save-data-array  group-save blank-check"  name="d4" id="check-d4-4" value="check4" data-myObj="ko" data-group="questionario">
+                <label for="check-d4-4"></label>
+                <span>nessuna delle precedenti</span>
+                
+              </div>
+            </div>
+            <div class="bottoni">
+              <input type="button" name="previous" class="previous btn btn-previous" value="Previous" />
+              <input type="button" name="next" class="next btn btn-next" value="Continua" disabled />
+            </div>
+          </fieldset>
+          <fieldset data-count-page="10" class="sismic-intervention">
+            <strong>Qualificazione dell'intervento</strong>
+            <p>l'unità immobiliare su cui hai effettuato / effettuari l'intervento è situata nelle zone sismiche 1,2 e 3
+              di cui all'ordinanza del Presidente del Consiglio dei ministri n.3274 del 20 marzo 2003?</p>
+            <div class="form-group">
+              <div class="seismic-valutation">
+                <div class="seismic-valutation-wrap">
+                  <label for="address_estate_valutation"><strong  class="no-wrap">Confermi indirizzo dell'immobile</strong></label>
+                  <input type="text" data-modal class="input-valutation" id="address_estate_valutation">
+                </div>
+                <div class="buttons-valutation">
+                  <input type="hidden" id="city_estate_valutation" data-receive-from="locality_estate_valutation">
+                  <span class="btn-next getValutation">Conferma</span>
+                  <span class="btn btn-previous open-modal " id="change-address" data-toggle="modal" data-modal="address_real_estate_modal_valutation" data-whatever="@mdo">Cambia</span>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label  class="no-wrap" for="result-valutation-input">Valutazione sismica</label>
+              <div class="row-input m-bottom-60">
+                <input type="text" id="result-valutation-input" name="d5"class="form-control group-save save-data-array result-valutation" data-modal data-group="questionario">
+              </div>
+            </div>
+            <div>
+              <div id="map-valutation"></div>
+            </div>
+            <div class="bottoni m-top-30">
+              <input type="button" name="previous" class="previous btn btn-previous" value="Previous" />
+              <input type="button" name="next" class="next btn btn-next" value="Conferma" />
+            </div>
+            <!-- popup per cambiare indirizzo -->
+            <div class="modal fade" id="address_real_estate_modal_valutation" tabindex="-1" role="dialog"
+              aria-labelledby="exampleModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                  </div>
+                  <div class="modal-body">
+                      <div class="form-group">
+                        <label class="control-label" for="address-estate-valutation">Cerca</label>
+                        <div class="row-input">
+                          <input type="search" class="form-control" id="address-estate-valutation" required
+                            autocorrect="off" spellcheck="false" autocomplete="off">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="locality_estate_valutation" class="control-label">Città</label>
+                        <div class="row-input">
+                          <input type="text" class="form-control popup-control" name="locality" id="locality_estate_valutation">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="route_estate_valutation" class="control-label">Indirizzo</label>
+                        <div class="row-input">
+                          <input type="text" class="form-control popup-control" name="route" id="route_estate_valutation">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="street_number_estate" class="control-label">Numero</label>
+                        <div class="row-input">
+                          <input type="text" class="form-control popup-control" name="street_number" id="street_number_estate_valutation">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="province_estate_valutation" class="control-label">Provincia</label>
+                        <div class="row-input">
+                          <input type="text" class="form-control popup-control" name="province" id="administrative_area_level_2_estate_valutation">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="postal_code_estate_valutation" class="control-label">CAP</label>
+                        <div class="row-input">
+                          <input type="text" class="form-control popup-control" name="postal_code" id="postal_code_estate_valutation">
+                        </div>
+                      </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-previous close-modal" >Annulla</button>
+                    <button class="save-pop-up btn btn-next save-address save-address-valutation change-valutation-map" type="button" data-save="estate_valutation" class="btn btn-primary"
+                      >Salva</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset data-count-page="11">
+            <strong>Qualificazione dell'intervento</strong>
+            <p>Gli immobili su cui effettuare l'intervento trainato sono sottoposti alla tutela disciplinata dal codice
+              dei beni culturali e del paesaggio o per effetto di regolamenti edilizi, urbanistici e ambientali e
+              pertanto sugli stessi non possono essere realizzati interventi trainanti?</p>
+            <div class="bottoni">
+              <input type="button" class="btn next btn-previous save-data-array group-save" data-response-answer="No" data-myObj="ok" id="d5_bis_no" value="No" name="d5bis" data-group="questionario"/>
+              <input type="button" class="next btn btn-next save-data-array group-save" data-response-answer="Si" data-myObj="ok" value="Si" name="d5bis" data-group="questionario"/>
+            </div>
+          </fieldset>
+          <fieldset data-count-page="12">
+            <strong>Qualificazione dell'intervento</strong>
+            <p>Hai gà usufruito di interventi per l'efficientamento energetico su almeno altre 2 unità immobiliari?(non
+              rientrano nel computo delle 2 unità immobiliari gli interventi effettuati sulle parti comuni del
+              condominio)</p>
+            <div class="bottoni">
+              <input type="button" name="d6" class="save-data-array btn group-save next btn-previous" data-response-answer="No" data-myObj="ok" value="No"  data-group="questionario"/>
+              <input type="button" name='d6' class="save-data-array group-save next btn btn-next" data-response-answer="Si" data-myObj="ko" value="Si" data-group="questionario" />
+            </div>
+          </fieldset>
+          <fieldset data-count-page="13">
+            <div class="title-select">
+              <strong>Categoria catastale dell'immobile</strong>
+              <a tabindex="0" role="button" data-trigger="focus" data-toggle="popover" title="Categoria catastale dell’immobile" class="label-info-cursor" data-content="Ogni immobile è inserito in una categoria catastale. Grazie alle categorie catastali possiamo determinare la rendita di un immobile e le relative tasse da pagare per quella tipologia. Puoi leggere la categoria nella visura catastale del tuo immobile, oppure scegliere l’opzione che più rispecchia il tuo caso"><img src="./img/Punto-Interrogativo.svg" alt="info"></a>
+              <p>Qual'è la categoria catastale del tuo immobile?</p>
+            </div>
+            <div class="form-group category-real-estate active">
+              <select class="form-control choose-category save-data-array modal-single-check group-save" autocomplete="false" data-group="categoriaCatastale" name="categoria">
+                <option value="none">Scegli una categoria catastale</option>
+                <option value="a">A: alloggi e uffici privati</option>
+                <option value="b">B: scuole, uffici privati e ospedali</option>
+                <option value="c">C: attività commerciali o artigianali che appartengono ai privati</option>
+                <option value="d">D: stabilimenti industriali, alberghi, cinema e teatri</option>
+                <option value="e">E: areoporti, porti, stazioni autobus, stazioni ferroviare, edicole e chiese</option>
+                <option value="f">F: lastrici solari, fabbricati non abitabili o agibili</option>
+              </select>
+            </div>
+            <div class="form-group sub-category  category-real-estate category-a  ">
+              <select class="form-control " name="sottoCategoria" data-group="categoriaCatastale">
+                <option value="a/1">A/1: abitazioni di tipo signorile</option>
+                <option value="a/2">A/2: abitazioni di tipo civile</option>
+                <option value="a/3">A/3: abitazioni di tipo economico</option>
+                <option value="a/4">A/4: abitazioni di tipo popolare</option>
+                <option value="a/5">A/5: abitazioni di tipo ultrapopolare</option>
+                <option value="a/6">A/6: abitazioni di tipo rurale</option>
+                <option value="a/7">A/7: abitazioni in villini</option>
+                <option value="a/8">A/8: abitazioni in ville</option>
+                <option value="a/9">A/9: castelli, palazzi di eminenti pregi storici o artistici</option>
+                <option value="a/10">A/10: studi e uffici privati</option>
+                <option value="a/11">A/11: alloggi e abitazioni tipiche dei luoghi</option>
+              </select>
+            </div>
+            <div class="form-group sub-category category-real-estate category-b " >
+              <select class="form-control" name="sottoCategoria" data-group="categoriaCatastale">
+                <option value="b/1">B/1: collegi, orfanotrofi, conventi, seminari, ricoveri, ospizi, caserme</option>
+                <option value="b/2">B/2: ospedali ecase di cura senza fine di lucro</option>
+                <option value="b/3">B/3: riformatori e prigioni</option>
+                <option value="b/4">B/4: uffici pubblici</option>
+                <option value="b/5">B/5: laboratori, scientifici e scuole</option>
+                <option value="b/6">B/6: accademie, gallerie, musei, pinacoteche, biblioteche</option>
+                <option value="b/7">B/7: oratori e cappelle non destinate all'esercizio pubblico del culto</option>
+                <option value="b/8">B/8: magazzini sotterranei per depositi di derrate</option>
+              </select>
+            </div>
+            <div class="form-group sub-category category-real-estate category-c  " >
+              <select class="form-control" name="sottoCategoria" data-group="categoriaCatastale">
+                <option value="c/1">C/1: locali commerciali</option>
+                <option value="c/2">C/2: locali di deposito e magazzini</option>
+                <option value="c/3">C/3: laboratori per arti e mestieri</option>
+                <option value="c/4">C/4: locali e fabbricati per esercizi sportivi senza fine di lucro</option>
+                <option value="c/5">C/5: lstabilimenti di acque curative e balneari senza fine di lucro</option>
+                <option value="c/6">C/6: autorimesse, rimesse, scuderie estalle senza fine di lucro</option>
+                <option value="c/7">C/7: tettoie aperte o chiuse</option>
+              </select>
+            </div>
+            <div class="form-group sub-category category-real-estate category-d" >
+              <select class="form-control " name="sottoCategoria" data-group="categoriaCatastale">
+                <option value="d/1">D/1: opifici</option>
+                <option value="d/2">D/2: alberghi con fine di lucro</option>
+                <option value="d/3">D/3: sale per spettacoli e concerti, cinematografi e teatri con fine di lucro</option>
+                <option value="d/4">D/4: ospedalie case di cura con fine di lucro</option>
+                <option value="d/5">D/5: istituti di assicurazione, cambio o credito con fine di lucro</option>
+                <option value="d/6">D/6: locali e fabbricati per esercizi sportivi con fine di lucro</option>
+                <option value="d/7">D/7: fabbricati costruiti o adattati per </option>
+              </select>
+            </div>
+            <div class="form-group sub-category category-real-estate category-e">
+              <select class="form-control " name="sottoCategoria" data-group="categoriaCatastale">
+                <option value="e/1">E/1: stazioni per servizi aerei, marittimi, terrestri e di trasporto</option>
+                <option value="e/2">E/2: ponti comunali e provinciali a pedaggio</option>
+                <option value="e/3">E/3: sale per spettacoli e concerti, cinematografi e teatri con fine di lucro</option>
+                <option value="e/4">E/4: recinti chiusi per esigenze pubbliche speciali</option>
+                <option value="e/5">E/5: fabbricati costituenti fortificazioni e loro dipendenze</option>
+                <option value="e/6">E/6: torri, semafori e fari per rendere d'uso pubblico l'orologio comunale</option>
+                <option value="e/7">E/7: fabbricati destinato all'esercizio pubblico dei culti </option>
+                <option value="e/8">E/8: costruzioni e fabbricati nei cimiteri, esclusi i sepolcri, i colombari e i </option>
+                <option value="e/9">E/9: cedifici a destinazione particolare non compresi nelle categorie precedenti </option>
+              </select>
+            </div>
+            <div class="form-group sub-category category-real-estate category-f" >
+              <select class="form-control" name="sottoCategoria" data-group="categoriaCatastale">
+                <option value="f/1">F/1: aree urbane</option>
+                <option value="f/2">F/2: punità collabenti</option>
+                <option value="f/3">F/3: unità in corso di costruzione</option>
+                <option value="f/4">F/4: unità in corso di definizione</option>
+                <option value="f/5">F/5: lastrici solari</option>
+                <option value="f/6">F/6: fabbricato in attesa di dichiarazione</option>
+                <option value="f/7">F/7: infrastrutture di reti pubbliche di comunicazione </option>
+              </select>
+            </div>
+            <div class="bottoni">
+              <input type="button" name="previous" class="previous btn group-save btn-previous" value="Previous" />
+              <input type="button" name="d7" class="next btn btn-next  d7-valutation sendData" value="Continua"data-myObj="ok" id="d7_si" disabled data-group="questionario" />
+            </div>
+          </fieldset>
+
+
+
+
+
+
+          <fieldset data-count-page="14" class="text-center ">
+            <strong class="last-page-title text-uppercase checkResult">Mi dispiace non ci sono i presupposti normativi per usufruire del superbonus
+              110%</strong>
+            <div class="last-page-code">
+              <span>HG123F</span>
+            </div>
+            <span class="last-page-code-text ">il tuo codice pratica</span><br>
+            <span class="last-page-code-text-small">(è stato trasmesso anche per email)</span>
+            <div class="qr-code">
+              <img src="img/qr-code.png" alt="">
+            </div>
+            <p class="last-page-paragraph">Nella tua casella e-mail abbiamo provato ad inviarti la relazione esplicativa
+              dell'intervento proposto e i documenti di cui necessitiamo per le successive verifiche. rimaniamo atua
+              disposizione per ogni chiarimento!</p>
+            <div class="last-page-footer">
+              <span class="text-center text-uppercase">Alla Prossima</span>
+            </div>
+          </fieldset>
+        </form>
+        
+      </div>
+    </div>
+  </main>
+</body>
+
+</html>

@@ -1,0 +1,26 @@
+/* Select per categoria immobile */
+
+.category-real-estate {
+    display: none;
+}
+
+.category-real-estate.active {
+    display: block;
+}
+
+select.form-control {
+    border: none;
+    -webkit-appearance: none;
+    margin: 20px auto;
+    border-radius: 10px;
+    padding: 0 20px;
+    background: url("../icon/downarr.png") no-repeat right #ebecf0;
+    -webkit-appearance: none;
+    background-position-x: 99%;
+    font-weight: bold;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2), -3px -3px 5px #ffffff;
+}
+
+select::-ms-expand {
+    display: none; /* Hide the default arrow in Internet Explorer 10 and Internet Explorer 11 */
+}
