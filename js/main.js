@@ -88,50 +88,52 @@ function checkAccess() {
   let inputArray = $('.my_current_step .input-control').get();
   let checkboxArray = $('.my_current_step .checkbox-control').get();
   let selectArray = $('.my_current_step .select-control').get();
-  // console.log(checkboxArray)
-  // console.log(inputArray)
-  // console.log(selectArray)
   let access = true;
-
+  // console.log(inputArray)
+  // console.log(checkboxArray)
+  // console.log(selectArray)
+  console.log(access)
 
 
   inputArray.forEach(input => {
 
-    let inputId = input.getAttribute('name');
-    let validate = validator.element(`[name="${inputId}"]`);
-    // console.log(validate)
+    let inputName = input.getAttribute('name');
+    let validate = validator.element(`[name="${inputName}"]`);
+    console.log(validate)
     if(!validate) {
       access = false
+      // console.log(access)
     }
 
   });
 
   checkboxArray.forEach(checkbox => {
-    let checkboxId = checkbox.getAttribute('id');
-    let validate = validator.element(`#${checkboxId}`);
-    // console.log(validate)
+    let checkboxName = checkbox.getAttribute('name');
+    let validate = validator.element(`[name="${checkboxName}"]`);
+    console.log(validate)
     if(!validate) {
       access = false
+      // console.log(access)
     }
 
   });
 
   selectArray.forEach(select => {
-    let selectId = select.getAttribute('id');
-    let validate = validator.element(`#${selectId}`);
-    // console.log(validate)
+    let selectName = select.getAttribute('name');
+    let validate = validator.element(`[name="${selectName}"]`);
+    console.log(validate)
     if(!validate) {
       access = false
+      // console.log(access)
     }
 
   });
 
-
-
+  console.log(access)
   if(access) {
-    $('.next').attr('data-access', 'allowed')
+    $('.my_current_step .next').attr('data-access', 'allowed')
   } else {
-    $('.next').attr('data-access', 'denied')
+    $('.my_current_step .next').attr('data-access', 'denied')
   }
 
 }
@@ -205,14 +207,14 @@ function selectUserType(this_click) {
   if(this_click.attr('data-typeuser')) {
     switch (this_click.attr('data-typeuser')) {
       case 'business':
-        $('fieldset').remove('.person')
+        $('fieldset.person').detach()
         if(window.bonusOgg.impresa === undefined) {window.bonusOgg.impresa = BONUSTEMPLATE.impresa}
         delete window.bonusOgg.privato
         break 
 
     
       case 'person':
-        $('fieldset').remove('.business')
+        $('fieldset.business').detach()
         if(window.bonusOgg.privato === undefined) {window.bonusOgg.privato = BONUSTEMPLATE.privato}
         delete window.bonusOgg.impresa
         break
@@ -581,11 +583,45 @@ function getReport() {
 
 // Google Maps
 
-$('#address_registered_office').on('click', function(){
-  let map;
-  let mapId ='map-registered-office';
-  let searchBox='address-registered-office';
+// $('#goMap').on('click', function(){
+//   let mapIdValue = $(this).data('map')
+//   let searchBoxIdValue = $(this).data('searchbox')
+//   let map;
+//   let mapId = mapIdValue;
+//   let searchBox = searchBoxIdValue;
 
-  initMap(mapId);
-  initAutocomplete('_registered_office', componentForm, searchBox);
-})
+//   initMap(mapId);
+//   initAutocomplete('_registered_office', componentForm, searchBox);
+// })
+
+
+// function initAutocomplete(selector, componentForm, inputId){
+//   var inputGoogle = document.getElementById(inputId)
+//   autocomplete = new google.maps.places.Autocomplete(inputGoogle, {types:["address"]});
+//   autocomplete.setFields(["address_components",]);
+//   autocomplete.addListener("place_changed", function(){
+//     const place = autocomplete.getPlace();
+//     console.log(place.address_components);
+  
+  
+//     for (const component in componentForm) {
+//       if (document.getElementById(`${component}${selector}`)) {
+//         document.getElementById(`${component}${selector}`).value = "";
+//         document.getElementById(`${component}${selector}`).disabled = false;
+//       }
+//     }
+    
+//     for (const component of place.address_components) {
+//       const addressType = component.types[0];
+      
+  
+//       if (componentForm[addressType]) {
+//         const val = component[componentForm[addressType]]
+//         console.log(val);;
+//         if (document.getElementById(`${addressType}${selector}`)) {
+//           document.getElementById(`${addressType}${selector}`).value = val;
+//         }
+//       }
+//     }
+//   });
+// }

@@ -33,7 +33,7 @@
     <script src="data/schema-data.js"></script>
     <script src="js/main.js" charset="utf-8"></script>
     <!-- Google Maps Api Key -->
-    <!-- <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6ElNLOL1BWAp5GUCvkrOEM9vEbPxxceI&libraries=places&v=weekly"></script> -->
+    <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6ElNLOL1BWAp5GUCvkrOEM9vEbPxxceI&libraries=places&v=weekly"></script>
   </head>
 
 <body>
@@ -456,7 +456,19 @@
             </div>
 
             <div class="form-group">
-              <label class="control-label"  for="address_registered_office">Sede legale</label>
+              <label class="control-label"  for="goMap">Sede legale</label>
+              <div class="row-input">
+                <input 
+                type="text" 
+                class="form-control fieldset-input input-control open-modal"  
+                id="goMap"
+                name="sede"
+                data-map="map-registered-office"
+                data-searchbox="address-registered-office" 
+                data-toggle="modal" 
+                data-modal="registered_office" 
+                data-whatever="@mdo">
+              </div>
             </div>
 
             <hr>
@@ -752,7 +764,7 @@
           </fieldset>
 
 
-          <fieldset data-count-page="5" class="">
+          <fieldset data-count-page="5">
             <p>
               <strong>Raccontaci di più sul tuo immobile</strong><br>
               Più dettagli ci darai e più precisa sarà la valutazione
