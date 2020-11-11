@@ -1,48 +1,70 @@
 $.validator.addMethod('regName' , function(value, element){
-
   return value == '' || /^[a-zA-Z'-. ]+$/.test(value)
 
- }, "Non sono ammessi caratteri speciali o numeri");
+}, "Non sono ammessi caratteri speciali o numeri");
 
- $.validator.addMethod("birth", function (value, element) {
+
+
+
+$.validator.addMethod("birth", function (value, element) {
   var dateArr = value.split('-');
   let date = new Date();
-  
   let thisYear = date.getFullYear();
-  console.log(thisYear);
-  console.log(dateArr[0]);
+
   if (dateArr[0] < 1900 || dateArr[0] > thisYear )
       return false;
   else
       return true;
 });
 
+
+
+
 $.validator.addMethod('regMail' , function(value, element){
 
   return value == '' || /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value)
 
- }, "Formato mail non valido");
+}, "Formato mail non valido");
+
+
+
 
 $.validator.addMethod('regAddress' , function(value, element){
 
-return value == '' ||/^[a-zA-Z0-9\s,'-.]*$/.test(value)
+  return value == '' ||/^[a-zA-Z0-9\s,'-.]*$/.test(value)
 
 }, "Formato mail non valido");
 
-$.validator.addMethod('emptySel' , function(value, element, arg){
 
+
+
+$.validator.addMethod('emptySel' , function(value, element, arg){
   return arg !== value
 
 }, "Scegli un opzione");
+
+
+
 
 window.validator = $('#formComp').validate({
   rules: {
     'checkPrivacy':{
       required:true,
+    },                                //<---- fine primo fieldset
+    'nome': {
+      required:true,
+      regName:true,
+      emptySel:'none'
+    },
+    'cognome': {
+      required:true,
+      regName:true,
+      emptySel:'none'
     },
     'nome-completo':{
       required:true,
-      regName:true
+      regName:true,
+      emptySel:'none'
     },
     'data-nascita':{
       required:true,
@@ -59,15 +81,7 @@ window.validator = $('#formComp').validate({
       required:true,
       number:true,
       minlength:6
-    },
-    'nome': {
-      required:true,
-      regName:true
-    },
-    'cognome': {
-      required:true,
-      regName:true
-    },
+    },                                //<---- fine secondo fieldset
     'ragione_sociale':{
       required:true,
       minlength:4,
@@ -139,22 +153,20 @@ window.validator = $('#formComp').validate({
     // 'address_real_estate':{
     //   required:true,
     //   regAddress:true
-    // },
+    // },                                //<---- fine *** fieldset
     'tipologia':{
       required:true,
       emptySel:'none'
     },
-    'province':{
+    'pianiCondominio':{
       required:true,
-    },
-    'piani-condominio':{
-      required:true
-      ,
+      emptySel:'none',
       min:1,
       max:99
     },
-    'unità-condominio':{
+    'unitaCondominio':{
       required:true,
+      emptySel:'none',
       min:1,
       max:99
     },
@@ -166,58 +178,68 @@ window.validator = $('#formComp').validate({
       required:true,
       emptySel:'none'
     },
+    'tipoGenerazione':{
+      required:true,
+      emptySel:'none'
+    },
     'tipoGeneratore':{
-      required: true,
+      required:true,
+      emptySel:'none'
+    },
+    'radiatore':{
+      required:true,
+      emptySel:'none'
+    },
+    'air-conditioner':{
+      required:true,
+      emptySel:'none'
+    },
+    'external-walls':{
+      required:true,
+      emptySel:'none'
+    },
+    'frame-type':{
+      required:true,
+      emptySel:'none'
     },
     'paretiEsterne': {
       required:true,
+      emptySel:'none'
     },
     'telaio': {
       required:true,
+      emptySel:'none'
+    },
+    'vetro': {
+      required:true,
+      emptySel:'none'
     },
     'efficienza_energetica':{
       required:true,
       emptySel:'none'
-    },
-    'generation_heating':{
-      required:true,
-      emptySel:'none'
-    },
-    'generator_type':{
-      required:true,
-      emptySel:'none'
-    },
-    'terminal_type':{
-      required:true,
-      emptySel:'none'
-    },
-    'external_walls':{
-      required:true,
-      emptySel:'none'
-    },
-    'frame_walls':{
-      required:true,
-      emptySel:'none'
-    },
-    'frame_type':{
-      required:true,
-      emptySel:'none'
-    },
-    'glass_type':{
-      required:true,
-      emptySel:'none'
-    },
-    
-
+    },                                //<---- fine quinto fieldset
     
   },
+
+
   messages:{
     'checkPrivacy':{
       required:'Devi accettare la privacy prima di continuare!',
-    },
+    },                                                              //<---- fine primo fieldset
     'nome':{
       required:'Campo richiesto',
-      regName:'Non sono ammessi caratteri speciali o numeri'
+      regName:'Non sono ammessi caratteri speciali o numeri',
+      emptySel:'Campo richiesto'
+    },
+    'cognome': {
+      required:'Campo richiesto',
+      regName:'Non sono ammessi caratteri speciali o numeri',
+      emptySel:'Campo richiesto'
+    },
+    'nome-completo':{
+      required:'Campo richiesto',
+      regName:'Non sono ammessi caratteri speciali o numeri',
+      emptySel:'Campo richiesto'
     },
     'data-nascita':{
       required:'Campo richiesto',
@@ -234,15 +256,7 @@ window.validator = $('#formComp').validate({
       required:'Campo richiesto',
       number:'Numero di telefono non valido',
       minlength:'Il numerodi telefono deve avere almeno 6 cifre'
-    },
-    'name_popup':{
-      required:'Campo richiesto',
-      regName:'Non sono ammessi caratteri speciali o numeri'
-    },
-    'surname_popup': {
-      required:'Campo richiesto',
-      regName:'Non sono ammessi caratteri speciali o numeri'
-    },
+    },                                                              //<---- fine secondo fieldset
     'ragione_sociale':{
       required:'campo richiesto',
       minlength:'La ragione sociale deve contenere almeno 4 lettere'
@@ -304,17 +318,17 @@ window.validator = $('#formComp').validate({
     'address_real_estate':{
       required:'Campo richiesto',
       regAddress:'Non sono ammessi caratteri speciali'
-    },
+    },                                                              //<---- fine *** fieldset
     'tipologia':{
       required:'Campo richiesto',
       emptySel:'Scegli un opzione'
     },
-    'piani-condominio':{
+    'pianiCondominio':{
       required:'Campo richiesto',
       min:'Inserire un numero valido',
       max:'Inserire un numero valido'
     },
-    'unità-condominio':{
+    'unitaCondominio':{
       required:'Campo richiesto',
       min:'Inserire un numero valido',
       max:'Inserire un numero valido'
@@ -329,46 +343,48 @@ window.validator = $('#formComp').validate({
     },
     'tipoGenerazione':{
       required:'Campo richiesto',
+      emptySel:'Scegli un opzione'
+    },
+    'tipoGeneratore':{
+      required:'Campo richiesto',
+      emptySel:'Scegli un opzione'
+    },
+    'radiatore':{
+      required:'Campo richiesto',
+      emptySel:'Scegli un opzione'
+    },
+    'air-conditioner':{
+      required:'Campo richiesto',
+      emptySel:'Scegli un opzione'
+    },
+    'external-walls':{
+      required:'Campo richiesto',
+      emptySel:'Scegli un opzione'
+    },
+    'frame-type':{
+      required:'Campo richiesto',
+      emptySel:'Scegli un opzione'
     },
     'paretiEsterne': {
       required:'Campo richiesto',
+      emptySel:'Scegli un opzione'
     },
     'telaio': {
       required:'Campo richiesto',
+      emptySel:'Scegli un opzione'
+    },
+    'vetro': {
+      required:'Campo richiesto',
+      emptySel:'Scegli un opzione'
     },
     'efficienza_energetica':{
       required:'Campo richiesto',
       emptySel:'Scegli un opzione'
-    },
-    'generation_heating':{
-      required:'Campo richiesto',
-      emptySel:'Scegli un opzione'
-    },
-    'generator_type':{
-      required:'Campo richiesto',
-      emptySel:'Scegli un opzione'
-    },
-    'terminal_type':{
-      required:'Campo richiesto',
-      emptySel:'Scegli un opzione'
-    },
-    'external_walls':{
-      required:'Campo richiesto',
-      emptySel:'Scegli un opzione'
-    },
-    'frame_walls':{
-      required:'Campo richiesto',
-      emptySel:'Scegli un opzione'
-    },
-    'frame_type':{
-      required:'Campo richiesto',
-      emptySel:'Scegli un opzione'
-    },
-    'glass_type':{
-      required:'Campo richiesto',
-      emptySel:'Scegli un opzione'
-    },
+    },                                                                //<---- fine quinto fieldset
   },
+
+
+  
   errorPlacement: function(error, element) {
     if(element.is('input')){
       element.hasClass('checkbox-control') ?

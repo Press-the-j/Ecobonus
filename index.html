@@ -410,6 +410,7 @@
                     </button>
 
                     <button 
+                    data-access="denied"
                     class="save-pop-up btn btn-next" 
                     type="button" 
                     class="btn btn-primary">
@@ -456,28 +457,24 @@
 
             <div class="form-group">
               <label class="control-label"  for="address_registered_office">Sede legale</label>
-              <div class="row-input">
-                <input type="text" class="form-control fieldset-input input-control open-modal"  id="address_registered_office" name="sede"
-                  data-toggle="modal" data-modal="registered_office" data-whatever="@mdo">
-                <input type="hidden" name="città" class=" save-data group-save" data-receive-from="locality_registered_office" data-group-result="sede-legale">
-                <input type="hidden" name="cap" class=" save-data  group-save" data-receive-from="postal_code_registered_office" data-group-result="sede-legale">
-                <input type="hidden" class="save-data  group-save" name="indirizzo"data-receive-from="route_registered_office" data-group-result="sede-legale">
-                <input type="hidden" name="numero" class="save-data  group-save" data-receive-from="street_number_registered_office" data-group-result="sede-legale">
-              </div>
             </div>
+
             <hr>
+
             <div class="info-contatto">
               <small>Informazioni di contatto aziendale</small>
             </div>
             <div class="form-group">
               <label class="control-label"  for="referent-name-registration">Nome del referente</label>
               <div class="row-input">
-                <input data-toggle="modal" data-modal="referent-registration" type="text"
-                  class="form-control fieldset-input input-control open-modal " id="referent-name-registration"
-                   name="name"
-                  data-receive-from="referent-complete-name">
-                  <input type="hidden" class="save-data" data-receive-from="name-referent-registration" name="nome">
-                  <input type="hidden" class="save-data" name="cognome" data-receive-from="surname-referent-registration">
+                <input 
+                data-toggle="modal" 
+                data-modal="referent-registration" 
+                type="text"
+                class="form-control fieldset-input input-control open-modal " 
+                id="referent-name-registration"
+                name="name"
+                data-receive-from="referent-complete-name">
               </div>
             </div>
             <div class="form-group">
@@ -515,138 +512,239 @@
             <div class="modal fade" id="business-name" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
               <div class="modal-dialog" role="document">
                 <div class="modal-content">
+
                   <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                        aria-hidden="true">&times;</span></button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
                   </div>
+
                   <div class="modal-body">
                     <div class="form-group">
                       <label class="control-label" for="company-name-popup">Ragione Sociale</label>
                       <div class="row-input">
-                        <input type="text" class="form-control popup-control" id="company-name-popup" name="company_name_popup" >
+                        <input 
+                        type="text" 
+                        class="form-control popup-control" 
+                        id="company-name-popup" 
+                        name="ragioneSociale" 
+                        />
                       </div>
                     </div>
+
                     <p>
                       Non ricordi la ragione sociale completa?
                       <br>
                       <br>
                       Inserisci qui il numero di Partita IVA (le informazioni societarie compariranno in automatico)
                     </p>
+
                     <div class="form-group">
                       <label class="control-label" for="p-iva" >Partita iva</label>
                       <div class="row-input">
-                        <input type="text" class="form-control popup-control" id="p-iva" name="pIva_popup">
+                        <input 
+                        type="text" 
+                        class="form-control popup-control" 
+                        id="p-iva" 
+                        name="piva">
                       </div>
                       <small class="error"></small>
                     </div>
 
                   </div>
+
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-previous close-modal" >Annulla</button>
-                    <button class="save-pop-up btn btn-next" type="button" class="btn btn-primary">Salva</button>
+                    <button 
+                    type="button" 
+                    class="btn btn-previous close-modal" >
+                    Annulla
+                    </button>
+
+                    <button 
+                    class="save-pop-up btn btn-next" 
+                    type="button" 
+                    class="btn btn-primary">
+                    Salva
+                    </button>
                   </div>
+
                 </div>
               </div>
             </div>
+
             <!-- popup sede legale -->
             <div class="modal fade" id="registered_office" tabindex="-1" role="dialog"
               aria-labelledby="exampleModalLabel">
               <div class="modal-dialog" role="document">
                 <div class="modal-content">
+
                   <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                        aria-hidden="true">&times;</span></button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
                   </div>
+
                   <div class="modal-body">
                     <div class="form-group">
                       <label class="control-label" for="address-registered-office">Cerca</label>
                       <div class="row-input">
-                        <input type="search" class="form-control" id="address-registered-office" required
-                          autocorrect="off" spellcheck="false" autocomplete="off">
+                        <input 
+                        type="search" 
+                        class="form-control" 
+                        id="address-registered-office" 
+                        required
+                        autocorrect="off" 
+                        spellcheck="false" 
+                        autocomplete="off">
                       </div>
                     </div>
+
                     <div class="form-group">
                       <label class="control-label" for="locality_registered_office">Città</label>
                       <div class="row-input">
-                        <input type="text" class="form-control popup-control" name="locality" id="locality_registered_office">
+                        <input 
+                        type="text" 
+                        class="form-control popup-control" 
+                        name="locality" 
+                        id="locality_registered_office"
+                        />
                       </div>
                     </div>
+
                     <div class="form-group">
                       <label class="control-label" for="route_registered_office">Indirizzo</label>
                       <div class="row-input">
-                        <input type="text" class="form-control popup-control" name="route" id="route_registered_office">
+                        <input 
+                        type="text" 
+                        class="form-control popup-control"
+                        name="route" 
+                        id="route_registered_office"
+                        />
                       </div>
                     </div>
+
                     <div class="form-group">
                       <label class="control-label" for="street_number_registered_office">Numero</label>
                       <div class="row-input">
-                        <input type="text" class="form-control popup-control" name="street_number" id="street_number_registered_office">
+                        <input 
+                        type="text" 
+                        class="form-control popup-control" 
+                        name="street_number" 
+                        id="street_number_registered_office"
+                        />
                       </div>
                     </div>
+
                     <div class="form-group">
                       <label class="control-label" for="postal_code_registered_office">CAP</label>
                       <div class="row-input">
-                        <input type="text" class="form-control popup-control" name="postal_code" id="postal_code_registered_office">
+                        <input 
+                        type="text" 
+                        class="form-control popup-control" 
+                        name="postal_code" 
+                        id="postal_code_registered_office"
+                        />
                       </div>
                     </div>
+
                     <div class="search-address-wrap">
                       <button class="btn-next btn save-address isModal" data-save="registered_office" id="search-address">Cerca sulla mappa</button>
-                      <input type="hidden" id="address_registered_office_modal">
                     </div>
+
                     <div>
                       <div id="map-registered-office"></div>
-                    </div>
-                   
+                    </div>                   
                   </div>
+
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-previous close-modal" >Annulla</button>
-                    <button class="save-pop-up btn btn-next save-address-registered-office" type="button" data-save="registered_office"class="btn btn-primary"
-                      >Salva</button>
+                    <button 
+                    type="button" 
+                    class="btn btn-previous close-modal">
+                    Annulla
+                    </button>
+
+                    <button 
+                    class="save-pop-up btn btn-next save-address-registered-office" 
+                    type="button" 
+                    data-save="registered_office"
+                    class="btn btn-primary">
+                    Salva
+                    </button>
                   </div>
                 </div>
               </div>
             </div>
+
             <!-- pop up referente -->
             <div class="modal fade" id="referent-registration" tabindex="-1" role="dialog" aria-labelledby="">
               <div class="modal-dialog" role="document">
                 <div class="modal-content">
+
                   <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                        aria-hidden="true">&times;</span></button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
                   </div>
+
                   <div class="modal-body">
                     <div class="form-group">
                       <label for="name-referent-registration" class="control-label">Nome Referente</label>
                       <div class="row-input">
-                        <input type="text" class="form-control popup-control send-val-name save-name" id="name-referent-registration" name="referent_name_registration_popup">
+                        <input 
+                        type="text" 
+                        class="form-control popup-control send-val-name save-name" 
+                        id="name-referent-registration" 
+                        name="referent_name_registration_popup">
                       </div>
                     </div>
+
                     <div class="form-group">
                       <label for="surname-referent-registration" class="control-label">Cognome Referente</label>
                       <div class="row-input">
-                        <input type="text" class="form-control popup-control send-val-name" id="surname-referent-registration" name="referent_name_registration_popup">
+                        <input 
+                        type="text" 
+                        class="form-control popup-control send-val-name" 
+                        id="surname-referent-registration" 
+                        name="referent_name_registration_popup">
                       </div>
                     </div>
-                    <input type="hidden" id="referent-complete-name">
+
                     <div class="form-group">
                       <label for="email-referent-registration" class="control-label">Email</label>
                       <div class="row-input">
-                        <input type="text" class="form-control popup-control" id="email-referent-registration"
-                        name="referent_mail_registration_popup">
+                        <input 
+                        type="text" 
+                        class="form-control popup-control" 
+                        id="email-referent-registration"
+                        name="email">
                       </div>
                     </div>
+
                     <div class="form-group">
                       <label for="number-referent-registration" class="control-label">Telefono</label>
                       <div class="row-input">
-                        <input type="text" class="form-control popup-control" id="number-referent-registration"
-                        name="referent_tel_registration_popup">
+                        <input 
+                        type="text" 
+                        class="form-control popup-control" 
+                        id="number-referent-registration"
+                        name="cellulare">
                       </div>
                     </div>
+
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-previous close-modal" >Annulla</button>
-                    <button class=" save-pop-up btn btn-next" type="button" class="btn btn-primary"
-                      >Salva</button>
+                    <button 
+                    type="button" 
+                    class="btn btn-previous close-modal" >
+                    Annulla
+                    </button>
+
+                    <button 
+                    class=" save-pop-up btn btn-next" 
+                    type="button" 
+                    class="btn btn-primary">
+                    Salva
+                    </button>
                   </div>
                 </div>
               </div>
@@ -799,7 +897,7 @@
             </div>
             <div class="bottoni">
               <input type="button" name="previous" class="previous btn-previous btn" value="Previous" />
-              <input type="button" name="next" class="next btn btn-next" value="Next" />
+              <input data-access="denied" type="button" name="next" class="next btn btn-next" value="Next" />
             </div>
 
             <!-- popup indirizzo immobile -->
@@ -901,9 +999,9 @@
                       
                       <select 
                       data-select="tipo-generazione" 
-                      class="form-control select-control send-val" 
+                      class="form-control select-control send-val proviamoci" 
                       name="tipoGenerazione"
-                      id="generation-heating" 
+                      id="tipoGenerazione" 
                       data-acquire="true">
                         <option style="display:none" value="none">Tipologia generazione riscaldamento</option>
                         
@@ -931,7 +1029,7 @@
                       data-select="tipo-generatore"
                       class="form-control select-control send-val" 
                       name="tipoGeneratore" 
-                      id="generator-type" 
+                      id="tipoGeneratore" 
                       data-acquire="true">
                         <option style="display:none" value="none">Tipologia generatore</option>
                         
@@ -958,7 +1056,7 @@
                       data-select="radiatore" 
                       class="form-control select-control send-val" 
                       name="radiatore" 
-                      id="terminal-type" 
+                      id="radiatore" 
                       data-acquire="true">
                         <option style="display:none" value="none">Tipologia terminale emissione</option>
                         

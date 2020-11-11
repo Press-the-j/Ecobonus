@@ -2,10 +2,9 @@ $(document).ready(function(){
 
   const URLSELECT = "http://ectm-env.eba-wmhap9wv.eu-south-1.elasticbeanstalk.com/";
   const SELECTS = ['tipologia', 'stato-immobile', 'tipo-generazione', 'tipo-generatore', 'radiatore', 'pareti-esterne','telaio', 'vetro']
-  const userName = ''
 
-  // get bonustemplate and store it into the localstorage
-  localStorage.setItem('bonusObj', JSON.stringify(BONUSTEMPLATE))
+  // get bonustemplate
+  window.bonusOgg = Object.assign({}, BONUSTEMPLATE);
 
   /* validation init */
   $.getScript( "js/validation.js", function( data ) {});
@@ -50,7 +49,6 @@ $(document).ready(function(){
   //save data in local
   //and set next page view
   $(document).on('click', '.next[data-access="allowed"]', function(){
-    console.log(userName)
     let this_click = $(this);
     let this_fieldset = this_click.closest('fieldset');    
     let next_fieldset_count = this_click.parents('fieldset').data('count-page') + 1;
@@ -90,16 +88,18 @@ function checkAccess() {
   let inputArray = $('.my_current_step .input-control').get();
   let checkboxArray = $('.my_current_step .checkbox-control').get();
   let selectArray = $('.my_current_step .select-control').get();
-
+  // console.log(checkboxArray)
+  // console.log(inputArray)
+  // console.log(selectArray)
   let access = true;
 
 
 
   inputArray.forEach(input => {
 
-    let inputId = input.getAttribute('id');
-    let validate = validator.element(`#${inputId}`);
-
+    let inputId = input.getAttribute('name');
+    let validate = validator.element(`[name="${inputId}"]`);
+    // console.log(validate)
     if(!validate) {
       access = false
     }
@@ -107,10 +107,9 @@ function checkAccess() {
   });
 
   checkboxArray.forEach(checkbox => {
-
     let checkboxId = checkbox.getAttribute('id');
     let validate = validator.element(`#${checkboxId}`);
-
+    // console.log(validate)
     if(!validate) {
       access = false
     }
@@ -118,10 +117,9 @@ function checkAccess() {
   });
 
   selectArray.forEach(select => {
-
     let selectId = select.getAttribute('id');
     let validate = validator.element(`#${selectId}`);
- 
+    // console.log(validate)
     if(!validate) {
       access = false
     }
@@ -165,18 +163,15 @@ function setDynamicText(fieldset_count){
 
   let fieldText = $('.dynamic-text');
   let fieldSmallText = $('.head-small-text');
-  console.log(fieldText)
-  console.log(fieldSmallText)
+  let userName = window.bonusOgg.impresa === undefined ? window.bonusOgg.privato.nome : window.bonusOgg.impresa.ragioneSociale
   
   switch (fieldset_count) {
     case 2 :
-      console.log('entrato nel 2')
       fieldText.text('Iniziamo!!');
       fieldSmallText.text('(Per la registrazione impiegheremo circa 5 minuti')
       break
 
     case 3 :
-      console.log('entrato nel 3')
       fieldText.text('Piacere!');
       fieldSmallText.text('(Proseguiamo, impiegheremo circa 5 minuti)');
       break
@@ -186,14 +181,13 @@ function setDynamicText(fieldset_count){
       break
 
     case 5 :
-      setUserName()
       fieldSmallText.text('(Entriamo nel vivo della richiesta. impiegeheremo circa 5 minuti)');
-      // fieldText.text('Ciao '+ nameUser +"!");
+      fieldText.text('Ciao '+ userName +"!");
       break
 
     default:
       fieldSmallText.text('(Passiamo agli ultimi requisiti, impiegheremo 5 minuti)')
-      // fieldText.text('Ciao '+ nameUser +"!");
+      fieldText.text('Ciao '+ userName +"!");
       break  
   }
 }
@@ -206,24 +200,21 @@ function setDynamicText(fieldset_count){
 // save this reference in localStorage;
 // delete unmatched reference in bonusObj
 function selectUserType(this_click) {
-  let bonusObj = JSON.parse(localStorage.getItem('bonusObj'));
-  let userType;
+  let bonusObj = window.bonusOgg
 
   if(this_click.attr('data-typeuser')) {
     switch (this_click.attr('data-typeuser')) {
       case 'business':
         $('fieldset').remove('.person')
-        localStorage.setItem('user-type', 'business')
-        delete bonusObj.privato
-        localStorage.setItem('bonusObj', JSON.stringify(bonusObj))
+        if(window.bonusOgg.impresa === undefined) {window.bonusOgg.impresa = BONUSTEMPLATE.impresa}
+        delete window.bonusOgg.privato
         break 
 
     
       case 'person':
         $('fieldset').remove('.business')
-        localStorage.setItem('user-type', 'person')
-        delete bonusObj.impresa
-        localStorage.setItem('bonusObj', JSON.stringify(bonusObj))
+        if(window.bonusOgg.privato === undefined) {window.bonusOgg.privato = BONUSTEMPLATE.privato}
+        delete window.bonusOgg.impresa
         break
     }
   }
@@ -262,7 +253,7 @@ function compileHiddenInput(this_click) {
 
 
 function saveAnswers() {
-  let bonusObj = JSON.parse(localStorage.getItem('bonusObj'));
+  let bonusObj = window.bonusOgg;
   let inputArray = $('.my_current_step input[data-acquire="true"]').get();
   let selectArray = $('.my_current_step select[data-acquire="true"]').get();
   let entriesArray = {'inputArray': inputArray, 'selectArray': selectArray};
@@ -317,9 +308,6 @@ function saveAnswers() {
       }
       
     });
-    
-    localStorage.setItem('bonusObj', JSON.stringify(bonusObj))
-    console.log(JSON.parse(localStorage.getItem('bonusObj')))
   }
   
 }
@@ -334,15 +322,6 @@ function compileString(question, answer, string) {
 
   let replacedString = string.replace(rexegg, answer)
   return replacedString
-}
-
-
-
-
-
-function setUserName() {
-  let bonusObj = JSON.parse(localStorage.getItem('bonusObj'))
-  userName = bonusObj.privato.nome + ' ' + bonusObj.privato.cognome;
 }
 
 
@@ -496,7 +475,7 @@ function manageMinimumSelections(this_click) {
 function getReport() {
   // popola le variabili
   // leggo oggetto e salvo variabili di interesse
-  bonusObj = JSON.parse(localStorage.getItem('bonusObj'));
+  bonusObj = window.bonusOgg
   let answersStr = bonusObj.bonus110.questionario;
   let failed = '';
   let tutela = '';
@@ -597,3 +576,16 @@ function getReport() {
 } 
 
 // !IMPORTANT correggere bug userType: al previous() non viene rigenerato l'oggetto mancante
+
+
+
+// Google Maps
+
+$('#address_registered_office').on('click', function(){
+  let map;
+  let mapId ='map-registered-office';
+  let searchBox='address-registered-office';
+
+  initMap(mapId);
+  initAutocomplete('_registered_office', componentForm, searchBox);
+})
