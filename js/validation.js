@@ -47,6 +47,9 @@ $.validator.addMethod('emptySel' , function(value, element, arg){
 
 
 window.validator = $('#formComp').validate({
+  onfocusout: false,
+  focusCleanup: true,
+
   rules: {
     'checkPrivacy':{
       required:true,

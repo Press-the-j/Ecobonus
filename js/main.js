@@ -5,6 +5,10 @@ $(document).ready(function(){
 
   // get bonustemplate
   window.bonusOgg = Object.assign({}, BONUSTEMPLATE);
+  window.index = []
+
+  fieldsetArray = $('fieldset').get()
+  getIndex(fieldsetArray)
 
   /* validation init */
   $.getScript( "js/validation.js", function( data ) {});
@@ -19,9 +23,10 @@ $(document).ready(function(){
   })
 
   // get values from modal
-  $('.modal-dialog .save-pop-up').on('click', function() {
+  $('.modal-dialog .save-modal').on('click', function() {
     let this_click = $(this);
-    getModalData(this_click)
+    let parentContainer = '.modal.opened.in .modal-dialog';
+    getModalData(this_click, parentContainer)
   })
 
   // close a modal
@@ -43,29 +48,37 @@ $(document).ready(function(){
 
   /* check permission to nexStep */
   $('.next').on('click', function() {
-    checkAccess()
+    let parentContainer = '.my_current_step'
+    let access = checkAccess(parentContainer)
+
+    if(access) {
+      $('.my_current_step .next').attr('data-access', 'allowed')
+    } else {
+      $('.my_current_step .next').attr('data-access', 'denied')
+    }
+
   })
 
   //save data in local
   //and set next page view
   $(document).on('click', '.next[data-access="allowed"]', function(){
     let this_click = $(this);
-    let this_fieldset = this_click.closest('fieldset');    
-    let next_fieldset_count = this_click.parents('fieldset').data('count-page') + 1;
+    let this_fieldset_count = this_click.closest('fieldset').data('count-page');    
 
-    nextStep(this_click, next_fieldset_count);
-    this_fieldset.hide().removeClass('my_current_step');
-    this_fieldset.next().show().addClass('my_current_step')
+    nextStep(this_click, this_fieldset_count);
+    getReport()
   })
 
   // set previous page view
   $(document).on('click', 'input[name="previous"]', function(){
     let this_click = $(this);
-    let this_fieldset = this_click.closest('fieldset');
-    let prev_fieldset_count = this_click.parents('fieldset').data('count-page') - 1;
+    let this_fieldset_count = this_click.closest('fieldset').data('count-page');
+    
+    let prev_fieldset_count = index.filter(item => item < this_fieldset_count)
+    $('[data-count-page="' + this_fieldset_count + '"]').hide().removeClass('my_current_step')
+    $('[data-count-page="' + prev_fieldset_count[prev_fieldset_count.length - 1] + '"]').show().addClass('my_current_step')
+
     setDynamicText(prev_fieldset_count)
-    this_fieldset.hide().removeClass('my_current_step');
-    this_fieldset.prev().show().addClass('my_current_step')
   })
   
   // get the report
@@ -73,36 +86,54 @@ $(document).ready(function(){
     getReport();
   })
 
+
+  $('#goMap').on('click', function(){
+    let mapIdValue = $(this).data('map')
+    console.log(mapIdValue)
+    let searchBoxIdValue = $(this).data('searchbox')
+  
+    let mapId = mapIdValue;
+    console.log(mapId)
+    let searchBox = searchBoxIdValue;
+  
+    initMap(mapId);
+    initAutocomplete('_registered_office', componentForm, searchBox);
+  })
 });
 
 
 
 
 
-function checkAccess() {
+function getIndex(fieldsetArray) {
+  index = []
+  fieldsetArray.forEach(indexNode => {
+    index.push($(indexNode).data('count-page'))
+  });
+}
+
+
+
+
+
+function checkAccess(parentContainer) {
   /* 
   se i campi obbligatori sono tutti compilati
   aggiungi attributo data-access="allowed" al pulsante .next 
   */
-
-  let inputArray = $('.my_current_step .input-control').get();
-  let checkboxArray = $('.my_current_step .checkbox-control').get();
-  let selectArray = $('.my_current_step .select-control').get();
+  let inputArray = $(parentContainer + ' .input-control').get();
+  let checkboxArray = $(parentContainer + ' .checkbox-control').get();
+  let selectArray = $(parentContainer + ' .select-control').get();
   let access = true;
-  // console.log(inputArray)
-  // console.log(checkboxArray)
-  // console.log(selectArray)
-  console.log(access)
 
 
   inputArray.forEach(input => {
 
     let inputName = input.getAttribute('name');
     let validate = validator.element(`[name="${inputName}"]`);
-    console.log(validate)
+
     if(!validate) {
       access = false
-      // console.log(access)
     }
 
   });
@@ -110,10 +141,9 @@ function checkAccess() {
   checkboxArray.forEach(checkbox => {
     let checkboxName = checkbox.getAttribute('name');
     let validate = validator.element(`[name="${checkboxName}"]`);
-    console.log(validate)
+
     if(!validate) {
       access = false
-      // console.log(access)
     }
 
   });
@@ -121,20 +151,14 @@ function checkAccess() {
   selectArray.forEach(select => {
     let selectName = select.getAttribute('name');
     let validate = validator.element(`[name="${selectName}"]`);
-    console.log(validate)
+
     if(!validate) {
       access = false
-      // console.log(access)
     }
 
   });
 
-  console.log(access)
-  if(access) {
-    $('.my_current_step .next').attr('data-access', 'allowed')
-  } else {
-    $('.my_current_step .next').attr('data-access', 'denied')
-  }
+  return access
 
 }
 
@@ -142,7 +166,7 @@ function checkAccess() {
 
 
 
-function nextStep(this_click, next_fieldset_count) {
+function nextStep(this_click, this_fieldset_count) {
 
   // select an user-type in fieldset 2
   selectUserType(this_click);
@@ -152,8 +176,13 @@ function nextStep(this_click, next_fieldset_count) {
 
   //1: save user answers
   saveAnswers()
+  
+  let next_fieldset_count = index.filter(item => item > this_fieldset_count)
+  console.log(next_fieldset_count)
+  $('[data-count-page="' + this_fieldset_count + '"]').hide().removeClass('my_current_step')
+  $('[data-count-page="' + next_fieldset_count[0] + '"]').show().addClass('my_current_step')
 
-  setDynamicText(next_fieldset_count)
+  setDynamicText(next_fieldset_count[0])
 
 }
 
@@ -203,18 +232,26 @@ function setDynamicText(fieldset_count){
 // delete unmatched reference in bonusObj
 function selectUserType(this_click) {
   let bonusObj = window.bonusOgg
+  let fieldsetArray = [];
+  
 
   if(this_click.attr('data-typeuser')) {
     switch (this_click.attr('data-typeuser')) {
       case 'business':
-        $('fieldset.person').detach()
+        
+        fieldsetArray = $('fieldset:not(.person)').get()
+        getIndex(fieldsetArray)
+
         if(window.bonusOgg.impresa === undefined) {window.bonusOgg.impresa = BONUSTEMPLATE.impresa}
         delete window.bonusOgg.privato
         break 
 
     
       case 'person':
-        $('fieldset.business').detach()
+        
+        fieldsetArray = $('fieldset:not(.business)').get()
+        getIndex(fieldsetArray)
+
         if(window.bonusOgg.privato === undefined) {window.bonusOgg.privato = BONUSTEMPLATE.privato}
         delete window.bonusOgg.impresa
         break
@@ -228,16 +265,18 @@ function selectUserType(this_click) {
 
 function compileHiddenInput(this_click) {
   if(this_click.attr('name') == 'questionario') {
-    $('input[name="questionario"]').attr('data-acquire', false)
-    $(this_click).attr('data-acquire', 'true')
+    $('.my_current_step input[name="questionario"]').attr('data-acquire', false)
+    $(this_click).attr('data-acquire', true)
   } else {
-    let divParent = this_click.parent();
-    let inputGroup = divParent.siblings('div[data-required="true"]');
+    let divParent = this_click.parents('fieldset');
+    let inputGroup = divParent.find('div[data-required="true"]');
     let checkedInputArray = $(inputGroup).find('input:checked').get();
     let inputValue = '';
     let valueConcat = '';
     let checkedValueArray = [];
-
+    console.log(inputValue)
+    console.log(valueConcat)
+    console.log(checkedValueArray)
     checkedInputArray.forEach(checked => {
       inputValue = checked.getAttribute('name')
       checkedValueArray.push(inputValue)
@@ -342,34 +381,41 @@ function showModal(this_click) {
 
 
 // !IMPORTANTE aggiungere i modali 's'
-function getModalData(this_click) {
+function getModalData(this_click, parentContainer) {
   let this_fieldset_position = this_click.closest('fieldset').data('count-page');
-
+  let access = '';
   switch (this_fieldset_position) {
     case(3):
 
       let nameValue = $('input[name="nome"]').val()
       let lastnameValue = $('input[name="cognome"]').val()
-      $('input[name="nome-completo"]').val(nameValue + ' ' + lastnameValue);
-      $('.my_current_step .modal.opened.in .close').click();
+      
+      access = checkAccess(parentContainer)
+      console.log(access)
+      if(access) {
+        $('input[name="nome-completo"]').val(nameValue + ' ' + lastnameValue);
+        $('.my_current_step .modal.opened.in .close').click();
+      }      
 
       break;
     
     case(5):
 
-      if ($('select[name="tipoGenerazione"]').val() != 'none') {
+      access = checkAccess(parentContainer)
+
+      if (access) {
         let tipoGenerazioneValue = $('select[name="tipoGenerazione"]').val()
-        $('input[name="air-conditioner"]').val(tipoGenerazioneValue);
-      }
-      if ($('select[name="paretiEsterne"]').val() != 'none') {
         let paretiEsterneValue = $('select[name="paretiEsterne"]').val()
-        $('input[name="external-walls"]').val(paretiEsterneValue)
-      }
-      if ($('select[name="telaio"]').val() != 'none') {
         let telaioValue = $('select[name="telaio"]').val()
-        $('input[name="frame-type"]').val(telaioValue)
+
+
+        if(tipoGenerazioneValue != 'none') { $('input[name="air-conditioner"]').val(tipoGenerazioneValue) }
+        if(paretiEsterneValue != 'none') { $('input[name="external-walls"]').val(paretiEsterneValue) }      
+        if(telaioValue != 'none') { $('input[name="frame-type"]').val(telaioValue) }
+
+        $('.my_current_step .modal.opened.in .close').click();
       }
-      $('.my_current_step .modal.opened.in .close').click();
+      
       break;
 
   }
@@ -466,6 +512,11 @@ function populateSelect(url, endpoints ){
 function manageMinimumSelections(this_click) {
   let divParent = this_click.closest('div[data-required="true"]');      // assign data-required="true" to div parent
   divParent.find("input[data-selection='one']").prop("checked", false); // assign data-selection="one" for "onlyone" selections 
+  
+  if(this_click.data('selection') == 'one') {
+    divParent.find("input").prop("checked", false);
+  }
+
   this_click.prop("checked", true);
   divParent.siblings(".bottoni").find(".next").prop("disabled", false);
 }
@@ -479,7 +530,7 @@ function getReport() {
   // leggo oggetto e salvo variabili di interesse
   bonusObj = window.bonusOgg
   let answersStr = bonusObj.bonus110.questionario;
-  let failed = '';
+  var failed = false;
   let tutela = '';
   let intAntisismici = '';
   let intRiqualificazione = '';
@@ -487,37 +538,41 @@ function getReport() {
   let rischioSismico = '';
   let efficientamento = ''
   let catCatastale = '';
+  let esito = 'ok'
+
+  console.log(answersStr)
   
 
   for (let index = 1; index <= 8; index++) {
     const question = "d" + index;
     let rexegg = '';
     
-    
-
     switch (question) {
       case 'd1':
         ruleEx = '("'+ question +'":\\s"check5")'
         rexegg = new RegExp(ruleEx)
-        failed = answersStr.match(rexegg) === null ? 'ok' : 'ko';
-        break;
+        if(answersStr.match(rexegg) != null) { failed = true }
+        console.log(failed)
+        break
       
       case 'd2':
         ruleEx = '("'+ question +'":\\s"check8")'
         rexegg = new RegExp(ruleEx)
-        failed = answersStr.match(rexegg) === null ? 'ok' : 'ko';
+        if(answersStr.match(rexegg) != null) { failed = true }
+        console.log(failed)
         break
 
       case 'd3':
-        ruleEx = '("+ question +":\\s"ko")'
+        ruleEx = '("+ question +":\\s"No")'
         rexegg = new RegExp(ruleEx)
-        failed = answersStr.match(rexegg) === null ? 'ok' : 'ko';
+        if(answersStr.match(rexegg) != null) { failed = true }
+        console.log(failed)
         break
 
       case 'd4':
         ruleEx = '("'+ question +'":\\s"check4")'
         rexegg = new RegExp(ruleEx)
-        failed = answersStr.match(rexegg)
+        if(answersStr.match(rexegg) != null) { failed = true }
         ruleEx = '("'+ question +'":\\s"check1"?)'
         rexegg = new RegExp(ruleEx)
         intAntisismici = answersStr.match(rexegg) ? 'si': 'no';
@@ -527,12 +582,13 @@ function getReport() {
         ruleEx = '("'+ question +'":\\s"(\\w+,\\s)*check3")'
         rexegg = new RegExp(ruleEx)
         intTrainati = answersStr.match(rexegg) ? 'si': 'no';
+        console.log(failed)
         break
 
       case 'd5':
         ruleEx = '("'+ question +'":\\s"4")'
         rexegg = new RegExp(ruleEx)
-        rischioSismico = answersStr.match(rexegg) ? '4': 'altro';
+        if(answersStr.match(rexegg) != null) { rischioSismico = true }
         break
 
       case 'd6':
@@ -554,74 +610,87 @@ function getReport() {
         break
     }
   }
-  // 
-  // catCatastale
 
-  // esito restituito tramite if/else, 5 casi
-  // if(x || y){          //negativo
-    // se una checkbox negativa
-    // OPPURE
-    // estraneitaImprenditoria negativa
+  // if(intAntisismici && intRiqualificazione && intTrainati && rischiosismico) {
+  //   esito = 'nosism'
   // }
-  // else if(x && y && z) {    //esito 2
-
+  
+  // else if (failed) {
+  //   esito = 'ko'
   // }
-  // else if(x && y && z) {    //esito 1
-
-  // }
-  // else if(x && y && z) {    //train
-
-  // }
-  // else {                    //positivo
-
-  // }
+  // console.log(failed)
 } 
 
-// !IMPORTANT correggere bug userType: al previous() non viene rigenerato l'oggetto mancante
+
 
 
 
 // Google Maps
-
-// $('#goMap').on('click', function(){
-//   let mapIdValue = $(this).data('map')
-//   let searchBoxIdValue = $(this).data('searchbox')
-//   let map;
-//   let mapId = mapIdValue;
-//   let searchBox = searchBoxIdValue;
-
-//   initMap(mapId);
-//   initAutocomplete('_registered_office', componentForm, searchBox);
-// })
-
-
-// function initAutocomplete(selector, componentForm, inputId){
-//   var inputGoogle = document.getElementById(inputId)
-//   autocomplete = new google.maps.places.Autocomplete(inputGoogle, {types:["address"]});
-//   autocomplete.setFields(["address_components",]);
-//   autocomplete.addListener("place_changed", function(){
-//     const place = autocomplete.getPlace();
-//     console.log(place.address_components);
+function initAutocomplete(selector, componentForm, inputId){
+  var inputGoogle = document.getElementById(inputId)
+  autocomplete = new google.maps.places.Autocomplete(inputGoogle, {types:["address"]});
+  autocomplete.setFields(["address_components",]);
+  autocomplete.addListener("place_changed", function(){
+    const place = autocomplete.getPlace();
+    console.log(place.address_components);
   
   
-//     for (const component in componentForm) {
-//       if (document.getElementById(`${component}${selector}`)) {
-//         document.getElementById(`${component}${selector}`).value = "";
-//         document.getElementById(`${component}${selector}`).disabled = false;
-//       }
-//     }
+    for (const component in componentForm) {
+      if (document.getElementById(`${component}${selector}`)) {
+        document.getElementById(`${component}${selector}`).value = "";
+        document.getElementById(`${component}${selector}`).disabled = false;
+      }
+    }
     
-//     for (const component of place.address_components) {
-//       const addressType = component.types[0];
+    for (const component of place.address_components) {
+      const addressType = component.types[0];
       
   
-//       if (componentForm[addressType]) {
-//         const val = component[componentForm[addressType]]
-//         console.log(val);;
-//         if (document.getElementById(`${addressType}${selector}`)) {
-//           document.getElementById(`${addressType}${selector}`).value = val;
-//         }
-//       }
-//     }
-//   });
-// }
+      if (componentForm[addressType]) {
+        const val = component[componentForm[addressType]]
+        console.log(val);;
+        if (document.getElementById(`${addressType}${selector}`)) {
+          document.getElementById(`${addressType}${selector}`).value = val;
+        }
+      }
+    }
+  });
+}
+
+
+function setRegisteredOfficeMap(val){
+  map = new google.maps.Map(document.getElementById("map-registered-office"), {
+    center:  {lat: 	0, lng: 0},
+    zoom: 15,
+  });
+
+  const request = {
+    query: val,
+    fields: ["name", "geometry"],
+  };
+
+  const marker = new google.maps.Marker({
+    map: map,
+    visible: true,
+    anchorPoint: new google.maps.Point(0, -29),
+  });
+
+  service = new google.maps.places.PlacesService(map);
+  service.findPlaceFromQuery(request, (results, status) => {
+    
+    if (status === google.maps.places.PlacesServiceStatus.OK) {
+      marker.setPosition(results[0].geometry.location)
+      //marker.setVisible(true)
+      map.setCenter(results[0].geometry.location);
+    } else {
+      
+    }
+  });
+}
+
+function initMap(mapId) {
+  map = new google.maps.Map(document.getElementById(mapId), {
+  center: { lat: 	0, lng: 0},
+  zoom: 1,
+});
+}

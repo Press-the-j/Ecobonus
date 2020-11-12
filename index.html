@@ -33,7 +33,7 @@
     <script src="data/schema-data.js"></script>
     <script src="js/main.js" charset="utf-8"></script>
     <!-- Google Maps Api Key -->
-    <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6ElNLOL1BWAp5GUCvkrOEM9vEbPxxceI&libraries=places&v=weekly"></script>
+    <!-- <script defer src="https://maps.googleapis.com/maps/api/js?key=&libraries=places&v=weekly"></script> -->
   </head>
 
 <body>
@@ -380,7 +380,7 @@
                       <div class="row-input">
                         <input 
                         type="text" 
-                        class="form-control popup-control input-popup-control person send-val-name save-name"
+                        class="form-control popup-control input-control person send-val-name save-name"
                         id="name-popup" 
                         name="nome"
                         data-acquire="true"
@@ -393,7 +393,7 @@
                       <div class="row-input">
                         <input 
                         type="text" 
-                        class="form-control  popup-control input-popup-control person send-val-name"
+                        class="form-control  popup-control input-control person send-val-name"
                         id="surname-popup"
                         name="cognome"
                         data-acquire="true">
@@ -411,7 +411,7 @@
 
                     <button 
                     data-access="denied"
-                    class="save-pop-up btn btn-next" 
+                    class="save-modal btn btn-next" 
                     type="button" 
                     class="btn btn-primary">
                     Salva
@@ -573,7 +573,7 @@
                     </button>
 
                     <button 
-                    class="save-pop-up btn btn-next" 
+                    class="save-modal btn btn-next" 
                     type="button" 
                     class="btn btn-primary">
                     Salva
@@ -676,7 +676,7 @@
                     </button>
 
                     <button 
-                    class="save-pop-up btn btn-next save-address-registered-office" 
+                    class="save-modal btn btn-next save-address-registered-office" 
                     type="button" 
                     data-save="registered_office"
                     class="btn btn-primary">
@@ -752,7 +752,7 @@
                     </button>
 
                     <button 
-                    class=" save-pop-up btn btn-next" 
+                    class=" save-modal btn btn-next" 
                     type="button" 
                     class="btn btn-primary">
                     Salva
@@ -969,7 +969,7 @@
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-previous close-modal" >Annulla</button>
-                    <button class="save-pop-up btn btn-next save-address " type="button" data-save="estate" class="btn btn-primary"
+                    <button class="save-modal btn btn-next save-address " type="button" data-save="estate" class="btn btn-primary"
                       >Salva</button>
                   </div>
                 </div>
@@ -1083,7 +1083,7 @@
                     Annulla
                     </button>
                     <button 
-                    class="save-pop-up btn btn-next" 
+                    class="save-modal btn btn-next" 
                     type="button" 
                     class="btn btn-primary">
                     Salva
@@ -1165,7 +1165,7 @@
                     Annulla
                     </button>
                     <button 
-                    class="save-pop-up btn btn-next" 
+                    class="save-modal btn btn-next" 
                     type="button" 
                     class="btn btn-primary">
                     Salva
@@ -1226,7 +1226,7 @@
                     Annulla
                     </button>
                     <button 
-                    class="save-pop-up btn btn-next" 
+                    class="save-modal btn btn-next" 
                     type="button" 
                     class="btn btn-primary">
                     Salva
@@ -1621,7 +1621,7 @@
           </fieldset>
 
 
-          <!-- <fieldset data-count-page="10" class="sismic-intervention">
+          <fieldset data-count-page="10" class="sismic-intervention">
             <strong>Qualificazione dell'intervento</strong>
             <p>
               L'unità immobiliare su cui hai effettuato / effettuari l'intervento 
@@ -1667,9 +1667,9 @@
             <div class="bottoni m-top-30">
               <input type="button" name="previous" class="previous btn btn-previous" value="Previous" />
               <input type="button" name="next" class="next btn btn-next" value="Conferma" />
-            </div> -->
+            </div>
             <!-- popup per cambiare indirizzo -->
-            <!-- <div class="modal fade" id="address_real_estate_modal_valutation" tabindex="-1" role="dialog"
+            <div class="modal fade" id="address_real_estate_modal_valutation" tabindex="-1" role="dialog"
               aria-labelledby="exampleModalLabel">
               <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -1718,13 +1718,13 @@
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-previous close-modal" >Annulla</button>
-                    <button class="save-pop-up btn btn-next save-address save-address-valutation change-valutation-map" type="button" data-save="estate_valutation" class="btn btn-primary"
+                    <button class="save-modal btn btn-next save-address save-address-valutation change-valutation-map" type="button" data-save="estate_valutation" class="btn btn-primary"
                       >Salva</button>
                   </div>
                 </div>
               </div>
             </div>
-          </fieldset> -->
+          </fieldset>
 
 
           <fieldset data-count-page="11">
