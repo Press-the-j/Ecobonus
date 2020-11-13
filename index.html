@@ -33,7 +33,7 @@
     <script src="data/schema-data.js"></script>
     <script src="js/main.js" charset="utf-8"></script>
     <!-- Google Maps Api Key -->
-    <!-- <script defer src="https://maps.googleapis.com/maps/api/js?key=&libraries=places&v=weekly"></script> -->
+    <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6ElNLOL1BWAp5GUCvkrOEM9vEbPxxceI&libraries=places&v=weekly"></script>
   </head>
 
 <body>
@@ -456,15 +456,16 @@
             </div>
 
             <div class="form-group">
-              <label class="control-label"  for="goMap">Sede legale</label>
+              <label class="control-label"  for="sede-legale">Sede legale</label>
               <div class="row-input">
                 <input 
                 type="text" 
-                class="form-control fieldset-input input-control open-modal"  
-                id="goMap"
+                class="form-control fieldset-input input-control open-modal" 
+                id="sede-legale" 
                 name="sede"
+                data-function="goSearch"
                 data-map="map-registered-office"
-                data-searchbox="address-registered-office" 
+                data-autocomplete="address-registered-office" 
                 data-toggle="modal" 
                 data-modal="registered_office" 
                 data-whatever="@mdo">
@@ -612,55 +613,66 @@
                     </div>
 
                     <div class="form-group">
-                      <label class="control-label" for="locality_registered_office">Città</label>
+                      <label class="control-label" for="locality-office">Città</label>
                       <div class="row-input">
                         <input 
                         type="text" 
                         class="form-control popup-control" 
                         name="locality" 
-                        id="locality_registered_office"
+                        id="locality-office"
+                        value=""
                         />
                       </div>
                     </div>
 
                     <div class="form-group">
-                      <label class="control-label" for="route_registered_office">Indirizzo</label>
+                      <label class="control-label" for="route-office">Indirizzo</label>
                       <div class="row-input">
                         <input 
                         type="text" 
                         class="form-control popup-control"
                         name="route" 
-                        id="route_registered_office"
+                        id="route-office"
+                        value=""
                         />
                       </div>
                     </div>
 
                     <div class="form-group">
-                      <label class="control-label" for="street_number_registered_office">Numero</label>
+                      <label class="control-label" for="street_number-office">Numero</label>
                       <div class="row-input">
                         <input 
                         type="text" 
                         class="form-control popup-control" 
                         name="street_number" 
-                        id="street_number_registered_office"
+                        id="street_number-office"
+                        value=""
                         />
                       </div>
                     </div>
 
                     <div class="form-group">
-                      <label class="control-label" for="postal_code_registered_office">CAP</label>
+                      <label class="control-label" for="postal_code-office">CAP</label>
                       <div class="row-input">
                         <input 
                         type="text" 
                         class="form-control popup-control" 
                         name="postal_code" 
-                        id="postal_code_registered_office"
+                        id="postal_code-office"
+                        value=""
                         />
                       </div>
                     </div>
+                    
 
                     <div class="search-address-wrap">
-                      <button class="btn-next btn save-address isModal" data-save="registered_office" id="search-address">Cerca sulla mappa</button>
+                      <button 
+                      class="btn-next btn save-address isModal" 
+                      data-map="map-registered-office"
+                      data-autocomplete="address-registered-office"
+                      data-function="goMap">
+                      Cerca sulla mappa
+                    </button>
                     </div>
 
                     <div>
@@ -769,17 +781,17 @@
               <strong>Raccontaci di più sul tuo immobile</strong><br>
               Più dettagli ci darai e più precisa sarà la valutazione
             </p>
-            <!-- <div class="form-group">
+            <div class="form-group">
               <label class="control-label" for="address_estate">Dove si trova?</label>
               <div class="row-input">
-                <input type="search" autocomplete class="form-control input-control open-modal" name="address_real_estate" data-toggle="modal" data-modal="address_real_estate_modal" data-whatever="@mdo" id="address_estate">
-                <input type="hidden" class="save-data-array common-save " name="indirizzo"data-receive-from="route_estate" >
-                <input type="hidden" name="numero" class="save-data-array common-save" data-receive-from="street_number_estate">
-                <input type="hidden" name="città" class="save-data-array common-save save-city-valutation" id="city-estate" data-receive-from="locality_estate" >
-                <input type="hidden" name="provincia" class="save-data-array common-save" data-receive-from="province_estate" >
-                <input type="hidden" name="cap" class="save-data-array common-save" data-receive-from="postal_code_estate" >
+                <input type="search" data-function="goSearch" autocomplete data-selector="-estate" data-autocomplete="address_estate" class="form-control input-control open-modal" name="address_real_estate" data-toggle="modal" data-modal="address_real_estate_modal" data-whatever="@mdo" id="address_estate" placeholder="Enter a location">
+                <input type="hidden" name="indirizzo" id="route-estate">
+                <input type="hidden" name="numero" id="street_number-estate">
+                <input type="hidden" name="città" id="locality-estate">
+                <input type="hidden" name="provincia" id="administrative_area_level_1-estate">
+                <input type="hidden" name="cap" id="postal_code-estate">
               </div>
-            </div> -->
+            </div>
 
             <div class="form-group">
               <label class="control-label" for="type-real-estate">Tipologia</label>

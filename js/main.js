@@ -86,19 +86,34 @@ $(document).ready(function(){
     getReport();
   })
 
+  $('[data-function="goSearch"]').on('click', function(){
 
-  $('#goMap').on('click', function(){
-    let mapIdValue = $(this).data('map')
-    console.log(mapIdValue)
-    let searchBoxIdValue = $(this).data('searchbox')
-  
-    let mapId = mapIdValue;
-    console.log(mapId)
-    let searchBox = searchBoxIdValue;
-  
-    initMap(mapId);
-    initAutocomplete('_registered_office', componentForm, searchBox);
+    window.autocomplete = $(this).data('autocomplete')
+    window.selector = $(this).data('selector')
+    
+    window.componentForm = {
+      street_number: "short_name",
+      route: "long_name",
+      locality: "long_name",
+      administrative_area_level_1: "short_name",
+      country: "long_name",
+      postal_code: "short_name",
+    };
+
+
+    initAutocomplete(selector)
+
   })
+
+  $('[data-function="goMap"]').on('click', function(){
+    let input = $(this).data('autocomplete')
+    let inputQuery = $('#' + input).val()
+
+    let mapId = $(this).data('map')
+
+    showMap(inputQuery, mapId)
+  })
+  
 });
 
 
@@ -178,7 +193,6 @@ function nextStep(this_click, this_fieldset_count) {
   saveAnswers()
   
   let next_fieldset_count = index.filter(item => item > this_fieldset_count)
-  console.log(next_fieldset_count)
   $('[data-count-page="' + this_fieldset_count + '"]').hide().removeClass('my_current_step')
   $('[data-count-page="' + next_fieldset_count[0] + '"]').show().addClass('my_current_step')
 
@@ -274,9 +288,6 @@ function compileHiddenInput(this_click) {
     let inputValue = '';
     let valueConcat = '';
     let checkedValueArray = [];
-    console.log(inputValue)
-    console.log(valueConcat)
-    console.log(checkedValueArray)
     checkedInputArray.forEach(checked => {
       inputValue = checked.getAttribute('name')
       checkedValueArray.push(inputValue)
@@ -380,7 +391,7 @@ function showModal(this_click) {
 
 
 
-// !IMPORTANTE aggiungere i modali 's'
+
 function getModalData(this_click, parentContainer) {
   let this_fieldset_position = this_click.closest('fieldset').data('count-page');
   let access = '';
@@ -538,10 +549,7 @@ function getReport() {
   let rischioSismico = '';
   let efficientamento = ''
   let catCatastale = '';
-  let esito = 'ok'
-
-  console.log(answersStr)
-  
+  let esito = 'ok'  
 
   for (let index = 1; index <= 8; index++) {
     const question = "d" + index;
@@ -552,21 +560,18 @@ function getReport() {
         ruleEx = '("'+ question +'":\\s"check5")'
         rexegg = new RegExp(ruleEx)
         if(answersStr.match(rexegg) != null) { failed = true }
-        console.log(failed)
         break
       
       case 'd2':
         ruleEx = '("'+ question +'":\\s"check8")'
         rexegg = new RegExp(ruleEx)
         if(answersStr.match(rexegg) != null) { failed = true }
-        console.log(failed)
         break
 
       case 'd3':
         ruleEx = '("+ question +":\\s"No")'
         rexegg = new RegExp(ruleEx)
         if(answersStr.match(rexegg) != null) { failed = true }
-        console.log(failed)
         break
 
       case 'd4':
@@ -582,7 +587,6 @@ function getReport() {
         ruleEx = '("'+ question +'":\\s"(\\w+,\\s)*check3")'
         rexegg = new RegExp(ruleEx)
         intTrainati = answersStr.match(rexegg) ? 'si': 'no';
-        console.log(failed)
         break
 
       case 'd5':
@@ -625,47 +629,64 @@ function getReport() {
 
 
 
-// Google Maps
-function initAutocomplete(selector, componentForm, inputId){
-  var inputGoogle = document.getElementById(inputId)
-  autocomplete = new google.maps.places.Autocomplete(inputGoogle, {types:["address"]});
-  autocomplete.setFields(["address_components",]);
-  autocomplete.addListener("place_changed", function(){
-    const place = autocomplete.getPlace();
-    console.log(place.address_components);
-  
-  
-    for (const component in componentForm) {
-      if (document.getElementById(`${component}${selector}`)) {
-        document.getElementById(`${component}${selector}`).value = "";
-        document.getElementById(`${component}${selector}`).disabled = false;
-      }
-    }
-    
-    for (const component of place.address_components) {
-      const addressType = component.types[0];
-      
-  
-      if (componentForm[addressType]) {
-        const val = component[componentForm[addressType]]
-        console.log(val);;
-        if (document.getElementById(`${addressType}${selector}`)) {
-          document.getElementById(`${addressType}${selector}`).value = val;
-        }
-      }
-    }
-  });
+// Google MAps
+function initAutocomplete(mapId){
+  //setta l'input per l'autocomplete
+  autocomplete = new google.maps.places.Autocomplete(
+      document.getElementById(autocomplete),
+      { types: ["geocode"] }
+    );
+
+  console.log(autocomplete)
+
+  // riduce i dati in output
+  autocomplete.setFields(["address_component"]);
+
+  // aggiunge un listener per i cambiamenti nell'input
+  autocomplete.addListener("place_changed", formFiller);
+
 }
 
 
-function setRegisteredOfficeMap(val){
-  map = new google.maps.Map(document.getElementById("map-registered-office"), {
+
+
+
+function formFiller() {
+
+  const place = autocomplete.getPlace();
+  console.log(place)
+
+  // reset degli input
+  for (const component in componentForm) {
+    if(document.getElementById(component + selector) != null) {
+      document.getElementById(component + selector).value = "";
+      document.getElementById(component + selector).disabled = false;
+    }      
+  }
+
+  for (const component of place.address_components) {
+    const addressType = component.types[0];
+    if (componentForm[addressType]) {
+      const val = component[componentForm[addressType]];
+      if(document.getElementById(addressType + selector) != null) {
+        document.getElementById(addressType + selector).value = val;
+      }
+    }
+  }
+}
+
+
+
+
+
+function showMap(inputQuery, mapId){
+  map = new google.maps.Map(document.getElementById(mapId), {
     center:  {lat: 	0, lng: 0},
     zoom: 15,
   });
 
   const request = {
-    query: val,
+    query: inputQuery,
     fields: ["name", "geometry"],
   };
 
@@ -682,15 +703,6 @@ function setRegisteredOfficeMap(val){
       marker.setPosition(results[0].geometry.location)
       //marker.setVisible(true)
       map.setCenter(results[0].geometry.location);
-    } else {
-      
     }
   });
-}
-
-function initMap(mapId) {
-  map = new google.maps.Map(document.getElementById(mapId), {
-  center: { lat: 	0, lng: 0},
-  zoom: 1,
-});
 }
