@@ -66,6 +66,7 @@ $(document).ready(function(){
     let this_fieldset_count = this_click.closest('fieldset').data('count-page');    
 
     nextStep(this_click, this_fieldset_count);
+    console.log(bonusOgg)
     getReport()
   })
 
@@ -95,13 +96,13 @@ $(document).ready(function(){
       street_number: "short_name",
       route: "long_name",
       locality: "long_name",
-      administrative_area_level_1: "short_name",
+      administrative_area_level_2: "short_name",
       country: "long_name",
       postal_code: "short_name",
     };
 
 
-    initAutocomplete(selector)
+    initAutocomplete()
 
   })
 
@@ -114,6 +115,11 @@ $(document).ready(function(){
     showMap(inputQuery, mapId)
   })
   
+  $(document).on("keydown", function(e) {
+    if(e.which==13 && $('body').hasClass('modal-open')){
+      e.preventDefault();
+    }
+  })
 });
 
 
@@ -402,24 +408,53 @@ function getModalData(this_click, parentContainer) {
       let lastnameValue = $('input[name="cognome"]').val()
       
       access = checkAccess(parentContainer)
-      console.log(access)
       if(access) {
         $('input[name="nome-completo"]').val(nameValue + ' ' + lastnameValue);
         $('.my_current_step .modal.opened.in .close').click();
       }      
 
       break;
+
+
+    case(4):
+
+      access = checkAccess(parentContainer)
+
+      if(access) {
+        let ragioneSociale = $('input[name="ragione-sociale"]').val();
+        let piva = $('input[name="p-iva"]').val();
+        let sedeLegale = $('input[name="sede-legale"]').val();
+        let nomeReferente = $('input[name="nomeReferente"]').val();
+        let cognomeReferente = $('input[name="cognomeReferente"]').val();
+        let referente = nomeReferente + ' ' + cognomeReferente;
+        let email = $('input[name="email-popup"]').val();
+        let cellulare = $('input[name="cellulare-popup"]').val();
+
+        if(ragioneSociale != 'none') { $('input[name="ragioneSociale"]').val(ragioneSociale) }
+        if(piva != 'none') { $('input[name="piva"]').val(piva) }      
+        if(sedeLegale != 'none') { $('input[name="sedeLegale"]').val(sedeLegale) }
+        if(nomeReferente != 'none' & cognomeReferente != 'none') { $('input[name="referente"]').val(referente) }
+        if(email != 'none') { $('input[name="email"]').val(email) }      
+        if(cellulare != 'none') { $('input[name="cellulare"]').val(cellulare) }
+
+        $('.my_current_step .modal.opened.in .close').click();
+      }
+      
+      
+      break;
+
     
     case(5):
 
       access = checkAccess(parentContainer)
 
       if (access) {
+        let indirizzo = $('input[name="address_real_estate"]').val()
         let tipoGenerazioneValue = $('select[name="tipoGenerazione"]').val()
         let paretiEsterneValue = $('select[name="paretiEsterne"]').val()
         let telaioValue = $('select[name="telaio"]').val()
 
-
+        if(indirizzo != 'none') { $('input[name="address-real-estate"]').val(indirizzo) }
         if(tipoGenerazioneValue != 'none') { $('input[name="air-conditioner"]').val(tipoGenerazioneValue) }
         if(paretiEsterneValue != 'none') { $('input[name="external-walls"]').val(paretiEsterneValue) }      
         if(telaioValue != 'none') { $('input[name="frame-type"]').val(telaioValue) }
@@ -549,7 +584,7 @@ function getReport() {
   let rischioSismico = '';
   let efficientamento = ''
   let catCatastale = '';
-  let esito = 'ok'  
+  let esito = 'ko'  
 
   for (let index = 1; index <= 8; index++) {
     const question = "d" + index;
@@ -580,13 +615,13 @@ function getReport() {
         if(answersStr.match(rexegg) != null) { failed = true }
         ruleEx = '("'+ question +'":\\s"check1"?)'
         rexegg = new RegExp(ruleEx)
-        intAntisismici = answersStr.match(rexegg) ? 'si': 'no';
+        intAntisismici = answersStr.match(rexegg) ? true: false;
         ruleEx = '("'+ question +'":\\s"(\\w+,\\s)*check2"?)'
         rexegg = new RegExp(ruleEx)
-        intRiqualificazione = answersStr.match(rexegg) ? 'si': 'no';
+        intRiqualificazione = answersStr.match(rexegg) ? true: false;
         ruleEx = '("'+ question +'":\\s"(\\w+,\\s)*check3")'
         rexegg = new RegExp(ruleEx)
-        intTrainati = answersStr.match(rexegg) ? 'si': 'no';
+        intTrainati = answersStr.match(rexegg) ? true: false;
         break
 
       case 'd5':
@@ -596,33 +631,43 @@ function getReport() {
         break
 
       case 'd6':
-        ruleEx = '("'+ question +'":\\s"no")'
+        ruleEx = '("'+ question +'":\\s"No")'
         rexegg = new RegExp(ruleEx)
-        tutela = answersStr.match(rexegg) ? 'no' : 'si'
+        console.log(answersStr.match(rexegg))
+        tutela = answersStr.match(rexegg) ? false : true
         break
 
       case 'd7':
-        ruleEx = '("'+ question +'":\s"no")'
+        ruleEx = '("'+ question +'":\\s"No")'
         rexegg = new RegExp(ruleEx)
-        efficientamento = answersStr.match(rexegg) ? 'no' : 'si'
+        console.log(answersStr.match(rexegg))
+        efficientamento = answersStr.match(rexegg) ? false : true
         break
 
       case 'd8':
         ruleEx = '("'+ question +'":\\s"a\\d{1,2}")'
         rexegg = new RegExp(ruleEx)
-        catCatastale = answersStr.match(rexegg) ? 'no' : 'si'
+        console.log(answersStr.match(rexegg))
+        catCatastale = answersStr.match(rexegg) ? false : true
         break
     }
   }
 
-  // if(intAntisismici && intRiqualificazione && intTrainati && rischiosismico) {
-  //   esito = 'nosism'
-  // }
-  
-  // else if (failed) {
-  //   esito = 'ko'
-  // }
-  // console.log(failed)
+  if(intAntisismici && (intRiqualificazione || intTrainati) && rischiosismico) {
+    esito = 'nosism'
+  } 
+  if (intTrainati && !tutela) {
+    esito = 'train'
+  }
+  if (intTrainati && !efficientamento) {
+    esito = 'riq'
+  } 
+  if(!tutela && !efficientamento) {
+    esito = 'ok'
+  } 
+  if (failed) {
+    esito = 'ko'
+  } 
 } 
 
 
@@ -636,8 +681,6 @@ function initAutocomplete(mapId){
       document.getElementById(autocomplete),
       { types: ["geocode"] }
     );
-
-  console.log(autocomplete)
 
   // riduce i dati in output
   autocomplete.setFields(["address_component"]);
@@ -654,7 +697,6 @@ function initAutocomplete(mapId){
 function formFiller() {
 
   const place = autocomplete.getPlace();
-  console.log(place)
 
   // reset degli input
   for (const component in componentForm) {
