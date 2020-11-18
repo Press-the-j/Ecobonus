@@ -1,4 +1,21 @@
+Nella gestione della logica si è scelto di utilizzare i 'name' ed i 'data-attribute' come selettori, 
+lasciando l'utilizzo degli id ai casi strettamente necessari.
+
+Di seguito una lista dei vari selettori e delle funzioni collegate.
+
 ## Elenco delle classi richiamate da <span style="color:red">.JS</span> e come riutilizzarle
+
+Tutti gli input necessari alla struttura dell'oggetto BONUSTEMPLATE sono contraddistinti dal 'data-acquire="true"'.
+Esempio:
+
+`<input name="indirizzo" data-acquire="true">`
+
+la funzione saveAnswers() collezionerà tutti gli input del fieldset corrente, contrassegnati, e li salverà nel BONUSTEMPLATE
+
+Esempio:
+`$('.my_current_step input[data-acquire="true"]').get()`
+
+
 
 1. impostare in name
 2. impostare il data-require per le checkbox alternate o di gruppo (es. fieldset 6)

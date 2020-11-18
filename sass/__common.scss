@@ -12,7 +12,7 @@ body {
     font-family: "Lato", sans-serif;
     color: #2c3036;
     background-color: $background;
-    font-size: 18px;
+    font-size: 16px;
     padding-right: 0px !important
 }
 
@@ -32,6 +32,16 @@ body.modal-open {
 @font-face {
     font-family: "fontClock";
     src: url("../fonts/TickingTimebombBB.ttf");
+}
+
+h4 {
+  font-weight: 700 !important;
+}
+
+p {
+  margin-bottom: 30px;
+  font-size: 16px !important;
+  line-height: 1.6em;
 }
 
 /* .wrap-lazyload{
@@ -114,7 +124,7 @@ hr {
     border-radius: 2px;
     box-shadow: inset 0 12px 12px -12px rgba(0, 0, 0, 0.5);
     margin-bottom: 20px;
-    margin-top: 36px;
+    margin-top: 80px;
 }
 
 .pac-container{

@@ -478,8 +478,8 @@
 
             <hr>
 
-            <div class="info-contatto">
-              <small>Informazioni di contatto aziendale</small>
+            <div class="info-contatto m-bottom-30">
+              <small>informazioni di contatto aziendale</small>
             </div>
             <div class="form-group">
               <label class="control-label"  for="referent-name-registration">Nome del referente</label>
@@ -797,8 +797,9 @@
 
 
           <fieldset data-count-page="5">
+            
+            <h4>Raccontaci di più sul tuo immobile</h4>
             <p>
-              <strong>Raccontaci di più sul tuo immobile</strong><br>
               Più dettagli ci darai e più precisa sarà la valutazione
             </p>
             <div class="form-group">
@@ -1104,7 +1105,7 @@
                         se l’impianto di riscaldamento è autonomo o centralizzato.
                         Nell’impianto autonomo, il generatore termico serve solamente quell’immobile. 
                         Nell’impianto centralizzato c’è un unico generatore termico per più immobili">
-                        <img src="./img/Punto-Interrogativo.svg" alt="info"></a>
+                        <img src="./img/interrogativo.svg" alt="info"></a>
                       </div>
                       
                       <select 
@@ -1132,7 +1133,7 @@
                         di riscaldamento, cioè il tipo di apparecchio che genera il calore nel tuo impianto. 
                         Solitamente si tratta di una caldaia o di una pompa di calore, ma se sei indeciso ti 
                         consigliamo di consultare i documenti che ti ha lasciato l’installatore">
-                        <img src="./img/Punto-Interrogativo.svg" alt="info"></a>
+                        <img src="./img/interrogativo.svg" alt="info"></a>
                       </div>
 
                       <select 
@@ -1159,7 +1160,7 @@
                         data-content="Abbiamo bisogno di sapere che tipo di terminali sono collegati al tuo 
                         impianto di riscaldamento. I terminali sono gli apparecchi che distribuiscono il calore 
                         negli ambienti dell’immobile. Per esempio, i terminali più comuni sono i termosifoni">
-                        <img src="./img/Punto-Interrogativo.svg" alt="info"></a>
+                        <img src="./img/interrogativo.svg" alt="info"></a>
                       </div>
                       
                       <select 
@@ -1217,7 +1218,7 @@
                         dell’edificio in cui si trova l’immobile, quale sia la loro tipologia edilizia. 
                         Le pareti esterne corrispondono a tutti gli effetti alle facciate di una villa 
                         o del palazzo in cui si trova un appartamento">
-                        <img src="./img/Punto-Interrogativo.svg" alt="info"></a>
+                        <img src="./img/interrogativo.svg" alt="info"></a>
                       </div>
 
                       <select 
@@ -1232,13 +1233,21 @@
 
                     <div class="form-group">
                       <div class="label-wrapper">
-                        <label for="coat" class="m-right-10 coat-label">Le pareti sono gia state isolate mediante cappotto?</label>
-                        <input 
-                        type="checkbox" 
-                        id="coat" 
-                        class="coat-checkbox m-right-20"
-                        name="cappotto" 
-                        data-acquire="true">
+                        <div class="check-wrapper">
+                          <label class="my_container">
+                            <input 
+                            type="checkbox" 
+                            id="coat" 
+                            class="coat-checkbox m-right-20"
+                            name="cappotto" 
+                            data-acquire="true">
+                            <span for="coat" class="checkmark"><span for="coat" class="inner-checkmark"></span></span>
+                          </label>
+                          
+
+                          <label for="coat" class="m-right-10 coat-label">Le pareti sono gia state isolate mediante cappotto?</label>
+                        </div>
+
                         <a 
                         tabindex="0" 
                         role="button" 
@@ -1251,7 +1260,7 @@
                         Il rivestimento del cappotto termico è invisibile all’esterno, 
                         ma ha il vantaggio di ridurre la dispersione termica con un conseguente 
                         risparmio di energia e risorse">
-                        <img src="./img/Punto-Interrogativo.svg" alt="info"></a>
+                        <img src="./img/interrogativo.svg" alt="info"></a>
                       </div>
                     </div>
                   </div>
@@ -1604,7 +1613,7 @@
               o una libera/libero professionista esercitano 
               attività economiche organizzate che hanno come 
               scopo la produzione e/o lo scambio di beni o servizi">
-              <img src="./img/Punto-Interrogativo.svg" alt="info">
+              <img src="./img/interrogativo.svg" alt="info">
               </a>
 
               <p>
@@ -1734,6 +1743,7 @@
                     <strong class="no-wrap">Confermi indirizzo dell'immobile</strong>
                   </label>
                   <input 
+                  name="address_estate_valutation"
                   type="text" 
                   data-modal class="input-valutation" 
                   id="address_estate_valutation"
@@ -1741,8 +1751,18 @@
                 </div>
                 <div class="buttons-valutation">
                   <input type="hidden" id="city_estate_valutation" data-receive-from="locality_estate_valutation">
-                  <span class="btn-next getValutation">Conferma</span>
-                  <span class="btn btn-previous open-modal " id="change-address" data-toggle="modal" data-modal="address_real_estate_modal_valutation" data-whatever="@mdo">Cambia</span>
+                  <span class="btn-next" data-function="getValutation">Conferma</span>
+                  <span 
+                  class="btn btn-previous open-modal" 
+                  name="change-address"
+                  data-toggle="modal" 
+                  data-modal="address_real_estate_modal_valutation" 
+                  data-whatever="@mdo"
+                  data-function="goSearch"
+                  data-autocomplete="address-estate-valutation"
+                  data-selector="_estate_valutation">
+                  Cambia
+                  </span>
                 </div>
               </div>
             </div>
@@ -1752,73 +1772,137 @@
               <div class="row-input m-bottom-60">
                 <input 
                 type="text" 
-                id="result-valutation-input" 
-                name="d5" 
                 class="form-control group-save save-data-array result-valutation" 
-                data-modal 
-                data-group="questionario">
+                data-modal
+                id="result-valutation-input" 
+                data-question="d5" 
+                name="questionario" 
+                data-acquire="true">
               </div>
             </div>
+
             <div>
               <div id="map-valutation"></div>
             </div>
+
             <div class="bottoni m-top-30">
-              <input type="button" name="previous" class="previous btn btn-previous" value="Previous" />
-              <input type="button" name="next" class="next btn btn-next" value="Conferma" />
+              <input 
+              type="button" 
+              name="previous" 
+              class="previous btn btn-previous" 
+              value="Previous" />
+
+              <input 
+              type="button" 
+              name="next" 
+              class="next btn btn-next" 
+              value="Conferma" />
             </div>
+
             <!-- popup per cambiare indirizzo -->
-            <div class="modal fade" id="address_real_estate_modal_valutation" tabindex="-1" role="dialog"
+            <div class="modal fade" name="address_real_estate_modal_valutation" id="address_real_estate_modal_valutation" tabindex="-1" role="dialog"
               aria-labelledby="exampleModalLabel">
-              <div class="modal-dialog" role="document">
+              <div data-modal="1" class="modal-dialog" role="document">
                 <div class="modal-content">
+
                   <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                        aria-hidden="true">&times;</span></button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
                   </div>
+
                   <div class="modal-body">
                       <div class="form-group">
                         <label class="control-label" for="address-estate-valutation">Cerca</label>
                         <div class="row-input">
-                          <input type="search" class="form-control" id="address-estate-valutation" required
-                            autocorrect="off" spellcheck="false" autocomplete="off">
+                          <input 
+                          type="search" 
+                          class="form-control" 
+                          id="address-estate-valutation" 
+                          name="address-estate-valutation" 
+                          required
+                          autocorrect="off" 
+                          spellcheck="false" 
+                          autocomplete="off">
                         </div>
                       </div>
+
                       <div class="form-group">
                         <label for="locality_estate_valutation" class="control-label">Città</label>
                         <div class="row-input">
-                          <input type="text" class="form-control popup-control" name="locality" id="locality_estate_valutation">
+                          <input 
+                          type="text" 
+                          class="form-control popup-control" 
+                          name="citta" 
+                          id="locality_estate_valutation"
+                          data-acquire="false">
                         </div>
                       </div>
+
                       <div class="form-group">
                         <label for="route_estate_valutation" class="control-label">Indirizzo</label>
                         <div class="row-input">
-                          <input type="text" class="form-control popup-control" name="route" id="route_estate_valutation">
+                          <input 
+                          type="text" 
+                          class="form-control popup-control" 
+                          name="indirizzo" 
+                          id="route_estate_valutation"
+                          data-acquire="false">
                         </div>
                       </div>
+
                       <div class="form-group">
                         <label for="street_number_estate" class="control-label">Numero</label>
                         <div class="row-input">
-                          <input type="text" class="form-control popup-control" name="street_number" id="street_number_estate_valutation">
+                          <input 
+                          type="text" 
+                          class="form-control popup-control" 
+                          name="street_number" 
+                          id="street_number_estate_valutation"
+                          data-acquire="false">
                         </div>
                       </div>
+
                       <div class="form-group">
                         <label for="province_estate_valutation" class="control-label">Provincia</label>
                         <div class="row-input">
-                          <input type="text" class="form-control popup-control" name="province" id="administrative_area_level_2_estate_valutation">
+                          <input 
+                          type="text" 
+                          class="form-control popup-control"
+                          name="provincia" 
+                          id="administrative_area_level_2_estate_valutation"
+                          data-acquire="false">
                         </div>
                       </div>
+
                       <div class="form-group">
                         <label for="postal_code_estate_valutation" class="control-label">CAP</label>
                         <div class="row-input">
-                          <input type="text" class="form-control popup-control" name="postal_code" id="postal_code_estate_valutation">
+                          <input 
+                          type="text" 
+                          class="form-control popup-control" 
+                          name="postal_code" 
+                          id="postal_code_estate_valutation">
                         </div>
-                      </div>
+                      </div>                      
                   </div>
+
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-previous close-modal" >Annulla</button>
-                    <button class="save-modal btn btn-next save-address save-address-valutation change-valutation-map" type="button" data-save="estate_valutation" class="btn btn-primary"
-                      >Salva</button>
+                    <button 
+                    type="button" 
+                    class="btn btn-previous close-modal" >
+                    Annulla
+                    </button>
+
+                    <button 
+                    class="save-modal btn btn-next save-address save-address-valutation change-valutation-map" 
+                    type="button" 
+                    data-save="estate_valutation" 
+                    class="btn btn-primary">
+                    Salva
+                    </button>
                   </div>
+
                 </div>
               </div>
             </div>
@@ -1895,7 +1979,7 @@
               la rendita di un immobile e le relative tasse da pagare per quella tipologia. 
               Puoi leggere la categoria nella visura catastale del tuo immobile, 
               oppure scegliere l’opzione che più rispecchia il tuo caso">
-              <img src="./img/Punto-Interrogativo.svg" alt="info">
+              <img src="./img/interrogativo.svg" alt="info">
               </a>
               <p>Qual'è la categoria catastale del tuo immobile?</p>
             </div>

@@ -20,3 +20,10 @@ select.form-control {
 select::-ms-expand {
     display: none; /* Hide the default arrow in Internet Explorer 10 and Internet Explorer 11 */
 }
+select {
+    margin-top: 0 !important;
+}
+
+option {
+    font-weight: 400;
+}

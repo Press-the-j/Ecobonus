@@ -3,7 +3,10 @@
   }
 
 .modal-content {
-    background-color: #ebecf0 !important;
+    background-color: #f1f2f5 !important;
+    box-shadow: 3px 3px 5px #cdced0, -3px -3px 5px #fff;
+    border: none !important;
+    padding: 0 20px 40px;
 }
 
 .modal-header {
@@ -14,6 +17,7 @@
     border-top: none !important;
     padding: 10px !important;
     display: flex;
+    justify-content: center;
 }
 
 .close span {
@@ -36,3 +40,6 @@ button.close {
     box-shadow: 2px 2px 6px 1px rgba(0, 0, 0, 1);
 }
 
+.btn-previous {
+    margin-right: 20px !important;
+}

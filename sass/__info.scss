@@ -11,6 +11,7 @@
 .label-wrapper{
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
 #impresa-info,
@@ -20,9 +21,12 @@
     }
 }
 
+.check-wrap {
+  display: flex;
+  align-items: center;
+}
+
 .label-info-cursor{
-  border: 1px solid #3C28D6;
-  border-radius: 100%;
   background-color: transparent;
   display: flex;
   width: 24px;

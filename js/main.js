@@ -3,17 +3,23 @@ $(document).ready(function(){
   const URLSELECT = "http://ectm-env.eba-wmhap9wv.eu-south-1.elasticbeanstalk.com/";
   const SELECTS = ['tipologia', 'stato-immobile', 'tipo-generazione', 'tipo-generatore', 'radiatore', 'pareti-esterne','telaio', 'vetro']
 
-  // get bonustemplate
+  // copia il template del bonustemplate
   window.bonusOgg = Object.assign({}, BONUSTEMPLATE);
   window.index = []
 
+  // genera l'index dei fieldset
   fieldsetArray = $('fieldset').get()
   getIndex(fieldsetArray)
 
-  /* validation init */
+  // inizializza ed assegna oggetto 
+  // dedicato alla tabella di valutazione sismica
+  window.seismicValObj;
+  getSeismicValObj()
+
+  // inizializza libreria di validazione degli input obbligatori
   $.getScript( "js/validation.js", function( data ) {});
 
-  /* set options in empty selects */
+  //popola le select attraverso una chiamata ajax
   populateSelect(URLSELECT, SELECTS)
 
   // open a modal
@@ -22,31 +28,46 @@ $(document).ready(function(){
     showModal(this_click)
   })
 
-  // get values from modal
+  // copia i dati dai modal agli input target
   $('.modal-dialog .save-modal').on('click', function() {
     let this_click = $(this);
     let parentContainer = '.modal.opened.in .modal-dialog';
     getModalData(this_click, parentContainer)
+    saveAnswers()
   })
 
-  // close a modal
+  // chiudi il modal
   $('.close-modal').on('click', function(){
     $('.close').click();
   })
 
-  // switchSelection() on click
+  // gestire i pop-over
+  $('.label-info-cursor').on('click', function(){
+
+    if($(window).length < 480){
+      $(this).attr('data-placement', 'bottom');
+    } else {
+      $(this).attr('data-placement', 'right');
+    }
+
+    $(this).popover('toggle');
+  })
+
+  // mostra/nascondi select alternative
+  //basate sulle scelte degli utenti
   $('[data-switch="true"]').on('click', function() {
     let this_click = $(this);
     switchSelection(this_click)
   })
 
-  // manage minimum number of selections
+  // gestisci il numero minimo di risposte
+  // per checkbox a scelta multipla
   $('div[data-required="true"] input').on("click", function () {
     let this_click = $(this)
     manageMinimumSelections(this_click)
   })
 
-  /* check permission to nexStep */
+  // verifica i permessi per procedere al fieldset successivo
   $('.next').on('click', function() {
     let parentContainer = '.my_current_step'
     let access = checkAccess(parentContainer)
@@ -59,34 +80,12 @@ $(document).ready(function(){
 
   })
 
-  //save data in local
-  //and set next page view
-  $(document).on('click', '.next[data-access="allowed"]', function(){
-    let this_click = $(this);
-    let this_fieldset_count = this_click.closest('fieldset').data('count-page');    
-
-    nextStep(this_click, this_fieldset_count);
-    console.log(bonusOgg)
-    getReport()
+  // ottieni la valutazione sismica
+  $('[data-function="getValutation"]').on('click', function() {
+    getSeismicValutation()
   })
 
-  // set previous page view
-  $(document).on('click', 'input[name="previous"]', function(){
-    let this_click = $(this);
-    let this_fieldset_count = this_click.closest('fieldset').data('count-page');
-    
-    let prev_fieldset_count = index.filter(item => item < this_fieldset_count)
-    $('[data-count-page="' + this_fieldset_count + '"]').hide().removeClass('my_current_step')
-    $('[data-count-page="' + prev_fieldset_count[prev_fieldset_count.length - 1] + '"]').show().addClass('my_current_step')
-
-    setDynamicText(prev_fieldset_count)
-  })
-  
-  // get the report
-  $(document).on('click', 'input[data-elaborate="allowed"]', function(){
-    getReport();
-  })
-
+  //imposta l'autocomplete per la ricerca dei luoghi
   $('[data-function="goSearch"]').on('click', function(){
 
     window.autocomplete = $(this).data('autocomplete')
@@ -106,6 +105,7 @@ $(document).ready(function(){
 
   })
 
+  // imposta la visulizzazione della mappa
   $('[data-function="goMap"]').on('click', function(){
     let input = $(this).data('autocomplete')
     let inputQuery = $('#' + input).val()
@@ -115,12 +115,62 @@ $(document).ready(function(){
     showMap(inputQuery, mapId)
   })
   
-  $(document).on("keydown", function(e) {
-    if(e.which==13 && $('body').hasClass('modal-open')){
-      e.preventDefault();
-    }
+  //salva i dati e passa alla view successiva
+  $(document).on('click', '.next[data-access="allowed"]', function(){
+    let this_click = $(this);
+    let this_fieldset_count = this_click.closest('fieldset').data('count-page');    
+
+    nextStep(this_click, this_fieldset_count);
+    console.log(bonusOgg)
+    getReport()
   })
+
+  //fai un passo indietro (torna alla view precedente)
+  $(document).on('click', 'input[name="previous"]', function(){
+    let this_click = $(this);
+    let this_fieldset_count = this_click.closest('fieldset').data('count-page');
+    
+    let prev_fieldset_count = index.filter(item => item < this_fieldset_count)
+    $('[data-count-page="' + this_fieldset_count + '"]').hide().removeClass('my_current_step')
+    $('[data-count-page="' + prev_fieldset_count[prev_fieldset_count.length - 1] + '"]').show().addClass('my_current_step')
+    
+    setDynamicContents(prev_fieldset_count)
+    setProgressBar(prev_fieldset_count[0])
+  })
+  
+  // ottieni la valutazione di accesso al bonus
+  $(document).on('click', 'input[data-elaborate="allowed"]', function(){
+    getReport();
+  })
+
+  //imposta i dati dei modal obbligatori, sulla base delle scelte dell'utente
+  $(document).on('click', '[name="change-address"]', function() {
+    let rifModal = $(this).data('modal')
+    setAcquireOnTrue(rifModal)
+  })
+
+
+  // $(document).on("keydown", function(e) {
+  //   if(e.which==13 && $('body').hasClass('modal-open')){
+  //     e.preventDefault();
+  //   }
+  // })
 });
+
+
+
+
+
+function getSeismicValObj() {
+  $.ajax({
+    type: "GET",
+    url: "./data/classificazione-sismica-2020.csv",
+    
+    success: function (response) {
+      seismicValObj = $.csv.toObjects(response);      
+    }
+  }); 
+}
 
 
 
@@ -202,7 +252,8 @@ function nextStep(this_click, this_fieldset_count) {
   $('[data-count-page="' + this_fieldset_count + '"]').hide().removeClass('my_current_step')
   $('[data-count-page="' + next_fieldset_count[0] + '"]').show().addClass('my_current_step')
 
-  setDynamicText(next_fieldset_count[0])
+  setDynamicContents(next_fieldset_count[0])
+  setProgressBar(next_fieldset_count[0])
 
 }
 
@@ -210,11 +261,11 @@ function nextStep(this_click, this_fieldset_count) {
 
 
 
-function setDynamicText(fieldset_count){
+function setDynamicContents(fieldset_count){
 
   let fieldText = $('.dynamic-text');
   let fieldSmallText = $('.head-small-text');
-  let userName = window.bonusOgg.impresa === undefined ? window.bonusOgg.privato.nome : window.bonusOgg.impresa.ragioneSociale
+  let userName = bonusOgg.impresa === undefined ? bonusOgg.privato.nome : bonusOgg.impresa.ragioneSociale
   
   switch (fieldset_count) {
     case 2 :
@@ -229,11 +280,22 @@ function setDynamicText(fieldset_count){
 
     case 4 : 
       fieldText.text('Piacere!');
+      showMap("Piazza del Quirinale, Rome, Metropolitan City of Rome, Italy", 'map-registered-office', 5)
       break
 
     case 5 :
-      fieldSmallText.text('(Entriamo nel vivo della richiesta. impiegeheremo circa 5 minuti)');
+      fieldSmallText.text('(Entriamo nel vivo della richiesta, impiegeheremo circa 5 minuti.)');
       fieldText.text('Ciao '+ userName +"!");
+      showMap("Piazza del Quirinale, Rome, Metropolitan City of Rome, Italy", 'map-estate', 5)
+      break
+
+    case 10 :
+      fieldSmallText.text('(Passiamo agli ultimi requisiti, impiegheremo 5 minuti)')
+      fieldText.text('Ciao '+ userName +"!");
+      let completeAddress = bonusOgg.bonus110.indirizzo + ', ' + bonusOgg.bonus110.citta + ' (' + bonusOgg.bonus110.provincia + ')'
+      $('#address_estate_valutation').val(completeAddress)
+      $('#city_estate_valutation').val(bonusOgg.bonus110.citta)
+      showMap("Piazza del Quirinale, Rome, Metropolitan City of Rome, Italy", 'map-valutation', 5)
       break
 
     default:
@@ -247,8 +309,18 @@ function setDynamicText(fieldset_count){
 
 
 
+function setProgressBar(currentStep) {
+  steps = $("fieldset").length; 
+  var percentuale = parseFloat(100 / steps) * currentStep;
+  percentuale = percentuale.toFixed();
+  $(".progress-bar").css("width",percentuale+"%");    
+}
+
+
+
+
+
 // select an user-type in fieldset 2: 
-// save this reference in localStorage;
 // delete unmatched reference in bonusObj
 function selectUserType(this_click) {
   let bonusObj = window.bonusOgg
@@ -464,8 +536,36 @@ function getModalData(this_click, parentContainer) {
       
       break;
 
+    case (10):
+      access = checkAccess(parentContainer)
+
+      if (access) {
+        let indirizzo = $('input[name="address-estate-valutation"]').val()
+
+        if(indirizzo != 'none') { 
+          $('input[name="address_estate_valutation"]').val(indirizzo) 
+          $('#city_estate_valutation').val($('#locality_estate_valutation').val())
+        }
+
+        $('.my_current_step .modal.opened.in .close').click();
+      }
+      break
+
   }
 
+}
+
+
+
+
+
+function setAcquireOnTrue(rifModal) {
+  let acquireFalseArray = $('[name="' + rifModal + '"] [data-acquire="false"]' ).get()
+  console.log(acquireFalseArray)
+  acquireFalseArray.forEach(acquireFalse => {
+    console.log($(acquireFalse))
+    $(acquireFalse).attr('data-acquire', true)
+  });
 }
 
 
@@ -565,6 +665,27 @@ function manageMinimumSelections(this_click) {
 
   this_click.prop("checked", true);
   divParent.siblings(".bottoni").find(".next").prop("disabled", false);
+}
+
+
+
+
+
+function getSeismicValutation() {
+  let risk = $('#city_estate_valutation').val()
+  let input = $('#result-valutation-input')
+  console.log(risk)
+  for (let el of seismicValObj){
+
+    if($.trim(el.Denominazione.toLowerCase()) === risk.toLowerCase()){
+      input.val(el["Classificazione 2020"])
+      break
+    } else {
+      input.val("Non abbiamo trovato nessun risultato")
+      
+    }
+
+  }
 }
 
 
@@ -721,10 +842,10 @@ function formFiller() {
 
 
 
-function showMap(inputQuery, mapId){
+function showMap(inputQuery, mapId, zoomlvl = 15){
   map = new google.maps.Map(document.getElementById(mapId), {
     center:  {lat: 	0, lng: 0},
-    zoom: 15,
+    zoom: zoomlvl,
   });
 
   const request = {
