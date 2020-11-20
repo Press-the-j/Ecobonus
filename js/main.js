@@ -122,7 +122,6 @@ $(document).ready(function(){
 
     nextStep(this_click, this_fieldset_count);
     console.log(bonusOgg)
-    getReport()
   })
 
   //fai un passo indietro (torna alla view precedente)
@@ -135,7 +134,7 @@ $(document).ready(function(){
     $('[data-count-page="' + prev_fieldset_count[prev_fieldset_count.length - 1] + '"]').show().addClass('my_current_step')
     
     setDynamicContents(prev_fieldset_count)
-    setProgressBar(prev_fieldset_count[0])
+    setProgressBar(prev_fieldset_count[prev_fieldset_count.length - 1])
   })
   
   // ottieni la valutazione di accesso al bonus
@@ -150,11 +149,11 @@ $(document).ready(function(){
   })
 
 
-  // $(document).on("keydown", function(e) {
-  //   if(e.which==13 && $('body').hasClass('modal-open')){
-  //     e.preventDefault();
-  //   }
-  // })
+  $(document).on("keydown", function(e) {
+    if(e.which==13 && $('body').hasClass('modal-open')){
+      e.preventDefault();
+    }
+  })
 });
 
 
@@ -188,10 +187,6 @@ function getIndex(fieldsetArray) {
 
 
 function checkAccess(parentContainer) {
-  /* 
-  se i campi obbligatori sono tutti compilati
-  aggiungi attributo data-access="allowed" al pulsante .next 
-  */
   let inputArray = $(parentContainer + ' .input-control').get();
   let checkboxArray = $(parentContainer + ' .checkbox-control').get();
   let selectArray = $(parentContainer + ' .select-control').get();
@@ -320,8 +315,7 @@ function setProgressBar(currentStep) {
 
 
 
-// select an user-type in fieldset 2: 
-// delete unmatched reference in bonusObj
+
 function selectUserType(this_click) {
   let bonusObj = window.bonusOgg
   let fieldsetArray = [];
@@ -402,6 +396,11 @@ function saveAnswers() {
           nameValue = element.checked ? true : false;
           break;
 
+        case 'number':
+
+          nameValue = parseInt($(element).val());
+          break;
+
         default:
 
           nameValue = $(element).val();
@@ -411,7 +410,7 @@ function saveAnswers() {
       for (const classe in bonusObj) {
         for (const option in bonusObj[classe]) {
           if(typeof(bonusObj[classe][option]) == 'object') {
-            if(option == elementName ) {                            // && bonusObj[classe][option]['value'] != 'undefined'
+            if(option == elementName ) {                          
                 bonusObj[classe][option]['value'] = nameValue              
             } else {
               for (const sub in bonusObj[classe][option]) {
@@ -423,8 +422,8 @@ function saveAnswers() {
           } else if(typeof(bonusObj[classe][option]) != 'object') {
             if(option == elementName){
               if (elementName == 'questionario') {
-                let question = '"' + $(element).data('question') + '"'; //element.data('question')
-                let answer = question + ': "' + nameValue + '"'; //uguale al valore dell'input
+                let question = '"' + $(element).data('question') + '"';
+                let answer = question + ': "' + nameValue + '"'; 
                 let string = bonusObj[classe][option];
                 bonusObj[classe][option] = compileString(question, answer, string)
               } else {
@@ -626,7 +625,6 @@ function populateSelect(url, endpoints ){
       success: function (data) {
 
 
-        /* this loop is due because of the API syntax inconsistency*/
         for (let element in data._embedded) {
 
           let selectKey = element;
@@ -656,8 +654,8 @@ function populateSelect(url, endpoints ){
 
 
 function manageMinimumSelections(this_click) {
-  let divParent = this_click.closest('div[data-required="true"]');      // assign data-required="true" to div parent
-  divParent.find("input[data-selection='one']").prop("checked", false); // assign data-selection="one" for "onlyone" selections 
+  let divParent = this_click.closest('div[data-required="true"]');     
+  divParent.find("input[data-selection='one']").prop("checked", false); 
   
   if(this_click.data('selection') == 'one') {
     divParent.find("input").prop("checked", false);
@@ -864,7 +862,6 @@ function showMap(inputQuery, mapId, zoomlvl = 15){
     
     if (status === google.maps.places.PlacesServiceStatus.OK) {
       marker.setPosition(results[0].geometry.location)
-      //marker.setVisible(true)
       map.setCenter(results[0].geometry.location);
     }
   });

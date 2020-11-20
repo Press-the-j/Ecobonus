@@ -1,5 +1,9 @@
 /* Select per categoria immobile */
 
+.category-real-estate.active {
+    display: block;
+}
+
 .category-real-estate {
     display: none;
 }

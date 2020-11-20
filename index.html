@@ -471,8 +471,7 @@
                 data-autocomplete="address-registered-office" 
                 data-toggle="modal" 
                 data-modal="registered_office" 
-                data-whatever="@mdo"
-                data-acquire="true">
+                data-whatever="@mdo">
               </div>
             </div>
 
@@ -638,9 +637,9 @@
                         <input 
                         type="text" 
                         class="form-control popup-control" 
-                        name="locality" 
+                        name="cittaImp" 
                         id="locality-office"
-                        value=""
+                        data-acquire="true"
                         />
                       </div>
                     </div>
@@ -651,9 +650,9 @@
                         <input 
                         type="text" 
                         class="form-control popup-control"
-                        name="route" 
+                        name="indirizzoImp" 
                         id="route-office"
-                        value=""
+                        data-acquire="true"
                         />
                       </div>
                     </div>
@@ -666,7 +665,7 @@
                         class="form-control popup-control" 
                         name="street_number" 
                         id="street_number-office"
-                        value=""
+                        data-acquire="true"
                         />
                       </div>
                     </div>
@@ -677,12 +676,36 @@
                         <input 
                         type="text" 
                         class="form-control popup-control" 
-                        name="postal_code" 
+                        name="capImp" 
                         id="postal_code-office"
-                        value=""
+                        data-acquire="true"
                         />
                       </div>
                     </div>
+
+
+                      <div class="row-input">
+                        <input 
+                        type="hidden" 
+                        class="form-control popup-control" 
+                        name="provinciaImp" 
+                        id="administrative_area_level_2-office"
+                        data-acquire="true"
+                        />
+                      </div>
+
+
+
+                      <div class="row-input">
+                        <input 
+                        type="hidden" 
+                        class="form-control popup-control" 
+                        name="statoImp" 
+                        id="country-office"
+                        data-acquire="true"
+                        />
+                      </div>
+
                     
 
                     <div class="search-address-wrap">
@@ -1453,7 +1476,7 @@
 
 
           <fieldset data-count-page="7">
-            <strong>Qualificazione dell'intervento</strong>
+            <h4>Qualificazione dell'intervento</h4>
             <p>Rientri all'interno di quale delle seguenti categorie?</p>
 
             <div class="form-group category-user" data-required="true">
@@ -1600,22 +1623,22 @@
 
           <fieldset data-count-page="8">
             <div class="title-select">
-
-              <strong>Estraneità all'attività imprenditoriale</strong>
-              <a 
-              tabindex="0" 
-              role="button" 
-              data-trigger="focus" 
-              data-toggle="popover" 
-              title="Requisiti del beneficiario" 
-              class="label-info-cursor" 
-              data-content="una/un imprenditrice/imprenditore 
-              o una libera/libero professionista esercitano 
-              attività economiche organizzate che hanno come 
-              scopo la produzione e/o lo scambio di beni o servizi">
-              <img src="./img/interrogativo.svg" alt="info">
-              </a>
-
+              <div class="title-wrapper">
+                <h4>Estraneità all'attività imprenditoriale</h4>
+                <a 
+                tabindex="0" 
+                role="button" 
+                data-trigger="focus" 
+                data-toggle="popover" 
+                title="Requisiti del beneficiario" 
+                class="label-info-cursor" 
+                data-content="una/un imprenditrice/imprenditore 
+                o una libera/libero professionista esercitano 
+                attività economiche organizzate che hanno come 
+                scopo la produzione e/o lo scambio di beni o servizi">
+                <img src="./img/interrogativo.svg" alt="info">
+                </a>
+              </div>
               <p>
                 Il beneficiario dell'intervento è una persona fisica 
                 che agisce in veste di privato e quindi estraneo ad
@@ -1641,7 +1664,7 @@
 
 
           <fieldset class="intervantion-qualification" data-count-page="9">
-            <strong>Qualificazione dell'intervento</strong>
+            <h4>Qualificazione dell'intervento</h4>
             <p>
               Nel periodo tra il 1 luglio 2020 e il 31 dicembre 2021 
               hai sostenuto/sosterrai una spesa relativa ad uno
@@ -1729,7 +1752,7 @@
 
 
           <fieldset data-count-page="10" class="sismic-intervention">
-            <strong>Qualificazione dell'intervento</strong>
+            <h4>Qualificazione dell'intervento</h4>
             <p>
               L'unità immobiliare su cui hai effettuato / effettuari l'intervento 
               è situata nelle zone sismiche 1,2 e 3 di cui all'ordinanza 
@@ -1910,7 +1933,7 @@
 
 
           <fieldset data-count-page="11">
-            <strong>Qualificazione dell'intervento</strong>
+            <h4>Qualificazione dell'intervento</h4>
             <p>
               Gli immobili su cui effettuare l'intervento trainato 
               sono sottoposti alla tutela disciplinata dal codice
@@ -1938,7 +1961,7 @@
 
 
           <fieldset data-count-page="12">
-            <strong>Qualificazione dell'intervento</strong>
+            <h4>Qualificazione dell'intervento</h4>
             <p>
               Hai gà usufruito di interventi per l'efficientamento energetico 
               su almeno altre 2 unità immobiliari?(non rientrano nel computo 
@@ -1966,26 +1989,28 @@
 
           <fieldset data-count-page="13">
             <div class="title-select">
-              <strong>Categoria catastale dell'immobile</strong>
-              <a 
-              tabindex="0" 
-              role="button" 
-              data-trigger="focus" 
-              data-toggle="popover" 
-              title="Categoria catastale dell’immobile" 
-              class="label-info-cursor" 
-              data-content="Ogni immobile è inserito in una categoria catastale. 
-              Grazie alle categorie catastali possiamo determinare 
-              la rendita di un immobile e le relative tasse da pagare per quella tipologia. 
-              Puoi leggere la categoria nella visura catastale del tuo immobile, 
-              oppure scegliere l’opzione che più rispecchia il tuo caso">
-              <img src="./img/interrogativo.svg" alt="info">
-              </a>
-              <p>Qual'è la categoria catastale del tuo immobile?</p>
+              <div class="title-wrapper">
+                <h4>Categoria catastale dell'immobile</h4>
+                <a 
+                tabindex="0" 
+                role="button" 
+                data-trigger="focus" 
+                data-toggle="popover" 
+                title="Categoria catastale dell’immobile" 
+                class="label-info-cursor" 
+                data-content="Ogni immobile è inserito in una categoria catastale. 
+                Grazie alle categorie catastali possiamo determinare 
+                la rendita di un immobile e le relative tasse da pagare per quella tipologia. 
+                Puoi leggere la categoria nella visura catastale del tuo immobile, 
+                oppure scegliere l’opzione che più rispecchia il tuo caso">
+                <img src="./img/interrogativo.svg" alt="info">
+                </a>
+              </div>
+              <p>Qual è la categoria catastale del tuo immobile?</p>
             </div>
 
             <div class="form-group category-real-estate active">
-              <select class="form-control choose-category save-data-array modal-single-check group-save" data-switch="true" name="categoria">
+              <select name="questionario" data-question="d8" class="form-control choose-category save-data-array modal-single-check group-save" data-switch="true" name="categoria" data-acquire="true">
                 <option value="none">Scegli una categoria catastale</option>
                 <option value="a">A: alloggi e uffici privati</option>
                 <option value="b">B: scuole, uffici privati e ospedali</option>
@@ -2077,7 +2102,7 @@
 
             <div class="bottoni">
               <input type="button" name="previous" class="previous btn group-save btn-previous" value="Previous" />
-              <input type="button" name="d7" class="next btn btn-next  d7-valutation sendData" value="Continua"data-myObj="ok" id="d7_si" disabled data-group="questionario" />
+              <input type="button" class="next btn btn-next  d7-valutation sendData" value="Continua" data-myObj="ok" id="d7_si" data-elaborate="allowed" data-elaborate="allowed"/>
             </div>
           </fieldset>
 

@@ -1,17 +1,16 @@
 const BONUSTEMPLATE = {
   "impresa" : {
+    "referente": "string",
     "ragioneSociale" : "string",
     "piva" : "string",
-    "sedeLegale": "string",
-    "referente": "string",
-    "mercato": "string",
-    // "indirizzo" : "string",
-    // "citta" : "string",
-    // "cap" : "string",
-    // "provincia" : "string",
-    // "stato" : "string",
+    "indirizzoImp" : "string",
+    "cittaImp" : "string",
+    "capImp" : "string",
+    "provinciaImp" : "string",
+    "statoImp" : "string",
     "email" : "string",
     "cellulare" : "string",
+    "mercato": "string",
     "marketingCheck" : false
    },
   "privato" : {
@@ -31,10 +30,10 @@ const BONUSTEMPLATE = {
         "value" : "string",
       },        
       "pianiCondominio": {
-        "value": "string"
+        "value": 0
       },
       "unitaCondominio": {
-        "value": "string"
+        "value": 0
       }
     },
     "superficie" : "string",

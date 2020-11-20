@@ -143,6 +143,12 @@ hr {
   display: flex;
 }
 
+.title-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .head {
   text-align: center;
   position: relative;
@@ -183,13 +189,14 @@ hr {
 
 .progress-bar {
   background-color: #3C28D6;
-  border-radius: 10px;
+  border-radius: 20px;
 }
 
 .progress {
   width: 100%;
   height: 14px;
   margin-bottom: 0 !important;
+  border-radius: 20px;
   box-shadow: inset 3px 3px 12px -6px rgba(0, 0, 0, 0.5);
 }
 
@@ -492,6 +499,10 @@ button.close {
   margin-right: 20px !important;
 }
 
+[data-function="goMap"] {
+  margin: 20px 0;
+}
+
 input.form-control {
   border: none;
   outline: none !important;
@@ -644,6 +655,10 @@ a
 }
 
 /* Select per categoria immobile */
+.category-real-estate.active {
+  display: block;
+}
+
 .category-real-estate {
   display: none;
 }
@@ -762,7 +777,7 @@ label.switch {
 
 .check-wrap {
   display: flex;
-  align-items: center;
+  margin: 20px 0;
 }
 
 .label-info-cursor {
