@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-  const URLSELECT = "http://ectm-env.eba-wmhap9wv.eu-south-1.elasticbeanstalk.com/";
+  const URLSELECT = "http://146.59.166.135:5000/";
   const SELECTS = ['tipologia', 'stato-immobile', 'tipo-generazione', 'tipo-generatore', 'radiatore', 'pareti-esterne','telaio', 'vetro']
 
   // copia il template del bonustemplate
@@ -624,7 +624,6 @@ function populateSelect(url, endpoints ){
 
       success: function (data) {
 
-
         for (let element in data._embedded) {
 
           let selectKey = element;
@@ -632,7 +631,7 @@ function populateSelect(url, endpoints ){
 
           optionsArray.forEach(option => {
             let thisOption = $("<option></option>");
-            thisOption.text(option.name).attr('value', option.name)
+            thisOption.text(option.value).attr('value', option.name)
             $(`[data-select=${endpoint}]`).append(thisOption)
           });
 
